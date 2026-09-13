@@ -1,0 +1,65 @@
+{
+  "format": "portable-skill-catalog-v1",
+  "skills": [
+    {
+      "name": "efficient-tool-use",
+      "description": "Choose bounded retrieval and execution strategies for a task with many tools, large outputs or repeated investigation. Use when tool selection or context cost matters; not to impose overhead on trivial work.",
+      "path": "skills/efficient-tool-use/SKILL.md",
+      "provenance": "architecture-kit-authored",
+      "capabilities": [
+        "source.read",
+        "source.search",
+        "execution.run"
+      ],
+      "files": {
+        "SKILL.md": "691483b7a17b3f38a774959770cab91ea471b0250567968e9a907becec23a2ad"
+      },
+      "content_sha256": "c8b356ca1e331d9490cf41d86670dfb28a37e2fec9b1de21ead4437b8540234c"
+    },
+    {
+      "name": "repository-orientation",
+      "description": "Establish the relevant instructions, source boundaries and evidence for an unfamiliar repository or repository status assessment. Use before substantial investigation; not for every small edit.",
+      "path": "skills/repository-orientation/SKILL.md",
+      "provenance": "architecture-kit-authored",
+      "capabilities": [
+        "source.read",
+        "source.search",
+        "vcs.inspect"
+      ],
+      "files": {
+        "SKILL.md": "12b12e442c9fafc641d741092abb1363303cc900839520e687b1f66d93b8a890"
+      },
+      "content_sha256": "57aa409913c9aa0e7c5618a13437026aa18fbc686a6275948ec7f8afbd6e8666"
+    },
+    {
+      "name": "test-contract-freshness",
+      "description": "Investigate passing tests that may use stale mocks, fixtures or interfaces. Use for test-validity audits and narrow freshness guards; not for ordinary test execution.",
+      "path": "skills/test-contract-freshness/SKILL.md",
+      "provenance": "architecture-kit-authored",
+      "capabilities": [
+        "source.read",
+        "source.search",
+        "execution.run"
+      ],
+      "files": {
+        "SKILL.md": "08b7d1680db7a9130519694f340fbc1b85f847fd5583c687461387f29deb68e2"
+      },
+      "content_sha256": "58c983df6ea590099584b5385f5ce38648864752c8e5d8b88d66d5abe26714e5"
+    },
+    {
+      "name": "verified-change",
+      "description": "Select and run proportionate repository checks for an implemented change and report their evidence and limits. Use when completing a change; not for investigating whether test doubles have drifted.",
+      "path": "skills/verified-change/SKILL.md",
+      "provenance": "architecture-kit-authored",
+      "capabilities": [
+        "source.read",
+        "vcs.inspect",
+        "execution.run"
+      ],
+      "files": {
+        "SKILL.md": "adf19011e669ae08925d5cdc7f9661a6c0827295f5f605620d5f15e9500712bd"
+      },
+      "content_sha256": "058eed2d9451a2d5378eb2d0d480f87ba7d6bbbdc56d687fcdfa2edb4f4c2b9c"
+    }
+  ]
+}

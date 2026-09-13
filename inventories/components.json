@@ -317,10 +317,9 @@
       "id": "agent.observation",
       "layer": "data",
       "optional": true,
-      "purpose": "Asynchronous bounded event projection, snapshots, cursors, and reducers.",
+      "purpose": "Asynchronous bounded run/event projection; coordination and retrieval enrich it only when selected.",
       "requires": [
-        "agent.coordination",
-        "agent.retrieval"
+        "agent.goal-controller"
       ]
     },
     {

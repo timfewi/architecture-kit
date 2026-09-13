@@ -20,7 +20,8 @@
         "changes require a fresh session"
       ],
       "owner": "host launcher",
-      "purpose": "Immutable session authority composition"
+      "purpose": "Immutable session authority composition",
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/launch_policy"
     },
     {
       "decision_refs": [
@@ -44,7 +45,8 @@
         "one canonical owner"
       ],
       "owner": "tool registry",
-      "purpose": "Canonical bounded operational tool contract"
+      "purpose": "Canonical bounded operational tool contract",
+      "payload_schema": null
     },
     {
       "decision_refs": [
@@ -52,12 +54,17 @@
         "ADR-008"
       ],
       "fields": [
-        "binding_id",
-        "model_id",
         "request_id",
-        "body_digest",
+        "run_id",
+        "adapter_id",
+        "model_binding_id",
+        "identity",
+        "messages",
+        "allowed_tools",
+        "input_token_bound",
+        "max_output_tokens",
         "deadline",
-        "usage"
+        "reservation_id"
       ],
       "id": "model-gateway",
       "invariants": [
@@ -65,7 +72,8 @@
         "no credential in harness"
       ],
       "owner": "host model gateway",
-      "purpose": "Provider-neutral credential-isolated model request"
+      "purpose": "Provider-neutral credential-isolated model request",
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/model_request"
     },
     {
       "decision_refs": [
@@ -73,12 +81,15 @@
         "ADR-026"
       ],
       "fields": [
+        "receipt_id",
+        "run_id",
         "call_id",
-        "source_digest",
-        "policy_digest",
-        "toolchain_revision",
+        "identity",
+        "input_digest",
+        "output",
         "result_class",
-        "output_digest"
+        "settled_at",
+        "verification"
       ],
       "id": "execution-receipt",
       "invariants": [
@@ -86,7 +97,8 @@
         "receipt existence alone is not success"
       ],
       "owner": "host evidence owner",
-      "purpose": "Bind an operation to its exact inputs and result"
+      "purpose": "Bind an operation to its exact inputs and result",
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/step_receipt"
     },
     {
       "decision_refs": [
@@ -107,7 +119,8 @@
         "effective limit is the minimum of all ceilings"
       ],
       "owner": "host scheduler",
-      "purpose": "Effective agent capabilities, grants, and capacity"
+      "purpose": "Effective agent capabilities, grants, and capacity",
+      "payload_schema": null
     },
     {
       "decision_refs": [
@@ -129,7 +142,8 @@
         "no credentials or authority claims"
       ],
       "owner": "coordination owner",
-      "purpose": "Presentation-safe scoped peer identity"
+      "purpose": "Presentation-safe scoped peer identity",
+      "payload_schema": null
     },
     {
       "decision_refs": [
@@ -148,7 +162,8 @@
         "revocation recomputes visibility"
       ],
       "owner": "coordination owner",
-      "purpose": "Grant-intersection peer discovery"
+      "purpose": "Grant-intersection peer discovery",
+      "payload_schema": null
     },
     {
       "decision_refs": [
@@ -169,7 +184,8 @@
         "every execution is reauthorized"
       ],
       "owner": "coordination owner",
-      "purpose": "Durable messages, tasks, claims, leases, and artifacts"
+      "purpose": "Durable messages, tasks, claims, leases, and artifacts",
+      "payload_schema": null
     },
     {
       "decision_refs": [
@@ -191,7 +207,8 @@
         "gaps are visible"
       ],
       "owner": "observation owner",
-      "purpose": "Deterministic content-minimized live projection"
+      "purpose": "Deterministic content-minimized live projection",
+      "payload_schema": null
     },
     {
       "decision_refs": [
@@ -212,7 +229,8 @@
         "scope-checked"
       ],
       "owner": "conversation owner",
-      "purpose": "Authorized run and evidence projection"
+      "purpose": "Authorized run and evidence projection",
+      "payload_schema": null
     },
     {
       "decision_refs": [
@@ -232,7 +250,8 @@
         "uncertain outcomes remain uncertain"
       ],
       "owner": "host dispatcher",
-      "purpose": "Existing authorized agent lifecycle controls"
+      "purpose": "Existing authorized agent lifecycle controls",
+      "payload_schema": null
     },
     {
       "decision_refs": [
@@ -253,26 +272,23 @@
         "waiting external runs no model turns"
       ],
       "owner": "goal controller",
-      "purpose": "Host-owned autonomous lifecycle state"
+      "purpose": "Host-owned autonomous lifecycle state",
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/goal_state"
     },
     {
       "decision_refs": [
         "ADR-024"
       ],
       "fields": [
-        "goal_id",
-        "step_id",
-        "source_snapshot_digest",
-        "toolchain_revision",
-        "action",
-        "required_capability",
+        "receipt_id",
+        "run_id",
+        "call_id",
+        "identity",
         "input_digest",
+        "output",
         "result_class",
-        "output_digest",
-        "diff_summary",
-        "verification_delta",
-        "budget_consumed",
-        "next_state"
+        "settled_at",
+        "verification"
       ],
       "id": "step-receipt",
       "invariants": [
@@ -280,23 +296,22 @@
         "same failure fingerprint blocks unchanged retry"
       ],
       "owner": "goal controller",
-      "purpose": "Durable bounded step settlement"
+      "purpose": "Durable bounded step settlement",
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/step_receipt"
     },
     {
       "decision_refs": [
         "ADR-028"
       ],
       "fields": [
-        "goal_id",
-        "policy_digest",
-        "requirements_digest",
-        "source_digest",
-        "toolchain_revision",
-        "last_step_id",
-        "open_requirements",
+        "run_id",
+        "identity",
+        "last_sequence",
         "controller_state",
-        "external_requests",
-        "next_action"
+        "pending_calls",
+        "open_requirements",
+        "next_action",
+        "expires_at"
       ],
       "id": "resume-packet",
       "invariants": [
@@ -304,7 +319,8 @@
         "digest mismatch rejects reuse"
       ],
       "owner": "context owner",
-      "purpose": "Minimum digest-bound context for launch, resume, and compaction"
+      "purpose": "Minimum digest-bound context for launch, resume, and compaction",
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/resume_packet"
     },
     {
       "decision_refs": [
@@ -325,7 +341,8 @@
         "no activation or arbitrary command"
       ],
       "owner": "reviewed build owner",
-      "purpose": "Request one reviewed build recipe"
+      "purpose": "Request one reviewed build recipe",
+      "payload_schema": null
     },
     {
       "decision_refs": [
@@ -342,7 +359,8 @@
         "store path is host validated"
       ],
       "owner": "reviewed build owner",
-      "purpose": "Correlate one reviewed build outcome"
+      "purpose": "Correlate one reviewed build outcome",
+      "payload_schema": null
     },
     {
       "decision_refs": [
@@ -363,7 +381,328 @@
         "changed bindings invalidate dependent evidence"
       ],
       "owner": "verification owner",
-      "purpose": "Controller-owned requirement completion matrix"
+      "purpose": "Controller-owned requirement completion matrix",
+      "payload_schema": null
+    },
+    {
+      "id": "runtime-task",
+      "owner": "platform task controller",
+      "purpose": "Typed portable starter runtime-task contract; synthetic fixtures are not runtime evidence.",
+      "fields": [
+        "task_id",
+        "objective",
+        "workspace_id",
+        "requirements"
+      ],
+      "invariants": [
+        "validate the closed payload schema before semantic checks",
+        "bind current identities; declaration does not grant authority"
+      ],
+      "decision_refs": [
+        "ADR-023"
+      ],
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/task"
+    },
+    {
+      "id": "runtime-run",
+      "owner": "platform goal controller",
+      "purpose": "Typed portable starter runtime-run contract; synthetic fixtures are not runtime evidence.",
+      "fields": [
+        "run_id",
+        "task_id",
+        "agent_id",
+        "identity",
+        "state",
+        "created_at"
+      ],
+      "invariants": [
+        "validate the closed payload schema before semantic checks",
+        "bind current identities; declaration does not grant authority"
+      ],
+      "decision_refs": [
+        "ADR-023"
+      ],
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/run"
+    },
+    {
+      "id": "runtime-event",
+      "owner": "durable event store",
+      "purpose": "Typed portable starter runtime-event contract; synthetic fixtures are not runtime evidence.",
+      "fields": [
+        "run_id",
+        "sequence",
+        "at",
+        "kind",
+        "payload"
+      ],
+      "invariants": [
+        "validate the closed payload schema before semantic checks",
+        "bind current identities; declaration does not grant authority"
+      ],
+      "decision_refs": [
+        "ADR-014"
+      ],
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/run_event"
+    },
+    {
+      "id": "runtime-grant",
+      "owner": "approval broker",
+      "purpose": "Typed portable starter runtime-grant contract; synthetic fixtures are not runtime evidence.",
+      "fields": [
+        "grant_id",
+        "run_id",
+        "workspace_id",
+        "tool",
+        "input_digest",
+        "identity",
+        "binding_digest",
+        "expires_at",
+        "max_uses",
+        "state"
+      ],
+      "invariants": [
+        "validate the closed payload schema before semantic checks",
+        "bind current identities; declaration does not grant authority"
+      ],
+      "decision_refs": [
+        "ADR-006"
+      ],
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/grant"
+    },
+    {
+      "id": "runtime-approval",
+      "owner": "approval broker",
+      "purpose": "Typed portable starter runtime-approval contract; synthetic fixtures are not runtime evidence.",
+      "fields": [
+        "approval_id",
+        "grant_id",
+        "grant_digest",
+        "decision",
+        "decided_at",
+        "expires_at"
+      ],
+      "invariants": [
+        "validate the closed payload schema before semantic checks",
+        "bind current identities; declaration does not grant authority"
+      ],
+      "decision_refs": [
+        "ADR-006"
+      ],
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/approval"
+    },
+    {
+      "id": "handler-binding",
+      "owner": "canonical tool registry",
+      "purpose": "Typed portable starter handler-binding contract; synthetic fixtures are not runtime evidence.",
+      "fields": [
+        "tool",
+        "definition_digest",
+        "handler_id",
+        "handler_digest",
+        "input_schema",
+        "output_schema",
+        "executor",
+        "authority",
+        "effects",
+        "idempotency",
+        "cancellation"
+      ],
+      "invariants": [
+        "validate the closed payload schema before semantic checks",
+        "bind current identities; declaration does not grant authority"
+      ],
+      "decision_refs": [
+        "ADR-009"
+      ],
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/handler_binding"
+    },
+    {
+      "id": "tool-dispatch",
+      "owner": "approval broker",
+      "purpose": "Typed portable starter tool-dispatch contract; synthetic fixtures are not runtime evidence.",
+      "fields": [
+        "call_id",
+        "run_id",
+        "workspace_id",
+        "tool",
+        "input_artifact",
+        "identity",
+        "binding_digest",
+        "grant_id",
+        "approval_id",
+        "deadline"
+      ],
+      "invariants": [
+        "validate the closed payload schema before semantic checks",
+        "bind current identities; declaration does not grant authority"
+      ],
+      "decision_refs": [
+        "ADR-012"
+      ],
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/dispatch"
+    },
+    {
+      "id": "model-stream",
+      "owner": "model adapter",
+      "purpose": "Typed portable starter model-stream contract; synthetic fixtures are not runtime evidence.",
+      "fields": [
+        "request_id",
+        "sequence",
+        "kind"
+      ],
+      "invariants": [
+        "validate the closed payload schema before semantic checks",
+        "bind current identities; declaration does not grant authority"
+      ],
+      "decision_refs": [
+        "ADR-008"
+      ],
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/stream_event"
+    },
+    {
+      "id": "adapter-control",
+      "owner": "harness adapter",
+      "purpose": "Typed portable starter adapter-control contract; synthetic fixtures are not runtime evidence.",
+      "fields": [
+        "request_id",
+        "run_id",
+        "operation",
+        "identity",
+        "deadline",
+        "resume"
+      ],
+      "invariants": [
+        "validate the closed payload schema before semantic checks",
+        "bind current identities; declaration does not grant authority"
+      ],
+      "decision_refs": [
+        "ADR-007"
+      ],
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/adapter_control"
+    },
+    {
+      "id": "context-policy",
+      "owner": "platform context owner",
+      "purpose": "Typed portable starter context-policy contract; synthetic fixtures are not runtime evidence.",
+      "fields": [
+        "window_tokens",
+        "input_tokens",
+        "output_tokens",
+        "safety_tokens",
+        "tool_output_bytes",
+        "resume_bytes",
+        "automatic",
+        "overflow",
+        "history",
+        "counting"
+      ],
+      "invariants": [
+        "validate the closed payload schema before semantic checks",
+        "bind current identities; declaration does not grant authority"
+      ],
+      "decision_refs": [
+        "ADR-028"
+      ],
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/context_policy"
+    },
+    {
+      "id": "budget-policy",
+      "owner": "platform goal controller",
+      "purpose": "Typed portable starter budget-policy contract; synthetic fixtures are not runtime evidence.",
+      "fields": [
+        "run_tokens",
+        "run_microcredits",
+        "max_model_calls",
+        "max_tool_calls",
+        "deadline_seconds",
+        "billing_unit",
+        "unknown_usage"
+      ],
+      "invariants": [
+        "validate the closed payload schema before semantic checks",
+        "bind current identities; declaration does not grant authority"
+      ],
+      "decision_refs": [
+        "ADR-024"
+      ],
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/budget_policy"
+    },
+    {
+      "id": "storage-policy",
+      "owner": "durable state owner",
+      "purpose": "Typed portable starter storage-policy contract; synthetic fixtures are not runtime evidence.",
+      "fields": [
+        "atomic_unit",
+        "delivery",
+        "recovery",
+        "events_days",
+        "receipts_days",
+        "artifacts_days",
+        "unresolved",
+        "redaction",
+        "migration",
+        "unsupported_schema"
+      ],
+      "invariants": [
+        "validate the closed payload schema before semantic checks",
+        "bind current identities; declaration does not grant authority"
+      ],
+      "decision_refs": [
+        "ADR-014"
+      ],
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/storage_policy"
+    },
+    {
+      "id": "platform-services",
+      "owner": "external platform service provider",
+      "purpose": "Typed portable starter platform-services contract; synthetic fixtures are not runtime evidence.",
+      "fields": [
+        "supervision",
+        "credential_mediation",
+        "policy_store",
+        "workspace_isolation",
+        "private_ipc",
+        "durable_store"
+      ],
+      "invariants": [
+        "validate the closed payload schema before semantic checks",
+        "bind current identities; declaration does not grant authority"
+      ],
+      "decision_refs": [
+        "ADR-027"
+      ],
+      "payload_schema": "schemas/runtime-contracts.schema.json#/$defs/platform_services"
+    },
+    {
+      "id": "launch-config",
+      "owner": "launcher configuration resolver",
+      "purpose": "Resolved launch intent before intersection with trusted authority.",
+      "fields": [
+        "$schema",
+        "agent_id",
+        "profile_id",
+        "concurrency",
+        "enabled_extensions",
+        "adapter",
+        "model",
+        "instructions",
+        "skills",
+        "selected_tools",
+        "workspace",
+        "context",
+        "budget",
+        "storage",
+        "services"
+      ],
+      "invariants": [
+        "configuration requests capabilities but cannot grant them",
+        "freeze the resolved configuration digest before launch"
+      ],
+      "decision_refs": [
+        "ADR-005",
+        "ADR-007"
+      ],
+      "payload_schema": "schemas/agent-config.schema.json"
     }
   ],
   "$schema": "https://architecture-kit.invalid/schemas/interfaces.schema.json"

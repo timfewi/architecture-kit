@@ -1,0 +1,468 @@
+{
+  "format": "bootstrap-plan-v1",
+  "target": "Portable agent platform: autonomous control, multiple harnesses, retrieval, skills, memory, coordination, observation, terminal and web; host/dotfiles external.",
+  "shared_inputs": [
+    ".agents/bootstrap.py",
+    ".agents/bootstrap_evidence.py",
+    ".agents/bootstrap_checks.py",
+    "flake.nix",
+    "flake.lock",
+    "requirements.txt",
+    "justfile"
+  ],
+  "tasks": [
+    {
+      "id": "kit-baseline",
+      "title": "Establish the clone and complete kit validation",
+      "depends_on": [],
+      "refs": [
+        "STARTER.md",
+        "DEVELOPMENT.md",
+        "VERIFICATION.md"
+      ],
+      "acceptance": [
+        "All current kit checks pass with the exact validator dependencies.",
+        "Record missing host execution prerequisites separately; synthetic checks remain source evidence."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": [
+            "just",
+            "check"
+          ],
+          "inputs": [
+            "."
+          ],
+          "level": "source",
+          "timeout_seconds": 300
+        }
+      ]
+    },
+    {
+      "id": "implementation-design",
+      "title": "Select a small implementation and record host bindings",
+      "depends_on": [
+        "kit-baseline"
+      ],
+      "refs": [
+        "inventories/components.json",
+        "inventories/software.json",
+        "schemas/agent-config.schema.json"
+      ],
+      "acceptance": [
+        "Record module owners, exact dependency pins with live sources/date, package boundaries and six host service bindings.",
+        "Resolve final extension selection: retrieval, skills, memory, coordination, observation, terminal and web. Keep host/dotfiles external.",
+        "Review any code reuse separately, including license, retained size and dependencies; copy nothing without a later decision."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": null,
+          "inputs": [
+            "inventories/components.json",
+            "inventories/software.json",
+            "schemas/agent-config.schema.json",
+            "src",
+            "tests"
+          ],
+          "level": "source",
+          "timeout_seconds": 300
+        }
+      ]
+    },
+    {
+      "id": "host-contract",
+      "title": "Probe required independent-host services",
+      "depends_on": [
+        "implementation-design"
+      ],
+      "refs": [
+        "STARTER.md",
+        "ARCHITECTURE.md"
+      ],
+      "acceptance": [
+        "Exercise supervision, private IPC, credential mediation, workspace isolation, immutable policy and durable-store bindings with synthetic inputs.",
+        "Required absent guarantees reject the affected integration; no fallback to unrestricted execution."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": null,
+          "inputs": [
+            "STARTER.md",
+            "ARCHITECTURE.md",
+            "src",
+            "tests"
+          ],
+          "level": "focused-test",
+          "timeout_seconds": 300
+        }
+      ]
+    },
+    {
+      "id": "policy-registry",
+      "title": "Implement immutable policy and canonical registries",
+      "depends_on": [
+        "host-contract"
+      ],
+      "refs": [
+        "inventories/agent-tools.json",
+        "schemas/runtime-contracts.schema.json"
+      ],
+      "acceptance": [
+        "Equivalent launch intent produces stable identities; changed authority or bindings changes identity.",
+        "Unknown/duplicate tools, invalid combinations, foreign workspace identity and unsupported schemas are rejected."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": null,
+          "inputs": [
+            "inventories/agent-tools.json",
+            "schemas/runtime-contracts.schema.json",
+            "src",
+            "tests"
+          ],
+          "level": "focused-test",
+          "timeout_seconds": 300
+        }
+      ]
+    },
+    {
+      "id": "broker-dispatch",
+      "title": "Implement typed dispatch and exact approval",
+      "depends_on": [
+        "policy-registry"
+      ],
+      "refs": [
+        "schemas/runtime-contracts.schema.json",
+        "examples/reference-run.json"
+      ],
+      "acceptance": [
+        "Real broker validates issuer, input digest, handler, current grants and schema before dispatch.",
+        "Denial, expiry, replay, revoked grant, changed input and uncertain dispatch have independent negative tests."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": null,
+          "inputs": [
+            "schemas/runtime-contracts.schema.json",
+            "examples/reference-run.json",
+            "src",
+            "tests"
+          ],
+          "level": "focused-test",
+          "timeout_seconds": 300
+        }
+      ]
+    },
+    {
+      "id": "worker-lifecycle",
+      "title": "Implement isolated execution, cancellation and cleanup",
+      "depends_on": [
+        "broker-dispatch"
+      ],
+      "refs": [
+        "ARCHITECTURE.md",
+        "VERIFICATION.md",
+        "inventories/build-capability.json"
+      ],
+      "acceptance": [
+        "Actual worker proves approved mounts, no unintended egress/credentials, bounded execution and read-only Git metadata.",
+        "Timeout, parent death, cancellation, hostile paths and descendant cleanup are exercised; a synthetic replay is insufficient."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": null,
+          "inputs": [
+            "ARCHITECTURE.md",
+            "VERIFICATION.md",
+            "inventories/build-capability.json",
+            "src",
+            "tests"
+          ],
+          "level": "live",
+          "timeout_seconds": 300
+        }
+      ]
+    },
+    {
+      "id": "first-adapter",
+      "title": "Integrate one real registered harness and model route",
+      "depends_on": [
+        "worker-lifecycle"
+      ],
+      "refs": [
+        "STARTER.md",
+        "schemas/runtime-contracts.schema.json"
+      ],
+      "acceptance": [
+        "Registered adapter uses the same broker policy; native tool paths cannot bypass it.",
+        "Real request, streaming, tool correlation, cancellation and resume work; credentials stay outside harness/repo workers.",
+        "Select exact provider/adapter revisions and verified usage/pricing semantics; unknown usage remains unknown."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": null,
+          "inputs": [
+            "STARTER.md",
+            "schemas/runtime-contracts.schema.json",
+            "src",
+            "tests"
+          ],
+          "level": "live",
+          "timeout_seconds": 300
+        }
+      ]
+    },
+    {
+      "id": "durable-controller",
+      "title": "Implement task persistence, autonomous control and resume",
+      "depends_on": [
+        "first-adapter"
+      ],
+      "refs": [
+        "inventories/controller-policy.json",
+        "schemas/runtime-contracts.schema.json",
+        "examples/reference-run.json"
+      ],
+      "acceptance": [
+        "Real controller/storage execute success, denial, timeout, cancellation, budget exhaustion and recovery scenario oracles.",
+        "Crash/replay cannot double-dispatch effects; external waits run no model turns; completion requires current evidence.",
+        "Fresh session resumes source-bound work after interruption and reports uncertain effects without guessing."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": null,
+          "inputs": [
+            "inventories/controller-policy.json",
+            "schemas/runtime-contracts.schema.json",
+            "examples/reference-run.json",
+            "src",
+            "tests"
+          ],
+          "level": "live",
+          "timeout_seconds": 300
+        }
+      ]
+    },
+    {
+      "id": "adapter-parity",
+      "title": "Prove neutral adapters and provider shapes",
+      "depends_on": [
+        "durable-controller"
+      ],
+      "refs": [
+        "ARCHITECTURE.md",
+        "VERIFICATION.md"
+      ],
+      "acceptance": [
+        "Two independent real adapters and a synthetic third use identical policy/tool and resume contracts.",
+        "Provider/authentication errors, unsupported operations and usage mapping have actual consumer tests."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": null,
+          "inputs": [
+            "ARCHITECTURE.md",
+            "VERIFICATION.md",
+            "src",
+            "tests"
+          ],
+          "level": "live",
+          "timeout_seconds": 300
+        }
+      ]
+    },
+    {
+      "id": "retrieval-skills",
+      "title": "Implement progressive retrieval and operating skills",
+      "depends_on": [
+        "durable-controller"
+      ],
+      "refs": [
+        "TOOLING.md",
+        "skills/README.md",
+        "inventories/agent-tools.json"
+      ],
+      "acceptance": [
+        "Real source reader/search handles byte windows, complete enumeration, stale indexes, changed continuation and unsupported languages.",
+        "Skill discovery uses compact metadata, verifies content digests and loads only selected bodies/references.",
+        "Run positive, negative and ambiguous routing cases; public/private overlays cannot shadow names or grant power."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": null,
+          "inputs": [
+            "TOOLING.md",
+            "skills/README.md",
+            "inventories/agent-tools.json",
+            "src",
+            "tests"
+          ],
+          "level": "live",
+          "timeout_seconds": 300
+        }
+      ]
+    },
+    {
+      "id": "memory-evidence",
+      "title": "Implement evidence-bound memory lifecycle",
+      "depends_on": [
+        "retrieval-skills"
+      ],
+      "refs": [
+        "ARCHITECTURE.md",
+        "VERIFICATION.md"
+      ],
+      "acceptance": [
+        "Real evidence store distinguishes source/build/live levels, invalidates dependent results and retains unresolved evidence.",
+        "Memory candidates are reviewed separately; secret redaction, stale anchors and unavailable evidence have negative tests."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": null,
+          "inputs": [
+            "ARCHITECTURE.md",
+            "VERIFICATION.md",
+            "src",
+            "tests"
+          ],
+          "level": "live",
+          "timeout_seconds": 300
+        }
+      ]
+    },
+    {
+      "id": "coordination",
+      "title": "Implement scoped multi-agent scheduling",
+      "depends_on": [
+        "durable-controller"
+      ],
+      "refs": [
+        "inventories/components.json",
+        "inventories/interfaces.json",
+        "ARCHITECTURE.md"
+      ],
+      "acceptance": [
+        "Real scheduler enforces finite capacity and one writer/claimant, with scoped peer visibility and revocation.",
+        "Duplicate delivery, expired lease, conflicting claims and mixed-workspace saturation preserve authority."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": null,
+          "inputs": [
+            "inventories/components.json",
+            "inventories/interfaces.json",
+            "ARCHITECTURE.md",
+            "src",
+            "tests"
+          ],
+          "level": "live",
+          "timeout_seconds": 300
+        }
+      ]
+    },
+    {
+      "id": "observation",
+      "title": "Implement reconstructible observation",
+      "depends_on": [
+        "durable-controller"
+      ],
+      "refs": [
+        "inventories/interfaces.json",
+        "ARCHITECTURE.md"
+      ],
+      "acceptance": [
+        "Actual event collector/reducer reconstructs equivalent state from snapshots and cursors; gaps require resync.",
+        "Stopped/slow observation cannot stall agents or become the authority owner."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": null,
+          "inputs": [
+            "inventories/interfaces.json",
+            "ARCHITECTURE.md",
+            "src",
+            "tests"
+          ],
+          "level": "live",
+          "timeout_seconds": 300
+        }
+      ]
+    },
+    {
+      "id": "clients",
+      "title": "Implement terminal and web consumers",
+      "depends_on": [
+        "observation",
+        "coordination",
+        "retrieval-skills"
+      ],
+      "refs": [
+        "inventories/interfaces.json",
+        "ARCHITECTURE.md"
+      ],
+      "acceptance": [
+        "Both clients drive the same Focus, Swarm and Observe scenarios over neutral contracts.",
+        "Keyboard/accessibility, scope checks and slow/disconnected clients are tested with the real platform."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": null,
+          "inputs": [
+            "inventories/interfaces.json",
+            "ARCHITECTURE.md",
+            "src",
+            "tests"
+          ],
+          "level": "live",
+          "timeout_seconds": 300
+        }
+      ]
+    },
+    {
+      "id": "platform-acceptance",
+      "title": "Verify the combined complete portable platform",
+      "depends_on": [
+        "adapter-parity",
+        "memory-evidence",
+        "clients"
+      ],
+      "refs": [
+        "profiles/agent-platform.yaml",
+        "VERIFICATION.md"
+      ],
+      "acceptance": [
+        "Build exact artifacts and execute a realistic repo task with two adapters, isolated edits, checks and recovery.",
+        "Run required combined negative gates and final requirement-to-evidence matrix; no desktop/host setup is counted.",
+        "Permanent orientation, verification and resume work without bootstrap code; transfer required evidence before retirement."
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": null,
+          "inputs": [
+            "profiles/agent-platform.yaml",
+            "VERIFICATION.md",
+            "src",
+            "tests"
+          ],
+          "level": "live",
+          "timeout_seconds": 300
+        }
+      ]
+    }
+  ]
+}

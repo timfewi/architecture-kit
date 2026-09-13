@@ -1,0 +1,38 @@
+{
+  "cases": [
+    {
+      "request": "I am new to this repository. Which code and checks establish whether cancellation is implemented?",
+      "expected": [
+        "repository-orientation"
+      ],
+      "reason": "Repository orientation and requirement evidence."
+    },
+    {
+      "request": "Translate this short greeting into German.",
+      "expected": [],
+      "reason": "No repository or tool workflow needed."
+    },
+    {
+      "request": "Tests pass after a producer field changed, but the client fails. I also need to know where the boundary is.",
+      "expected": [
+        "repository-orientation",
+        "test-contract-freshness"
+      ],
+      "reason": "Locate the boundary first, then audit the stale double; ordinary check execution alone is insufficient."
+    },
+    {
+      "request": "I finished a small parser fix. Run the repository checks and report the coverage.",
+      "expected": [
+        "verified-change"
+      ],
+      "reason": "Verification of an implemented change."
+    },
+    {
+      "request": "A large tool response consumes the context before the task is done. Choose a bounded strategy preserving complete results.",
+      "expected": [
+        "efficient-tool-use"
+      ],
+      "reason": "Tool selection and completeness."
+    }
+  ]
+}

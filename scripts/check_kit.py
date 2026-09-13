@@ -10,6 +10,12 @@ import sys
 from pathlib import Path
 from urllib.parse import urldefrag, urljoin
 
+if __package__:
+    from . import check_skills, runtime_contracts
+else:
+    import check_skills
+    import runtime_contracts
+
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://architecture-kit.invalid/"
 DIALECT = "https://json-schema.org/draft/2020-12/schema"
@@ -274,6 +280,7 @@ def contract_examples(root, tools, documents):
 
 
 def semantic_check(root):
+    check_skills.check(root)
     files = source_files(root)
     documents = schema_documents(root)
     json_files = {
@@ -397,7 +404,7 @@ def semantic_check(root):
             not resolved & forbidden,
             f"excluded dependency: {identity}: {resolved & forbidden}",
         )
-        if identity == "agent-platform":
+        if identity in {"agent-platform", "agent-starter"}:
             require(
                 not any(x.startswith("host.") for x in resolved),
                 "portable profile depends on reference host",
@@ -442,6 +449,28 @@ def semantic_check(root):
             "build field parity drift",
         )
     contract_examples(root, tools, documents)
+    config = read_json(root, controller["starter_config_ref"])
+    runtime_contracts.check_config(config, tools, profiles, components)
+    for instruction in config["instructions"]:
+        safe_path(instruction["path"])
+    reference = read_json(root, "examples/reference-run.json")
+    runtime_contracts.check_reference(
+        root, read_json, config, reference, tools, controller
+    )
+    result_semantics("text", reference["result"])
+    for interface in inventories["interfaces"]["interfaces"]:
+        target = interface["payload_schema"]
+        if target is not None:
+            schema = resolve_schema(target, documents)
+            fields = schema.get("required")
+            if fields is None:
+                variants = schema["oneOf"]
+                fields = [
+                    k
+                    for k in variants[0]["required"]
+                    if all(k in v["required"] for v in variants)
+                ]
+            require(interface["fields"] == fields, "interface payload field drift")
     return {
         "files": files,
         "schemas": documents,

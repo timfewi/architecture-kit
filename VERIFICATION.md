@@ -102,9 +102,13 @@ The requirement matrix for the kit is separate from deployment acceptance:
 | Strict shape and cross-file semantics | Full Draft 2020-12 validation plus independent parser, ID, dependency, transition, path and result cross-field checks. |
 | Research-backed selection | Primary-source register, inspected coverage and explicit unsupported claims in research/FINDINGS.md. |
 | Honest efficiency evidence | Raw synthetic retrieval samples, executable/runner/corpus identities and separate metadata byte counts; tokens remain unavailable. |
+| Single-agent starter | Closed config/runtime schemas, catalog/binding parity, nine synthetic replays and independent negative mutations; no provider, broker, database or isolation implementation. |
 | Reproducible package contents | Exact artifact hashes, sizes, references and deterministic manifest comparison. |
 
 The local checker does not implement or simulate the 51 runtime handlers.
+It now replays supplied starter events in memory to check cross-record
+invariants; this is not actual model/tool execution or durable storage recovery.
+See [STARTER.md](STARTER.md) for the requirement-to-evidence matrix.
 The 51 input examples and ten shared result examples are checked by full mode.
 Schema negatives cover closed shapes, required fields, cursor inputs, status
 contradictions, successful-build artifacts and mutually exclusive process exits.
@@ -124,6 +128,7 @@ Run these commands in a provisioned isolated environment:
 ruff check --isolated --select E4,E7,E9,F,I,PLW1510 scripts tests
 ruff format --isolated --check scripts tests
 python3 -B -m unittest discover -s tests -p 'test_semantics.py'
+python3 -B -m unittest discover -s tests -p 'test_runtime_semantics.py'
 python3 -B scripts/check_kit.py --structural
 python3 -B scripts/check_kit.py
 python3 -B -m unittest discover -s tests -p 'test_schemas.py'

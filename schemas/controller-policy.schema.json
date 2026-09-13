@@ -14,7 +14,8 @@
     "allowed_after_duplicate_failure",
     "budgets",
     "automatic_context",
-    "$schema"
+    "$schema",
+    "starter_config_ref"
   ],
   "properties": {
     "owner": {
@@ -241,6 +242,9 @@
     },
     "$schema": {
       "const": "https://architecture-kit.invalid/schemas/controller-policy.schema.json"
+    },
+    "starter_config_ref": {
+      "const": "examples/agent-config.json"
     }
   },
   "$id": "https://architecture-kit.invalid/schemas/controller-policy.schema.json"

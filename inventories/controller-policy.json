@@ -341,5 +341,6 @@
     }
   ],
   "waiting_external_model_turns": 0,
-  "$schema": "https://architecture-kit.invalid/schemas/controller-policy.schema.json"
+  "$schema": "https://architecture-kit.invalid/schemas/controller-policy.schema.json",
+  "starter_config_ref": "examples/agent-config.json"
 }

@@ -171,12 +171,13 @@ pins.
 | --- | --- | --- |
 | Generic names and portable dependency closure | implemented + verified | Current-source generation-label search, component/profile checker and semantic fixtures. |
 | Precise tools and conditional Linux choices | implemented + verified | 51 metadata definitions, 13 initial operations, 22 software choices; schema references, effect and capability parity checked. This verifies specification structure, not handlers. |
-| Strict JSON Schema acceptance | implemented, not currently verified | 15 schemas and the standard-validator test suite exist. Full check exits 2 with ENVIRONMENT_BLOCKED because jsonschema/referencing are absent. |
+| Strict JSON Schema acceptance | implemented, not currently verified | 18 schemas and the standard-validator test suite exist. The previously diagnosed ENVIRONMENT_BLOCKED condition (missing jsonschema/referencing) remains unresolved; full schema acceptance was not rerun on the unchanged environment. |
 | Research and creative selection proposals | documentation only | Twelve inspected primary sources, version cross-checks, explicit limitations and follow-up experiment oracles. |
 | Synthetic retrieval correctness and timing | implemented + verified | Six candidate/case records, 20 measured samples each; runner, executable, catalog and corpus bindings. Model tokens remain unavailable. |
-| Kit integrity and Python quality | implemented + verified | Manifest/semantic check, 18 semantic regression tests, Ruff lint/format, local link check. Baseline scan: three Python rules, two source files, zero findings and parser errors; two test files excluded by baseline policy. |
+| Portable single-agent starter | implemented + focused semantic tests | Resolved config, typed runtime contracts, numeric context/accounting/storage policies and nine synthetic replay paths; no production adapter, worker or database. |
+| Kit integrity and Python quality | implemented + verified | just check-fast passed: 42 semantic tests, Ruff/ShellCheck lint, Python/Nix/Just formatting, reference and manifest checks. 26 local Markdown links resolve. The new baseline receipt reports exit 0, but does not expose detailed file/rule/parser counts; those counts are not inferred. |
 
 The remaining completion dependency is the full standards-based validator and
 its schema acceptance suite in a reviewed immutable repository toolchain.
-No additional runtime feature or host deployment is part of this kit change.
+Starter contract replay is included; production runtime features and host/Home Manager deployment are not.
 The missing validator was not replaced with a hand-written approximation.

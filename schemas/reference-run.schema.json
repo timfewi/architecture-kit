@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://architecture-kit.invalid/schemas/reference-run.schema.json",
+  "title": "Synthetic single-agent contract replay fixture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "synthetic",
+    "config_path",
+    "task",
+    "run",
+    "grant",
+    "binding",
+    "adapter_request",
+    "adapter_stream",
+    "adapter_control",
+    "scenarios",
+    "input",
+    "result"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://architecture-kit.invalid/schemas/reference-run.schema.json"
+    },
+    "synthetic": {
+      "const": true
+    },
+    "config_path": {
+      "const": "examples/agent-config.json"
+    },
+    "task": {
+      "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/task"
+    },
+    "run": {
+      "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/run"
+    },
+    "grant": {
+      "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/grant"
+    },
+    "binding": {
+      "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/handler_binding"
+    },
+    "adapter_request": {
+      "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/model_request"
+    },
+    "adapter_stream": {
+      "type": "array",
+      "items": {
+        "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/stream_event"
+      },
+      "minItems": 1,
+      "maxItems": 100,
+      "uniqueItems": true
+    },
+    "adapter_control": {
+      "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/adapter_control"
+    },
+    "scenarios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "events",
+          "expected_state",
+          "expected_spent_tokens",
+          "expected_held_tokens",
+          "expected_spent_microcredits",
+          "expected_held_microcredits"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/run_event"
+            },
+            "minItems": 1,
+            "maxItems": 100
+          },
+          "expected_state": {
+            "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/state"
+          },
+          "expected_spent_tokens": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000000
+          },
+          "expected_held_tokens": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000000
+          },
+          "expected_spent_microcredits": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000000
+          },
+          "expected_held_microcredits": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000000
+          }
+        }
+      },
+      "minItems": 6,
+      "maxItems": 20,
+      "uniqueItems": true
+    },
+    "input": {
+      "$ref": "https://architecture-kit.invalid/schemas/tool-contracts.schema.json#/$defs/workspace.read.input"
+    },
+    "result": {
+      "$ref": "https://architecture-kit.invalid/schemas/tool-contracts.schema.json#/$defs/result.text"
+    }
+  }
+}

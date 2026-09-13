@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://architecture-kit.invalid/schemas/agent-config.schema.json",
+  "title": "Fully resolved launch intent; no implicit defaults or authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "agent_id",
+    "profile_id",
+    "concurrency",
+    "enabled_extensions",
+    "adapter",
+    "model",
+    "instructions",
+    "skills",
+    "selected_tools",
+    "workspace",
+    "context",
+    "budget",
+    "storage",
+    "services"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://architecture-kit.invalid/schemas/agent-config.schema.json"
+    },
+    "agent_id": {
+      "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+    },
+    "profile_id": {
+      "const": "agent-starter"
+    },
+    "concurrency": {
+      "const": 1
+    },
+    "enabled_extensions": {
+      "type": "array",
+      "items": {
+        "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+      },
+      "minItems": 0,
+      "maxItems": 100,
+      "uniqueItems": true
+    },
+    "adapter": {
+      "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/adapter"
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "binding_id",
+        "model_id",
+        "binding_digest",
+        "pricing_digest",
+        "secret_ref",
+        "automatic_fallback"
+      ],
+      "properties": {
+        "binding_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "model_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "binding_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "pricing_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "secret_ref": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "automatic_fallback": {
+          "const": false
+        }
+      }
+    },
+    "instructions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "digest"
+        ],
+        "properties": {
+          "path": {
+            "$ref": "https://architecture-kit.invalid/schemas/tool-contracts.schema.json#/$defs/path"
+          },
+          "digest": {
+            "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 20,
+      "uniqueItems": true
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "digest"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+          },
+          "digest": {
+            "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+          }
+        }
+      },
+      "minItems": 0,
+      "maxItems": 20,
+      "uniqueItems": true
+    },
+    "selected_tools": {
+      "type": "array",
+      "items": {
+        "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+      },
+      "minItems": 1,
+      "maxItems": 100,
+      "uniqueItems": true
+    },
+    "workspace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workspace_id",
+        "access",
+        "grant_source",
+        "default_authority"
+      ],
+      "properties": {
+        "workspace_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "access": {
+          "enum": [
+            "read",
+            "write"
+          ]
+        },
+        "grant_source": {
+          "const": "broker"
+        },
+        "default_authority": {
+          "const": "deny"
+        }
+      }
+    },
+    "context": {
+      "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/context_policy"
+    },
+    "budget": {
+      "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/budget_policy"
+    },
+    "storage": {
+      "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/storage_policy"
+    },
+    "services": {
+      "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/platform_services"
+    }
+  }
+}

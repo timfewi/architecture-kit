@@ -1,0 +1,90 @@
+{
+  "$schema": "https://architecture-kit.invalid/schemas/agent-config.schema.json",
+  "agent_id": "starter-agent",
+  "profile_id": "agent-starter",
+  "concurrency": 1,
+  "enabled_extensions": [],
+  "adapter": {
+    "adapter_id": "synthetic-adapter",
+    "implementation_digest": "1111111111111111111111111111111111111111111111111111111111111111",
+    "capabilities": [
+      "text",
+      "tool-calls",
+      "stream",
+      "cancel",
+      "resume"
+    ],
+    "resume_mode": "replay-normalized",
+    "cancellation": "best-effort"
+  },
+  "model": {
+    "binding_id": "synthetic-model-binding",
+    "model_id": "synthetic-contract-model",
+    "binding_digest": "2222222222222222222222222222222222222222222222222222222222222222",
+    "pricing_digest": "3333333333333333333333333333333333333333333333333333333333333333",
+    "secret_ref": null,
+    "automatic_fallback": false
+  },
+  "instructions": [
+    {
+      "path": "examples/starter-instructions.md",
+      "digest": "d233b0ccd7cdf61bb9a4320fa477b322b9a559e1389581a8ae75aae4f902c582"
+    }
+  ],
+  "skills": [],
+  "selected_tools": [
+    "workspace.read"
+  ],
+  "workspace": {
+    "workspace_id": "example",
+    "access": "read",
+    "grant_source": "broker",
+    "default_authority": "deny"
+  },
+  "context": {
+    "window_tokens": 8192,
+    "input_tokens": 6144,
+    "output_tokens": 1024,
+    "safety_tokens": 1024,
+    "tool_output_bytes": 16384,
+    "resume_bytes": 8192,
+    "automatic": [
+      "current_policy",
+      "active_goal",
+      "requirement_matrix",
+      "digest_bound_resume_packet"
+    ],
+    "overflow": "compact-once-then-block",
+    "history": "on-demand-digest-bound",
+    "counting": "adapter-count-or-conservative-bound"
+  },
+  "budget": {
+    "run_tokens": 12000,
+    "run_microcredits": 100000,
+    "max_model_calls": 8,
+    "max_tool_calls": 20,
+    "deadline_seconds": 900,
+    "billing_unit": "synthetic-credit",
+    "unknown_usage": "hold-reservation-and-reconcile"
+  },
+  "storage": {
+    "atomic_unit": "event-state-receipt-outbox",
+    "delivery": "at-least-once",
+    "recovery": "reconcile-before-redispatch",
+    "events_days": 30,
+    "receipts_days": 90,
+    "artifacts_days": 7,
+    "unresolved": "retain-until-settled",
+    "redaction": "before-persistence-and-model",
+    "migration": "digest-bound-copy-validate-swap",
+    "unsupported_schema": "reject"
+  },
+  "services": {
+    "supervision": "external-supervisor",
+    "credential_mediation": "external-credential-broker",
+    "policy_store": "external-policy-store",
+    "workspace_isolation": "external-workspace-worker",
+    "private_ipc": "external-private-ipc",
+    "durable_store": "external-durable-store"
+  }
+}

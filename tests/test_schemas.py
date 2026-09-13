@@ -242,6 +242,137 @@ class SchemaTests(unittest.TestCase):
     def test_all_inventory_and_profile_schemas(self):
         kit.full_schema_check(kit.ROOT, self.data)
 
+    def test_starter_config_and_reference_closed_shapes(self):
+        for path, ref in [
+            ("examples/agent-config.json", "schemas/agent-config.schema.json"),
+            ("examples/reference-run.json", "schemas/reference-run.schema.json"),
+        ]:
+            value = kit.read_json(kit.ROOT, path)
+            validator = self.validator(ref)
+            validator.validate(value)
+            self.assertFalse(validator.is_valid(dict(value, extra=True)))
+            for required in value:
+                invalid = copy.deepcopy(value)
+                del invalid[required]
+                self.assertFalse(validator.is_valid(invalid), (path, required))
+
+    def test_runtime_payload_closed_shapes_and_required_fields(self):
+        fixture = kit.read_json(kit.ROOT, "examples/reference-run.json")
+        config = kit.read_json(kit.ROOT, "examples/agent-config.json")
+        samples = {
+            "task": fixture["task"],
+            "run": fixture["run"],
+            "grant": fixture["grant"],
+            "handler_binding": fixture["binding"],
+            "model_request": fixture["adapter_request"],
+            "adapter_control": fixture["adapter_control"],
+            "adapter": config["adapter"],
+            "context_policy": config["context"],
+            "budget_policy": config["budget"],
+            "storage_policy": config["storage"],
+            "platform_services": config["services"],
+            "identity": fixture["run"]["identity"],
+        }
+        samples["launch_policy"] = {
+            "session_id": "fixture-session",
+            "repository_id": "example",
+            "profile_id": "agent-starter",
+            "authorities": ["workspace_read"],
+            "resource_limits": config["budget"],
+            "policy_digest": fixture["run"]["identity"]["policy_digest"],
+        }
+        samples["goal_state"] = {
+            "goal_id": "read-task",
+            "state": "QUEUED",
+            "requirements_digest": "0" * 64,
+            "budget": {
+                "spent_tokens": 0,
+                "held_tokens": 0,
+                "spent_microcredits": 0,
+                "held_microcredits": 0,
+            },
+            "progress_delta": [],
+            "next_action": "execute",
+        }
+        kind_types = {
+            "reserve": "reservation",
+            "approval": "approval",
+            "dispatch": "dispatch",
+            "receipt": "step_receipt",
+            "checkpoint": "resume_packet",
+        }
+        for scenario in fixture["scenarios"]:
+            for event in scenario["events"]:
+                self.validator(
+                    "schemas/runtime-contracts.schema.json#/$defs/run_event"
+                ).validate(event)
+                if event["kind"] in kind_types:
+                    samples[kind_types[event["kind"]]] = event["payload"]
+        for name, sample in samples.items():
+            with self.subTest(payload=name):
+                validator = self.validator(
+                    "schemas/runtime-contracts.schema.json#/$defs/" + name
+                )
+                validator.validate(sample)
+                self.assertFalse(validator.is_valid(dict(sample, injected=True)))
+                for required in sample:
+                    invalid = copy.deepcopy(sample)
+                    del invalid[required]
+                    self.assertFalse(validator.is_valid(invalid), (name, required))
+
+    def test_runtime_discriminators_limits_and_timestamps(self):
+        fixture = kit.read_json(kit.ROOT, "examples/reference-run.json")
+        validator = self.validator(
+            "schemas/runtime-contracts.schema.json#/$defs/run_event"
+        )
+        event = copy.deepcopy(fixture["scenarios"][0]["events"][0])
+        event["kind"] = "dispatch"
+        self.assertFalse(validator.is_valid(event))
+        event = copy.deepcopy(fixture["scenarios"][0]["events"][0])
+        event["sequence"] = 0
+        self.assertFalse(validator.is_valid(event))
+        event["sequence"] = 1
+        event["at"] = "2026-02-30T00:00:00Z"
+        self.assertFalse(validator.is_valid(event))
+        config = kit.read_json(kit.ROOT, "examples/agent-config.json")
+        config["budget"]["run_tokens"] = -1
+        self.assertFalse(
+            self.validator("schemas/agent-config.schema.json").is_valid(config)
+        )
+
+    def test_runtime_usage_unknown_is_not_zero(self):
+        validator = self.validator(
+            "schemas/runtime-contracts.schema.json#/$defs/accounting"
+        )
+        unknown = {"known": False, "reason": "unavailable"}
+        validator.validate(unknown)
+        self.assertFalse(validator.is_valid(dict(unknown, total_tokens=0)))
+        fixture = kit.read_json(kit.ROOT, "examples/reference-run.json")
+        known = copy.deepcopy(fixture["adapter_stream"][-1]["usage"])
+        validator.validate(known)
+        known["known"] = False
+        self.assertFalse(validator.is_valid(known))
+
+    def test_adapter_stream_variants_and_bounds(self):
+        fixture = kit.read_json(kit.ROOT, "examples/reference-run.json")
+        validator = self.validator(
+            "schemas/runtime-contracts.schema.json#/$defs/stream_event"
+        )
+        for event in fixture["adapter_stream"]:
+            validator.validate(event)
+            self.assertFalse(
+                validator.is_valid(dict(event, provider_secret="not-a-secret-fixture"))
+            )
+        event = {
+            "request_id": "request",
+            "sequence": 1,
+            "kind": "text-delta",
+            "text": "hello",
+        }
+        validator.validate(event)
+        event["text"] = "x" * 8193
+        self.assertFalse(validator.is_valid(event))
+
 
 if __name__ == "__main__":
     unittest.main()

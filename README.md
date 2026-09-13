@@ -5,11 +5,25 @@ Linux host profiles, precise tool contracts, and an evidence-based selection
 process. It specifies what an implementation must demonstrate. It does not
 claim that a runtime, isolation policy, or performance improvement is deployed.
 
-Start with [TOOLING.md](TOOLING.md) for concrete tool choices and
+For a host-free single-agent starting point, use [STARTER.md](STARTER.md), the
+[agent-starter profile](profiles/agent-starter.yaml) and the
+[resolved configuration example](examples/agent-config.json). Host and Home
+Manager setup can remain in separate repositories.
+
+Use [TOOLING.md](TOOLING.md) for concrete tool choices and
 [research/FINDINGS.md](research/FINDINGS.md) for sources, comparisons and limits.
 Choose a target in [profiles/](profiles/), then use
 [ARCHITECTURE.md](ARCHITECTURE.md) and [REBUILD-GUIDE.md](REBUILD-GUIDE.md).
 [VERIFICATION.md](VERIFICATION.md) distinguishes kit checks from runtime proof.
+
+<!-- bootstrap-start -->
+To turn repeated clones into an implementation project, start with
+[the temporary build assistance](.agents/README.md). It supplies resumable work
+items and local check helpers, not a platform runtime or agent launcher.
+<!-- bootstrap-end -->
+
+[Portable operating skills](skills/README.md) remain useful after implementation
+and can be loaded as ordinary files on an independent host.
 
 ## What is included
 
@@ -21,6 +35,9 @@ Choose a target in [profiles/](profiles/), then use
 - Component dependencies, configurable controller budgets, optional Linux
   choices, a measurement contract, 51 synthetic input examples and ten shared
   [result examples](examples/tool-results.json).
+- Typed launch, task/run/event, adapter, grant/approval, dispatch, receipt and
+  resume contracts, concrete context/cost/storage policies, and nine complete
+  [synthetic reference scenarios](examples/reference-run.json).
 - A local integrity/semantic checker and a full standards-based schema check.
 
 This is a specification and verification toolkit, not an agent runtime. Tool
@@ -31,12 +48,14 @@ implementations and authorities are available.
 
 | Profile | Use |
 | --- | --- |
+| `agent-starter` | Minimal single-agent core, explicit extensions, no Host/Home Manager implementation. |
 | `agent-platform` | Portable core on any host satisfying `platform.services`; no desktop or NixOS dependency. |
 | `host-foundation` | Optional declarative Linux/NixOS reference host. |
 | `greenfield-minimal` | Small reference laptop and essential agent services. |
 | `full-workstation` | All selected client, research, voice and VM roles. |
 
-Resolve component dependencies transitively. A dependency in `excludes` or
+Resolve component dependencies transitively. Optional components are checked for
+compatibility but activate only when explicitly selected. A dependency in `excludes` or
 `defer` is an error, not an implicit override. Profiles select requirements;
 they do not grant authority or demonstrate availability.
 
@@ -66,6 +85,7 @@ The underlying commands remain usable in any approved equivalent environment:
 ```sh
 python3 -B scripts/check_kit.py --structural
 python3 -B -m unittest discover -s tests -p 'test_semantics.py'
+python3 -B -m unittest discover -s tests -p 'test_runtime_semantics.py'
 python3 -B scripts/check_kit.py
 python3 -B -m unittest discover -s tests -p 'test_schemas.py'
 ```

@@ -6,8 +6,11 @@ technology-neutral except that NixOS/Linux is the reference host.
 ## Start with a profile
 
 Choose exactly one profile and resolve its component dependencies. For the
-lowest-cost useful system, use `greenfield-minimal`. Use `agent-platform`
-when another host already supplies the required host boundary. Use
+smallest agent platform on existing infrastructure, use `agent-starter` and
+[STARTER.md](STARTER.md). It leaves Host and Home Manager implementations in
+their own repositories and defines only the required service interfaces.
+Use `greenfield-minimal` for the reference laptop, or `agent-platform`
+for the broader portable capability set. Use
 `full-workstation` only when the optional research, browser, voice, client, and
 VM surfaces are needed.
 
@@ -19,9 +22,13 @@ interpret an unselected component as a missing requirement.
 
 Run the local checks in README.md, select one profile and resolve its dependency
 closure. Implement only selected components. The phases below express dependency
-order; an agent-platform deployment uses existing host services instead of
+order; an agent-starter or agent-platform deployment uses existing host services instead of
 rebuilding the reference laptop. Optional clients and services are not required
 to prove a minimal core. Refer to TOOLING.md for exact operation contracts.
+
+The host-free starter skips phases 1 and 10. Reviewed builds, additional harnesses,
+coordination and richer clients are selected extensions or later proof milestones,
+not prerequisites for the synthetic starter contract suite.
 
 ## Phase 1 — Declarative host foundation
 
@@ -67,15 +74,18 @@ duplicate/unknown rejection, approval replay denial, and result-bound tests.
 
 Implement the immutable harness registry, neutral adapter contract, host model
 gateway, provider bindings, session retention, output/usage normalization, and
-at least two independent external adapters.
+one registered adapter for starter integration. The stronger portability
+milestone adds at least two independent external adapters.
 
 Completion evidence: two real adapters plus a synthetic third, multiple
 provider shapes, credential isolation, cancellation, resume, approval, and
 identical tool-policy parity.
 
-## Phase 6 — First-party controlled loop
+## Phase 6 — Required controller and optional first-party loop
 
-Add the first-party loop as an optional adapter. Implement turn sequencing,
+The goal controller, context/resume owner and receipts are required independently
+of which harness supplies the loop. Implement these for every starter. If a
+first-party loop is selected, add it as an ordinary adapter with turn sequencing,
 streaming, tool correlation, context budgeting, compaction, explicit finish
 reasons, and local recovery. Add the host-owned goal controller, step receipts,
 progress deltas, retry fingerprints, WAITING_EXTERNAL, and finite slice budgets.
@@ -99,6 +109,9 @@ cleanup, privacy, and resource tests. No optional capability expands the
 default coding profile.
 
 ## Phase 8 — Coordination and observation
+
+Basic observation can project the single-agent run log without coordination.
+Add the following only when multi-agent coordination is selected.
 
 Implement host-issued agent profiles, finite scheduler buckets, grant-scoped
 peer directory, durable coordination ledger, Agent Cards, optional A2A

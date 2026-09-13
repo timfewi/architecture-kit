@@ -19,7 +19,8 @@
           "purpose",
           "fields",
           "invariants",
-          "decision_refs"
+          "decision_refs",
+          "payload_schema"
         ],
         "properties": {
           "id": {
@@ -68,6 +69,18 @@
               "maxLength": 2048
             },
             "maxItems": 1000
+          },
+          "payload_schema": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^schemas/[a-z-]+\\.schema\\.json(?:#/.+)?$",
+                "maxLength": 256
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         }
       },

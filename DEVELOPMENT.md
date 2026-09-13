@@ -90,6 +90,8 @@ Review and commit the complete intended changes according to your Git policy.
 | `just check` | Lint, format checks, all regression tests, full schema and manifest validation. |
 | `just check-fast` | Lint, formatting, semantic tests and manifest checks; excludes full JSON Schema validation. |
 | `just format` | Format Python, flake.nix and justfile; does not refresh the manifest. |
+| `just test-runtime-semantics` | Independent starter event-replay and negative tests; no actual runtime execution. |
+| `just refresh-reference` | Regenerate synthetic fixtures after reviewed config/schema changes; inspect the diff. |
 | `just refresh-manifest` | Refresh derived hashes after reviewing intentional changes. |
 | `just benchmark` | Print a new synthetic measurement without replacing accepted research evidence. |
 | `just baseline` | Optional host-provided project-check security scan; not silently included or installed by this generic Flake. |
@@ -100,7 +102,25 @@ The shell has no shellHook and never runs checks on entry. Recipes do not load
 .env files. The formatter and checker commands operate on the current checkout,
 not on a copied or implicitly rewritten source snapshot.
 
-## Example host worker integration
+## Portable build assistance
+
+The temporary build helper uses the existing Python standard library and prints
+JSON through ordinary local commands. It never needs the runtime's future
+broker/tools, a private catalog, a provider SDK or Nix itself. See
+[the build guide](.agents/README.md) for direct invocations and external state.
+
+The permanent skill validator uses the already declared PyYAML dependency.
+`just check` and `just check-fast` also include temporary helper tests and
+skill integrity. The full suite still requires the pinned JSON Schema validator.
+
+Process execution follows the
+[Python subprocess documentation](https://docs.python.org/3.14/library/subprocess.html)
+for the repository's declared Python family (consulted 2026-09-13).
+The helper bounds captured output and uses POSIX process groups for cancellation;
+it is not an execution sandbox. Unsupported native hosts may read the instructions
+and use a reviewed POSIX execution environment for helper-run checks.
+
+## Example host worker integration (optional)
 
 This Flake defines an environment; it does not register or activate an agent
 worker profile. Interactive Direnv trust does not grant broker execution rights.

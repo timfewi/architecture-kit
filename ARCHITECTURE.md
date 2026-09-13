@@ -173,7 +173,8 @@ wire codec, session codec, output mapping, and child transport. Harness names
 are registry data, never core branches.
 
 Rationale: At least two independent adapters and a synthetic third adapter are
-the proof that the boundary is real.
+the proof that the boundary is real. A one-adapter starter can establish its
+own integration first, but must not claim this stronger neutrality gate.
 
 Consequences: Neutral modules do not import harness implementations. Provider
 usage fields are normalized honestly; unavailable measurements remain null and
@@ -397,6 +398,10 @@ preserve isolation and convergence.
 
 ## ADR-019 — Keep observation asynchronous and reconstructible
 
+Starter scope: Basic observation projects goal-controller run events without
+requiring coordination. Multi-agent and retrieval projections enrich it only
+when explicitly selected.
+
 Context: Synchronous telemetry on the agent hot path can stall real work.
 
 Decision: Observation uses immediate bounded offers, content-minimized events,
@@ -464,8 +469,9 @@ Decision: Register the first-party loop through the same adapter and descriptor
 boundary as external harnesses. It owns model/tool turn sequencing, streaming,
 conversation context, compaction, correlation, retry classification, local
 recovery, and explicit finish reasons. It consumes existing policy, model
-gateway, tools, scheduler, grants, coordination, retrieval, evidence, and
-observation owners.
+gateway, tools, grants and evidence owners. Scheduler coordination, retrieval
+and observation are consumed only when their extensions are selected. The goal
+controller and context/resume owner remain required without a first-party loop.
 
 Rationale: The loop proves the neutral platform as a new consumer rather than
 becoming privileged core logic.
@@ -566,6 +572,11 @@ Acceptance: Reports cannot promote an evidence level, omit failed attempts, or
 reuse evidence from changed source, policy, toolchain, registry, or schema.
 
 ## ADR-027 — Package portable core separately from host implementations
+
+Starter realization: [STARTER.md](STARTER.md) defines the host-free minimal
+profile, resolved launch intent, typed runtime payloads and synthetic contract
+replay. External service IDs are integration requirements, not host or Home
+Manager configuration and not evidence of an installed runtime.
 
 Context: Linux/NixOS is the reference, while future hosts have different
 process, credential, sandbox, and service primitives.

@@ -19,5 +19,14 @@
   Just recipes, validator-environment smoke check and host setup guide.
 - Extended manifest kinds for development files and excluded local .direnv state.
 
+- Added the host-free agent-starter profile and resolved single-agent config.
+- Defined typed runtime/adapter/grant/receipt/resume payloads and concrete
+  context, accounting, external-service and persistence policies.
+- Decoupled basic observation from optional coordination; retained the stronger
+  multi-adapter portability gate as a separate milestone.
+- Added nine synthetic event-replay scenarios, schema acceptance cases and
+  independent negatives for authority, budgets, waiting and recovery.
+- Added STARTER.md and Just recipes; no production runtime or host/HM changes.
+
 This records specification work. Runtime support and full verification must be
 established at the evidence levels in VERIFICATION.md.

@@ -1,0 +1,1709 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json",
+  "title": "Portable starter runtime payloads; not authority or runtime proof",
+  "$defs": {
+    "id": {
+      "$ref": "https://architecture-kit.invalid/schemas/tool-contracts.schema.json#/$defs/id"
+    },
+    "digest": {
+      "$ref": "https://architecture-kit.invalid/schemas/tool-contracts.schema.json#/$defs/digest"
+    },
+    "artifact": {
+      "$ref": "https://architecture-kit.invalid/schemas/tool-contracts.schema.json#/$defs/artifact"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 32
+    },
+    "state": {
+      "enum": [
+        "QUEUED",
+        "PREFLIGHT",
+        "PLAN",
+        "EXECUTE_STEP",
+        "OBSERVE",
+        "VERIFY",
+        "REPLAN",
+        "WAITING_APPROVAL",
+        "WAITING_EXTERNAL",
+        "COMPLETE",
+        "BLOCKED",
+        "FAILED",
+        "CANCELLED",
+        "OUTCOME_UNCERTAIN"
+      ]
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_digest",
+        "policy_digest",
+        "toolchain_digest",
+        "registry_digest",
+        "config_digest",
+        "schema_digest",
+        "task_digest"
+      ],
+      "properties": {
+        "source_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "policy_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "toolchain_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "registry_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "config_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "schema_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "task_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        }
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "description",
+        "minimum_level"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "minimum_level": {
+          "enum": [
+            "source",
+            "focused-test",
+            "build",
+            "activation",
+            "live",
+            "release"
+          ]
+        }
+      }
+    },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_id",
+        "objective",
+        "workspace_id",
+        "requirements"
+      ],
+      "properties": {
+        "task_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "objective": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8192
+        },
+        "workspace_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/requirement"
+          },
+          "minItems": 1,
+          "maxItems": 100,
+          "uniqueItems": true
+        }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id",
+        "task_id",
+        "agent_id",
+        "identity",
+        "state",
+        "created_at"
+      ],
+      "properties": {
+        "run_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "task_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "agent_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "identity": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/identity"
+        },
+        "state": {
+          "const": "QUEUED"
+        },
+        "created_at": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+        }
+      }
+    },
+    "budget_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_tokens",
+        "run_microcredits",
+        "max_model_calls",
+        "max_tool_calls",
+        "deadline_seconds",
+        "billing_unit",
+        "unknown_usage"
+      ],
+      "properties": {
+        "run_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "run_microcredits": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "max_model_calls": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "max_tool_calls": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "deadline_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 86400
+        },
+        "billing_unit": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "unknown_usage": {
+          "const": "hold-reservation-and-reconcile"
+        }
+      }
+    },
+    "context_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "window_tokens",
+        "input_tokens",
+        "output_tokens",
+        "safety_tokens",
+        "tool_output_bytes",
+        "resume_bytes",
+        "automatic",
+        "overflow",
+        "history",
+        "counting"
+      ],
+      "properties": {
+        "window_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000000
+        },
+        "input_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000000
+        },
+        "output_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000000
+        },
+        "safety_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000000
+        },
+        "tool_output_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "resume_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65536
+        },
+        "automatic": {
+          "const": [
+            "current_policy",
+            "active_goal",
+            "requirement_matrix",
+            "digest_bound_resume_packet"
+          ]
+        },
+        "overflow": {
+          "const": "compact-once-then-block"
+        },
+        "history": {
+          "const": "on-demand-digest-bound"
+        },
+        "counting": {
+          "const": "adapter-count-or-conservative-bound"
+        }
+      }
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "known",
+        "input_uncached",
+        "input_cached",
+        "output_visible",
+        "output_reasoning",
+        "total_tokens",
+        "microcredits"
+      ],
+      "properties": {
+        "known": {
+          "const": true
+        },
+        "input_uncached": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "input_cached": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "output_visible": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "output_reasoning": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "total_tokens": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "microcredits": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        }
+      }
+    },
+    "unknown_usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "known",
+        "reason"
+      ],
+      "properties": {
+        "known": {
+          "const": false
+        },
+        "reason": {
+          "enum": [
+            "unavailable",
+            "interrupted",
+            "pending-reconciliation"
+          ]
+        }
+      }
+    },
+    "accounting": {
+      "oneOf": [
+        {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/usage"
+        },
+        {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/unknown_usage"
+        }
+      ]
+    },
+    "reservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reservation_id",
+        "request_id",
+        "tokens",
+        "microcredits"
+      ],
+      "properties": {
+        "reservation_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "request_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "microcredits": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        }
+      }
+    },
+    "grant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "grant_id",
+        "run_id",
+        "workspace_id",
+        "tool",
+        "input_digest",
+        "identity",
+        "binding_digest",
+        "expires_at",
+        "max_uses",
+        "state"
+      ],
+      "properties": {
+        "grant_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "run_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "workspace_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "tool": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "input_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "identity": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/identity"
+        },
+        "binding_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "expires_at": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+        },
+        "max_uses": {
+          "const": 1
+        },
+        "state": {
+          "enum": [
+            "active",
+            "revoked"
+          ]
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approval_id",
+        "grant_id",
+        "grant_digest",
+        "decision",
+        "decided_at",
+        "expires_at"
+      ],
+      "properties": {
+        "approval_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "grant_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "grant_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "decision": {
+          "enum": [
+            "granted",
+            "denied"
+          ]
+        },
+        "decided_at": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+        },
+        "expires_at": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+        }
+      }
+    },
+    "handler_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tool",
+        "definition_digest",
+        "handler_id",
+        "handler_digest",
+        "input_schema",
+        "output_schema",
+        "executor",
+        "authority",
+        "effects",
+        "idempotency",
+        "cancellation"
+      ],
+      "properties": {
+        "tool": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "definition_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "handler_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "handler_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "input_schema": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "output_schema": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "executor": {
+          "enum": [
+            "broker",
+            "worker",
+            "host-builder"
+          ]
+        },
+        "authority": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "effects": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "read",
+              "workspace_write",
+              "execute",
+              "git_write",
+              "network",
+              "external_write",
+              "job_control",
+              "state_write"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 10,
+          "uniqueItems": true
+        },
+        "idempotency": {
+          "enum": [
+            "read-only",
+            "deduplicated",
+            "reconcile-only"
+          ]
+        },
+        "cancellation": {
+          "enum": [
+            "cooperative",
+            "best-effort"
+          ]
+        }
+      }
+    },
+    "dispatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "call_id",
+        "run_id",
+        "workspace_id",
+        "tool",
+        "input_artifact",
+        "identity",
+        "binding_digest",
+        "grant_id",
+        "approval_id",
+        "deadline"
+      ],
+      "properties": {
+        "call_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "run_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "workspace_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "tool": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "input_artifact": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/artifact"
+        },
+        "identity": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/identity"
+        },
+        "binding_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "grant_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "approval_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "deadline": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requirement_id",
+        "level",
+        "status",
+        "output_digest"
+      ],
+      "properties": {
+        "requirement_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "level": {
+          "enum": [
+            "source",
+            "focused-test",
+            "build",
+            "activation",
+            "live",
+            "release"
+          ]
+        },
+        "status": {
+          "enum": [
+            "passed",
+            "failed",
+            "blocked"
+          ]
+        },
+        "output_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        }
+      }
+    },
+    "step_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "receipt_id",
+        "run_id",
+        "call_id",
+        "identity",
+        "input_digest",
+        "output",
+        "result_class",
+        "settled_at",
+        "verification"
+      ],
+      "properties": {
+        "receipt_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "run_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "call_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "identity": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/identity"
+        },
+        "input_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "output": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/artifact"
+        },
+        "result_class": {
+          "enum": [
+            "ok",
+            "error",
+            "cancelled"
+          ]
+        },
+        "settled_at": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+        },
+        "verification": {
+          "type": "array",
+          "items": {
+            "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/verification"
+          },
+          "minItems": 0,
+          "maxItems": 100,
+          "uniqueItems": true
+        }
+      }
+    },
+    "resume_packet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id",
+        "identity",
+        "last_sequence",
+        "controller_state",
+        "pending_calls",
+        "open_requirements",
+        "next_action",
+        "expires_at"
+      ],
+      "properties": {
+        "run_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "identity": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/identity"
+        },
+        "last_sequence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "controller_state": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/state"
+        },
+        "pending_calls": {
+          "type": "array",
+          "items": {
+            "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 100,
+          "uniqueItems": true
+        },
+        "open_requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 100,
+          "uniqueItems": true
+        },
+        "next_action": {
+          "enum": [
+            "reconcile",
+            "observe",
+            "verify",
+            "wait",
+            "stop"
+          ]
+        },
+        "expires_at": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+        }
+      }
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adapter_id",
+        "implementation_digest",
+        "capabilities",
+        "resume_mode",
+        "cancellation"
+      ],
+      "properties": {
+        "adapter_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "implementation_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "text",
+              "tool-calls",
+              "stream",
+              "cancel",
+              "resume"
+            ]
+          },
+          "minItems": 2,
+          "maxItems": 5,
+          "uniqueItems": true
+        },
+        "resume_mode": {
+          "enum": [
+            "replay-normalized",
+            "provider-session",
+            "unsupported"
+          ]
+        },
+        "cancellation": {
+          "enum": [
+            "best-effort",
+            "cooperative",
+            "unsupported"
+          ]
+        }
+      }
+    },
+    "content": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "text"
+          ],
+          "properties": {
+            "kind": {
+              "const": "text"
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 32768
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "call_id",
+            "tool",
+            "arguments"
+          ],
+          "properties": {
+            "kind": {
+              "const": "tool-call"
+            },
+            "call_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "tool": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "arguments": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/artifact"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "call_id",
+            "result"
+          ],
+          "properties": {
+            "kind": {
+              "const": "tool-result"
+            },
+            "call_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "result": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/artifact"
+            }
+          }
+        }
+      ]
+    },
+    "message": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "content"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "system",
+            "user",
+            "assistant",
+            "tool"
+          ]
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/content"
+          },
+          "minItems": 1,
+          "maxItems": 100,
+          "uniqueItems": true
+        }
+      }
+    },
+    "model_request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request_id",
+        "run_id",
+        "adapter_id",
+        "model_binding_id",
+        "identity",
+        "messages",
+        "allowed_tools",
+        "input_token_bound",
+        "max_output_tokens",
+        "deadline",
+        "reservation_id"
+      ],
+      "properties": {
+        "request_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "run_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "adapter_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "model_binding_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "identity": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/identity"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/message"
+          },
+          "minItems": 1,
+          "maxItems": 100,
+          "uniqueItems": true
+        },
+        "allowed_tools": {
+          "type": "array",
+          "items": {
+            "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 100,
+          "uniqueItems": true
+        },
+        "input_token_bound": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000000
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000000
+        },
+        "deadline": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+        },
+        "reservation_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        }
+      }
+    },
+    "stream_event": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "request_id",
+            "sequence",
+            "kind",
+            "text"
+          ],
+          "properties": {
+            "request_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "kind": {
+              "const": "text-delta"
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8192
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "request_id",
+            "sequence",
+            "kind",
+            "call_id",
+            "tool",
+            "arguments"
+          ],
+          "properties": {
+            "request_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "kind": {
+              "const": "tool-call"
+            },
+            "call_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "tool": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "arguments": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/artifact"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "request_id",
+            "sequence",
+            "kind",
+            "reason",
+            "usage"
+          ],
+          "properties": {
+            "request_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "kind": {
+              "const": "finish"
+            },
+            "reason": {
+              "enum": [
+                "stop",
+                "tool-calls",
+                "length",
+                "cancelled"
+              ]
+            },
+            "usage": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/accounting"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "request_id",
+            "sequence",
+            "kind",
+            "code",
+            "retryable",
+            "usage"
+          ],
+          "properties": {
+            "request_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "kind": {
+              "const": "error"
+            },
+            "code": {
+              "enum": [
+                "unsupported",
+                "authentication",
+                "rate-limit",
+                "timeout",
+                "transport",
+                "invalid-response"
+              ]
+            },
+            "retryable": {
+              "type": "boolean"
+            },
+            "usage": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/accounting"
+            }
+          }
+        }
+      ]
+    },
+    "adapter_control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request_id",
+        "run_id",
+        "operation",
+        "identity",
+        "deadline",
+        "resume"
+      ],
+      "properties": {
+        "request_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "run_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "operation": {
+          "enum": [
+            "cancel",
+            "resume"
+          ]
+        },
+        "identity": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/identity"
+        },
+        "deadline": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+        },
+        "resume": {
+          "anyOf": [
+            {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/resume_packet"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "storage_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "atomic_unit",
+        "delivery",
+        "recovery",
+        "events_days",
+        "receipts_days",
+        "artifacts_days",
+        "unresolved",
+        "redaction",
+        "migration",
+        "unsupported_schema"
+      ],
+      "properties": {
+        "atomic_unit": {
+          "const": "event-state-receipt-outbox"
+        },
+        "delivery": {
+          "const": "at-least-once"
+        },
+        "recovery": {
+          "const": "reconcile-before-redispatch"
+        },
+        "events_days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3650
+        },
+        "receipts_days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3650
+        },
+        "artifacts_days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3650
+        },
+        "unresolved": {
+          "const": "retain-until-settled"
+        },
+        "redaction": {
+          "const": "before-persistence-and-model"
+        },
+        "migration": {
+          "const": "digest-bound-copy-validate-swap"
+        },
+        "unsupported_schema": {
+          "const": "reject"
+        }
+      }
+    },
+    "platform_services": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supervision",
+        "credential_mediation",
+        "policy_store",
+        "workspace_isolation",
+        "private_ipc",
+        "durable_store"
+      ],
+      "properties": {
+        "supervision": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "credential_mediation": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "policy_store": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "workspace_isolation": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "private_ipc": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "durable_store": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        }
+      }
+    },
+    "run_event": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "run_id",
+            "sequence",
+            "at",
+            "kind",
+            "payload"
+          ],
+          "properties": {
+            "run_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "at": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+            },
+            "kind": {
+              "const": "transition"
+            },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "to",
+                "guard"
+              ],
+              "properties": {
+                "to": {
+                  "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/state"
+                },
+                "guard": {
+                  "enum": [
+                    "authorized_next_step",
+                    "failure_or_cancellation",
+                    "reconciliation_required",
+                    "new_evidence",
+                    "all_requirements_verified",
+                    "approval_granted_and_revalidated",
+                    "external_result_correlated"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "run_id",
+            "sequence",
+            "at",
+            "kind",
+            "payload"
+          ],
+          "properties": {
+            "run_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "at": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+            },
+            "kind": {
+              "const": "reserve"
+            },
+            "payload": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/reservation"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "run_id",
+            "sequence",
+            "at",
+            "kind",
+            "payload"
+          ],
+          "properties": {
+            "run_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "at": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+            },
+            "kind": {
+              "const": "model"
+            },
+            "payload": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/model_request"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "run_id",
+            "sequence",
+            "at",
+            "kind",
+            "payload"
+          ],
+          "properties": {
+            "run_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "at": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+            },
+            "kind": {
+              "const": "settle"
+            },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "reservation_id",
+                "usage"
+              ],
+              "properties": {
+                "reservation_id": {
+                  "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+                },
+                "usage": {
+                  "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/accounting"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "run_id",
+            "sequence",
+            "at",
+            "kind",
+            "payload"
+          ],
+          "properties": {
+            "run_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "at": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+            },
+            "kind": {
+              "const": "approval"
+            },
+            "payload": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/approval"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "run_id",
+            "sequence",
+            "at",
+            "kind",
+            "payload"
+          ],
+          "properties": {
+            "run_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "at": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+            },
+            "kind": {
+              "const": "dispatch"
+            },
+            "payload": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/dispatch"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "run_id",
+            "sequence",
+            "at",
+            "kind",
+            "payload"
+          ],
+          "properties": {
+            "run_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "at": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+            },
+            "kind": {
+              "const": "receipt"
+            },
+            "payload": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/step_receipt"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "run_id",
+            "sequence",
+            "at",
+            "kind",
+            "payload"
+          ],
+          "properties": {
+            "run_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "at": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+            },
+            "kind": {
+              "const": "reconcile"
+            },
+            "payload": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/step_receipt"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "run_id",
+            "sequence",
+            "at",
+            "kind",
+            "payload"
+          ],
+          "properties": {
+            "run_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "at": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+            },
+            "kind": {
+              "const": "checkpoint"
+            },
+            "payload": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/resume_packet"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "run_id",
+            "sequence",
+            "at",
+            "kind",
+            "payload"
+          ],
+          "properties": {
+            "run_id": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000
+            },
+            "at": {
+              "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/timestamp"
+            },
+            "kind": {
+              "const": "restart"
+            },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "checkpoint_digest"
+              ],
+              "properties": {
+                "checkpoint_digest": {
+                  "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "launch_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "session_id",
+        "repository_id",
+        "profile_id",
+        "authorities",
+        "resource_limits",
+        "policy_digest"
+      ],
+      "properties": {
+        "session_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "repository_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "profile_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "authorities": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "tool_discovery",
+              "workspace_read",
+              "workspace_write",
+              "workspace_execute",
+              "git_inspect",
+              "git_local_write",
+              "git_remote_read",
+              "git_remote_write",
+              "code_read",
+              "research",
+              "browser_read",
+              "browser_interact",
+              "browser_upload",
+              "artifact_read",
+              "compute",
+              "wasm",
+              "reviewed_build",
+              "skill_read",
+              "memory_read",
+              "memory_propose",
+              "forge_read",
+              "forge_write"
+            ]
+          },
+          "uniqueItems": true,
+          "maxItems": 100
+        },
+        "resource_limits": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/budget_policy"
+        },
+        "policy_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        }
+      }
+    },
+    "goal_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "goal_id",
+        "state",
+        "requirements_digest",
+        "budget",
+        "progress_delta",
+        "next_action"
+      ],
+      "properties": {
+        "goal_id": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/id"
+        },
+        "state": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/state"
+        },
+        "requirements_digest": {
+          "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/digest"
+        },
+        "budget": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "spent_tokens",
+            "held_tokens",
+            "spent_microcredits",
+            "held_microcredits"
+          ],
+          "properties": {
+            "spent_tokens": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            "held_tokens": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            "spent_microcredits": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            },
+            "held_microcredits": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            }
+          }
+        },
+        "progress_delta": {
+          "type": "array",
+          "items": {
+            "$ref": "https://architecture-kit.invalid/schemas/runtime-contracts.schema.json#/$defs/verification"
+          },
+          "maxItems": 100,
+          "uniqueItems": true
+        },
+        "next_action": {
+          "enum": [
+            "execute",
+            "reconcile",
+            "observe",
+            "verify",
+            "wait",
+            "stop"
+          ]
+        }
+      }
+    }
+  }
+}

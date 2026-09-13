@@ -1,0 +1,1743 @@
+{
+  "$schema": "https://architecture-kit.invalid/schemas/reference-run.schema.json",
+  "synthetic": true,
+  "config_path": "examples/agent-config.json",
+  "task": {
+    "task_id": "read-task",
+    "objective": "Read one bounded synthetic source window.",
+    "workspace_id": "example",
+    "requirements": [
+      {
+        "id": "read-evidence",
+        "description": "Correlated read result",
+        "minimum_level": "focused-test"
+      }
+    ]
+  },
+  "run": {
+    "run_id": "read-run",
+    "task_id": "read-task",
+    "agent_id": "starter-agent",
+    "identity": {
+      "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+      "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+      "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+      "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+      "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+      "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+      "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+    },
+    "state": "QUEUED",
+    "created_at": "2026-09-13T00:00:00Z"
+  },
+  "grant": {
+    "grant_id": "read-grant",
+    "run_id": "read-run",
+    "workspace_id": "example",
+    "tool": "workspace.read",
+    "input_digest": "675d78573c6dff90830c5323f5b06f1e77d54adc9252afa74bfd6c0ebbd1bdad",
+    "identity": {
+      "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+      "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+      "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+      "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+      "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+      "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+      "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+    },
+    "binding_digest": "2357e801c8cc284c4c149cd6403c0a5e907cddb684d25c7aaf89c6431a82a10e",
+    "expires_at": "2026-09-13T00:10:00Z",
+    "max_uses": 1,
+    "state": "active"
+  },
+  "binding": {
+    "tool": "workspace.read",
+    "definition_digest": "8c0c9d76b8dc961dffceba113bb3f07d9074dfc14d4a68bea8766401a8c68f11",
+    "handler_id": "synthetic-read-handler",
+    "handler_digest": "b663161aa385620f821c22ca334196c6c1c8ec24c712773037ee2e62f67d24d2",
+    "input_schema": "schemas/tool-contracts.schema.json#/$defs/workspace.read.input",
+    "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.text",
+    "executor": "broker",
+    "authority": "workspace_read",
+    "effects": [
+      "read"
+    ],
+    "idempotency": "read-only",
+    "cancellation": "best-effort"
+  },
+  "input": {
+    "workspace_id": "example",
+    "path": "src/example.txt",
+    "offset_bytes": 0,
+    "max_bytes": 1,
+    "expected_sha256": null
+  },
+  "result": {
+    "status": "ok",
+    "data": {
+      "text": "G",
+      "sha256": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+      "offset_bytes": 0,
+      "total_bytes": 8
+    },
+    "error": null,
+    "coverage": {
+      "scope": "selected",
+      "completeness": "complete",
+      "freshness": "current",
+      "returned": 1,
+      "truncated": false
+    },
+    "provenance": {
+      "call_id": "read-call",
+      "source_sha256": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+      "definition_sha256": "8c0c9d76b8dc961dffceba113bb3f07d9074dfc14d4a68bea8766401a8c68f11",
+      "policy_sha256": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+      "toolchain_sha256": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+      "elapsed_ms": 0
+    },
+    "continuation": null,
+    "artifact": null
+  },
+  "adapter_request": {
+    "request_id": "model-request",
+    "run_id": "read-run",
+    "adapter_id": "synthetic-adapter",
+    "model_binding_id": "synthetic-model-binding",
+    "identity": {
+      "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+      "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+      "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+      "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+      "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+      "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+      "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+    },
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "kind": "text",
+            "text": "Read one bounded synthetic source window."
+          }
+        ]
+      }
+    ],
+    "allowed_tools": [
+      "workspace.read"
+    ],
+    "input_token_bound": 1024,
+    "max_output_tokens": 512,
+    "deadline": "2026-09-13T00:10:00Z",
+    "reservation_id": "model-reservation"
+  },
+  "adapter_stream": [
+    {
+      "request_id": "model-request",
+      "sequence": 1,
+      "kind": "tool-call",
+      "call_id": "read-call",
+      "tool": "workspace.read",
+      "arguments": {
+        "id": "read-input",
+        "sha256": "675d78573c6dff90830c5323f5b06f1e77d54adc9252afa74bfd6c0ebbd1bdad",
+        "media_type": "application/json",
+        "size_bytes": 105
+      }
+    },
+    {
+      "request_id": "model-request",
+      "sequence": 2,
+      "kind": "finish",
+      "reason": "tool-calls",
+      "usage": {
+        "known": true,
+        "input_uncached": 700,
+        "input_cached": 100,
+        "output_visible": 160,
+        "output_reasoning": 40,
+        "total_tokens": 1000,
+        "microcredits": 500
+      }
+    }
+  ],
+  "adapter_control": {
+    "request_id": "model-request",
+    "run_id": "read-run",
+    "operation": "cancel",
+    "identity": {
+      "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+      "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+      "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+      "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+      "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+      "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+      "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+    },
+    "deadline": "2026-09-13T00:10:00Z",
+    "resume": null
+  },
+  "scenarios": [
+    {
+      "id": "success",
+      "events": [
+        {
+          "run_id": "read-run",
+          "sequence": 1,
+          "at": "2026-09-13T00:00:01Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PREFLIGHT",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 2,
+          "at": "2026-09-13T00:00:02Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PLAN",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 3,
+          "at": "2026-09-13T00:00:03Z",
+          "kind": "reserve",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "request_id": "model-request",
+            "tokens": 1536,
+            "microcredits": 1000
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 4,
+          "at": "2026-09-13T00:00:04Z",
+          "kind": "model",
+          "payload": {
+            "request_id": "model-request",
+            "run_id": "read-run",
+            "adapter_id": "synthetic-adapter",
+            "model_binding_id": "synthetic-model-binding",
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "kind": "text",
+                    "text": "Read one bounded synthetic source window."
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "workspace.read"
+            ],
+            "input_token_bound": 1024,
+            "max_output_tokens": 512,
+            "deadline": "2026-09-13T00:10:00Z",
+            "reservation_id": "model-reservation"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 5,
+          "at": "2026-09-13T00:00:05Z",
+          "kind": "settle",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "usage": {
+              "known": true,
+              "input_uncached": 700,
+              "input_cached": 100,
+              "output_visible": 160,
+              "output_reasoning": 40,
+              "total_tokens": 1000,
+              "microcredits": 500
+            }
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 6,
+          "at": "2026-09-13T00:00:06Z",
+          "kind": "transition",
+          "payload": {
+            "to": "WAITING_APPROVAL",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 7,
+          "at": "2026-09-13T00:00:07Z",
+          "kind": "approval",
+          "payload": {
+            "approval_id": "read-approval",
+            "grant_id": "read-grant",
+            "grant_digest": "3ded0f7db9c603453eb398301805e07d2323c2c42ea5d91ea7682daff01d5ec5",
+            "decision": "granted",
+            "decided_at": "2026-09-13T00:00:00Z",
+            "expires_at": "2026-09-13T00:10:00Z"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 8,
+          "at": "2026-09-13T00:00:08Z",
+          "kind": "transition",
+          "payload": {
+            "to": "EXECUTE_STEP",
+            "guard": "approval_granted_and_revalidated"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 9,
+          "at": "2026-09-13T00:00:09Z",
+          "kind": "dispatch",
+          "payload": {
+            "call_id": "read-call",
+            "run_id": "read-run",
+            "workspace_id": "example",
+            "tool": "workspace.read",
+            "input_artifact": {
+              "id": "read-input",
+              "sha256": "675d78573c6dff90830c5323f5b06f1e77d54adc9252afa74bfd6c0ebbd1bdad",
+              "media_type": "application/json",
+              "size_bytes": 105
+            },
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "binding_digest": "2357e801c8cc284c4c149cd6403c0a5e907cddb684d25c7aaf89c6431a82a10e",
+            "grant_id": "read-grant",
+            "approval_id": "read-approval",
+            "deadline": "2026-09-13T00:10:00Z"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 10,
+          "at": "2026-09-13T00:00:10Z",
+          "kind": "receipt",
+          "payload": {
+            "receipt_id": "read-receipt",
+            "run_id": "read-run",
+            "call_id": "read-call",
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "input_digest": "675d78573c6dff90830c5323f5b06f1e77d54adc9252afa74bfd6c0ebbd1bdad",
+            "output": {
+              "id": "read-output",
+              "sha256": "760bfdbee6b611a8ee54a59d54a2c6b39a484453c66262201606cc3d063358e7",
+              "media_type": "application/json",
+              "size_bytes": 695
+            },
+            "result_class": "ok",
+            "settled_at": "2026-09-13T00:00:10Z",
+            "verification": [
+              {
+                "requirement_id": "read-evidence",
+                "level": "focused-test",
+                "status": "passed",
+                "output_digest": "760bfdbee6b611a8ee54a59d54a2c6b39a484453c66262201606cc3d063358e7"
+              }
+            ]
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 11,
+          "at": "2026-09-13T00:00:11Z",
+          "kind": "transition",
+          "payload": {
+            "to": "OBSERVE",
+            "guard": "new_evidence"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 12,
+          "at": "2026-09-13T00:00:12Z",
+          "kind": "transition",
+          "payload": {
+            "to": "VERIFY",
+            "guard": "new_evidence"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 13,
+          "at": "2026-09-13T00:00:13Z",
+          "kind": "transition",
+          "payload": {
+            "to": "COMPLETE",
+            "guard": "all_requirements_verified"
+          }
+        }
+      ],
+      "expected_state": "COMPLETE",
+      "expected_spent_tokens": 1000,
+      "expected_held_tokens": 0,
+      "expected_spent_microcredits": 500,
+      "expected_held_microcredits": 0
+    },
+    {
+      "id": "approval-denied",
+      "events": [
+        {
+          "run_id": "read-run",
+          "sequence": 1,
+          "at": "2026-09-13T00:00:01Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PREFLIGHT",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 2,
+          "at": "2026-09-13T00:00:02Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PLAN",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 3,
+          "at": "2026-09-13T00:00:03Z",
+          "kind": "reserve",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "request_id": "model-request",
+            "tokens": 1536,
+            "microcredits": 1000
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 4,
+          "at": "2026-09-13T00:00:04Z",
+          "kind": "model",
+          "payload": {
+            "request_id": "model-request",
+            "run_id": "read-run",
+            "adapter_id": "synthetic-adapter",
+            "model_binding_id": "synthetic-model-binding",
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "kind": "text",
+                    "text": "Read one bounded synthetic source window."
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "workspace.read"
+            ],
+            "input_token_bound": 1024,
+            "max_output_tokens": 512,
+            "deadline": "2026-09-13T00:10:00Z",
+            "reservation_id": "model-reservation"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 5,
+          "at": "2026-09-13T00:00:05Z",
+          "kind": "settle",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "usage": {
+              "known": true,
+              "input_uncached": 700,
+              "input_cached": 100,
+              "output_visible": 160,
+              "output_reasoning": 40,
+              "total_tokens": 1000,
+              "microcredits": 500
+            }
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 6,
+          "at": "2026-09-13T00:00:06Z",
+          "kind": "transition",
+          "payload": {
+            "to": "WAITING_APPROVAL",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 7,
+          "at": "2026-09-13T00:00:07Z",
+          "kind": "approval",
+          "payload": {
+            "approval_id": "read-approval",
+            "grant_id": "read-grant",
+            "grant_digest": "3ded0f7db9c603453eb398301805e07d2323c2c42ea5d91ea7682daff01d5ec5",
+            "decision": "denied",
+            "decided_at": "2026-09-13T00:00:00Z",
+            "expires_at": "2026-09-13T00:10:00Z"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 8,
+          "at": "2026-09-13T00:00:08Z",
+          "kind": "transition",
+          "payload": {
+            "to": "BLOCKED",
+            "guard": "failure_or_cancellation"
+          }
+        }
+      ],
+      "expected_state": "BLOCKED",
+      "expected_spent_tokens": 1000,
+      "expected_held_tokens": 0,
+      "expected_spent_microcredits": 500,
+      "expected_held_microcredits": 0
+    },
+    {
+      "id": "model-timeout",
+      "events": [
+        {
+          "run_id": "read-run",
+          "sequence": 1,
+          "at": "2026-09-13T00:00:01Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PREFLIGHT",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 2,
+          "at": "2026-09-13T00:00:02Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PLAN",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 3,
+          "at": "2026-09-13T00:00:03Z",
+          "kind": "reserve",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "request_id": "model-request",
+            "tokens": 1536,
+            "microcredits": 1000
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 4,
+          "at": "2026-09-13T00:00:04Z",
+          "kind": "model",
+          "payload": {
+            "request_id": "model-request",
+            "run_id": "read-run",
+            "adapter_id": "synthetic-adapter",
+            "model_binding_id": "synthetic-model-binding",
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "kind": "text",
+                    "text": "Read one bounded synthetic source window."
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "workspace.read"
+            ],
+            "input_token_bound": 1024,
+            "max_output_tokens": 512,
+            "deadline": "2026-09-13T00:10:00Z",
+            "reservation_id": "model-reservation"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 5,
+          "at": "2026-09-13T00:00:05Z",
+          "kind": "settle",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "usage": {
+              "known": false,
+              "reason": "interrupted"
+            }
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 6,
+          "at": "2026-09-13T00:00:06Z",
+          "kind": "transition",
+          "payload": {
+            "to": "WAITING_EXTERNAL",
+            "guard": "authorized_next_step"
+          }
+        }
+      ],
+      "expected_state": "WAITING_EXTERNAL",
+      "expected_spent_tokens": 0,
+      "expected_held_tokens": 1536,
+      "expected_spent_microcredits": 0,
+      "expected_held_microcredits": 1000
+    },
+    {
+      "id": "cancelled-before-dispatch",
+      "events": [
+        {
+          "run_id": "read-run",
+          "sequence": 1,
+          "at": "2026-09-13T00:00:01Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PREFLIGHT",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 2,
+          "at": "2026-09-13T00:00:02Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PLAN",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 3,
+          "at": "2026-09-13T00:00:03Z",
+          "kind": "reserve",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "request_id": "model-request",
+            "tokens": 1536,
+            "microcredits": 1000
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 4,
+          "at": "2026-09-13T00:00:04Z",
+          "kind": "model",
+          "payload": {
+            "request_id": "model-request",
+            "run_id": "read-run",
+            "adapter_id": "synthetic-adapter",
+            "model_binding_id": "synthetic-model-binding",
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "kind": "text",
+                    "text": "Read one bounded synthetic source window."
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "workspace.read"
+            ],
+            "input_token_bound": 1024,
+            "max_output_tokens": 512,
+            "deadline": "2026-09-13T00:10:00Z",
+            "reservation_id": "model-reservation"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 5,
+          "at": "2026-09-13T00:00:05Z",
+          "kind": "settle",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "usage": {
+              "known": true,
+              "input_uncached": 700,
+              "input_cached": 100,
+              "output_visible": 160,
+              "output_reasoning": 40,
+              "total_tokens": 1000,
+              "microcredits": 500
+            }
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 6,
+          "at": "2026-09-13T00:00:06Z",
+          "kind": "transition",
+          "payload": {
+            "to": "CANCELLED",
+            "guard": "failure_or_cancellation"
+          }
+        }
+      ],
+      "expected_state": "CANCELLED",
+      "expected_spent_tokens": 1000,
+      "expected_held_tokens": 0,
+      "expected_spent_microcredits": 500,
+      "expected_held_microcredits": 0
+    },
+    {
+      "id": "unknown-usage-reconciled",
+      "events": [
+        {
+          "run_id": "read-run",
+          "sequence": 1,
+          "at": "2026-09-13T00:00:01Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PREFLIGHT",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 2,
+          "at": "2026-09-13T00:00:02Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PLAN",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 3,
+          "at": "2026-09-13T00:00:03Z",
+          "kind": "reserve",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "request_id": "model-request",
+            "tokens": 1536,
+            "microcredits": 1000
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 4,
+          "at": "2026-09-13T00:00:04Z",
+          "kind": "model",
+          "payload": {
+            "request_id": "model-request",
+            "run_id": "read-run",
+            "adapter_id": "synthetic-adapter",
+            "model_binding_id": "synthetic-model-binding",
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "kind": "text",
+                    "text": "Read one bounded synthetic source window."
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "workspace.read"
+            ],
+            "input_token_bound": 1024,
+            "max_output_tokens": 512,
+            "deadline": "2026-09-13T00:10:00Z",
+            "reservation_id": "model-reservation"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 5,
+          "at": "2026-09-13T00:00:05Z",
+          "kind": "settle",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "usage": {
+              "known": false,
+              "reason": "interrupted"
+            }
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 6,
+          "at": "2026-09-13T00:00:06Z",
+          "kind": "transition",
+          "payload": {
+            "to": "WAITING_EXTERNAL",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 7,
+          "at": "2026-09-13T00:00:07Z",
+          "kind": "settle",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "usage": {
+              "known": true,
+              "input_uncached": 700,
+              "input_cached": 100,
+              "output_visible": 160,
+              "output_reasoning": 40,
+              "total_tokens": 1000,
+              "microcredits": 500
+            }
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 8,
+          "at": "2026-09-13T00:00:08Z",
+          "kind": "transition",
+          "payload": {
+            "to": "CANCELLED",
+            "guard": "failure_or_cancellation"
+          }
+        }
+      ],
+      "expected_state": "CANCELLED",
+      "expected_spent_tokens": 1000,
+      "expected_held_tokens": 0,
+      "expected_spent_microcredits": 500,
+      "expected_held_microcredits": 0
+    },
+    {
+      "id": "budget-exhausted",
+      "events": [
+        {
+          "run_id": "read-run",
+          "sequence": 1,
+          "at": "2026-09-13T00:00:01Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PREFLIGHT",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 2,
+          "at": "2026-09-13T00:00:02Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PLAN",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 3,
+          "at": "2026-09-13T00:00:03Z",
+          "kind": "reserve",
+          "payload": {
+            "reservation_id": "budget-reservation-0",
+            "request_id": "budget-request-0",
+            "tokens": 6000,
+            "microcredits": 1000
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 4,
+          "at": "2026-09-13T00:00:04Z",
+          "kind": "model",
+          "payload": {
+            "request_id": "budget-request-0",
+            "run_id": "read-run",
+            "adapter_id": "synthetic-adapter",
+            "model_binding_id": "synthetic-model-binding",
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "kind": "text",
+                    "text": "Read one bounded synthetic source window."
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "workspace.read"
+            ],
+            "input_token_bound": 5400,
+            "max_output_tokens": 600,
+            "deadline": "2026-09-13T00:10:00Z",
+            "reservation_id": "budget-reservation-0"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 5,
+          "at": "2026-09-13T00:00:05Z",
+          "kind": "settle",
+          "payload": {
+            "reservation_id": "budget-reservation-0",
+            "usage": {
+              "known": true,
+              "input_uncached": 5300,
+              "input_cached": 100,
+              "output_visible": 560,
+              "output_reasoning": 40,
+              "total_tokens": 6000,
+              "microcredits": 500
+            }
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 6,
+          "at": "2026-09-13T00:00:06Z",
+          "kind": "reserve",
+          "payload": {
+            "reservation_id": "budget-reservation-1",
+            "request_id": "budget-request-1",
+            "tokens": 6000,
+            "microcredits": 1000
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 7,
+          "at": "2026-09-13T00:00:07Z",
+          "kind": "model",
+          "payload": {
+            "request_id": "budget-request-1",
+            "run_id": "read-run",
+            "adapter_id": "synthetic-adapter",
+            "model_binding_id": "synthetic-model-binding",
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "kind": "text",
+                    "text": "Read one bounded synthetic source window."
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "workspace.read"
+            ],
+            "input_token_bound": 5400,
+            "max_output_tokens": 600,
+            "deadline": "2026-09-13T00:10:00Z",
+            "reservation_id": "budget-reservation-1"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 8,
+          "at": "2026-09-13T00:00:08Z",
+          "kind": "settle",
+          "payload": {
+            "reservation_id": "budget-reservation-1",
+            "usage": {
+              "known": true,
+              "input_uncached": 5300,
+              "input_cached": 100,
+              "output_visible": 560,
+              "output_reasoning": 40,
+              "total_tokens": 6000,
+              "microcredits": 500
+            }
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 9,
+          "at": "2026-09-13T00:00:09Z",
+          "kind": "transition",
+          "payload": {
+            "to": "BLOCKED",
+            "guard": "failure_or_cancellation"
+          }
+        }
+      ],
+      "expected_state": "BLOCKED",
+      "expected_spent_tokens": 12000,
+      "expected_held_tokens": 0,
+      "expected_spent_microcredits": 1000,
+      "expected_held_microcredits": 0
+    },
+    {
+      "id": "restart-resume",
+      "events": [
+        {
+          "run_id": "read-run",
+          "sequence": 1,
+          "at": "2026-09-13T00:00:01Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PREFLIGHT",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 2,
+          "at": "2026-09-13T00:00:02Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PLAN",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 2,
+          "at": "2026-09-13T00:00:02Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PLAN",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 3,
+          "at": "2026-09-13T00:00:03Z",
+          "kind": "reserve",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "request_id": "model-request",
+            "tokens": 1536,
+            "microcredits": 1000
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 4,
+          "at": "2026-09-13T00:00:04Z",
+          "kind": "model",
+          "payload": {
+            "request_id": "model-request",
+            "run_id": "read-run",
+            "adapter_id": "synthetic-adapter",
+            "model_binding_id": "synthetic-model-binding",
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "kind": "text",
+                    "text": "Read one bounded synthetic source window."
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "workspace.read"
+            ],
+            "input_token_bound": 1024,
+            "max_output_tokens": 512,
+            "deadline": "2026-09-13T00:10:00Z",
+            "reservation_id": "model-reservation"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 5,
+          "at": "2026-09-13T00:00:05Z",
+          "kind": "settle",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "usage": {
+              "known": true,
+              "input_uncached": 700,
+              "input_cached": 100,
+              "output_visible": 160,
+              "output_reasoning": 40,
+              "total_tokens": 1000,
+              "microcredits": 500
+            }
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 6,
+          "at": "2026-09-13T00:00:06Z",
+          "kind": "transition",
+          "payload": {
+            "to": "WAITING_APPROVAL",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 7,
+          "at": "2026-09-13T00:00:07Z",
+          "kind": "approval",
+          "payload": {
+            "approval_id": "read-approval",
+            "grant_id": "read-grant",
+            "grant_digest": "3ded0f7db9c603453eb398301805e07d2323c2c42ea5d91ea7682daff01d5ec5",
+            "decision": "granted",
+            "decided_at": "2026-09-13T00:00:00Z",
+            "expires_at": "2026-09-13T00:10:00Z"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 8,
+          "at": "2026-09-13T00:00:08Z",
+          "kind": "transition",
+          "payload": {
+            "to": "EXECUTE_STEP",
+            "guard": "approval_granted_and_revalidated"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 9,
+          "at": "2026-09-13T00:00:09Z",
+          "kind": "dispatch",
+          "payload": {
+            "call_id": "read-call",
+            "run_id": "read-run",
+            "workspace_id": "example",
+            "tool": "workspace.read",
+            "input_artifact": {
+              "id": "read-input",
+              "sha256": "675d78573c6dff90830c5323f5b06f1e77d54adc9252afa74bfd6c0ebbd1bdad",
+              "media_type": "application/json",
+              "size_bytes": 105
+            },
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "binding_digest": "2357e801c8cc284c4c149cd6403c0a5e907cddb684d25c7aaf89c6431a82a10e",
+            "grant_id": "read-grant",
+            "approval_id": "read-approval",
+            "deadline": "2026-09-13T00:10:00Z"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 10,
+          "at": "2026-09-13T00:00:10Z",
+          "kind": "checkpoint",
+          "payload": {
+            "run_id": "read-run",
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "last_sequence": 9,
+            "controller_state": "EXECUTE_STEP",
+            "pending_calls": [
+              "read-call"
+            ],
+            "open_requirements": [
+              "read-evidence"
+            ],
+            "next_action": "reconcile",
+            "expires_at": "2026-09-13T00:10:00Z"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 11,
+          "at": "2026-09-13T00:00:11Z",
+          "kind": "restart",
+          "payload": {
+            "checkpoint_digest": "235d4d8a659d3ffcdd479ae143b869ba8aa0d9cfc5fb5ec9508b5b3d945562c7"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 12,
+          "at": "2026-09-13T00:00:12Z",
+          "kind": "reconcile",
+          "payload": {
+            "receipt_id": "read-receipt",
+            "run_id": "read-run",
+            "call_id": "read-call",
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "input_digest": "675d78573c6dff90830c5323f5b06f1e77d54adc9252afa74bfd6c0ebbd1bdad",
+            "output": {
+              "id": "read-output",
+              "sha256": "760bfdbee6b611a8ee54a59d54a2c6b39a484453c66262201606cc3d063358e7",
+              "media_type": "application/json",
+              "size_bytes": 695
+            },
+            "result_class": "ok",
+            "settled_at": "2026-09-13T00:00:10Z",
+            "verification": [
+              {
+                "requirement_id": "read-evidence",
+                "level": "focused-test",
+                "status": "passed",
+                "output_digest": "760bfdbee6b611a8ee54a59d54a2c6b39a484453c66262201606cc3d063358e7"
+              }
+            ]
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 13,
+          "at": "2026-09-13T00:00:13Z",
+          "kind": "transition",
+          "payload": {
+            "to": "OBSERVE",
+            "guard": "external_result_correlated"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 14,
+          "at": "2026-09-13T00:00:14Z",
+          "kind": "transition",
+          "payload": {
+            "to": "VERIFY",
+            "guard": "new_evidence"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 15,
+          "at": "2026-09-13T00:00:15Z",
+          "kind": "transition",
+          "payload": {
+            "to": "COMPLETE",
+            "guard": "all_requirements_verified"
+          }
+        }
+      ],
+      "expected_state": "COMPLETE",
+      "expected_spent_tokens": 1000,
+      "expected_held_tokens": 0,
+      "expected_spent_microcredits": 500,
+      "expected_held_microcredits": 0
+    },
+    {
+      "id": "tool-timeout",
+      "events": [
+        {
+          "run_id": "read-run",
+          "sequence": 1,
+          "at": "2026-09-13T00:00:01Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PREFLIGHT",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 2,
+          "at": "2026-09-13T00:00:02Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PLAN",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 3,
+          "at": "2026-09-13T00:00:03Z",
+          "kind": "reserve",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "request_id": "model-request",
+            "tokens": 1536,
+            "microcredits": 1000
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 4,
+          "at": "2026-09-13T00:00:04Z",
+          "kind": "model",
+          "payload": {
+            "request_id": "model-request",
+            "run_id": "read-run",
+            "adapter_id": "synthetic-adapter",
+            "model_binding_id": "synthetic-model-binding",
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "kind": "text",
+                    "text": "Read one bounded synthetic source window."
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "workspace.read"
+            ],
+            "input_token_bound": 1024,
+            "max_output_tokens": 512,
+            "deadline": "2026-09-13T00:10:00Z",
+            "reservation_id": "model-reservation"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 5,
+          "at": "2026-09-13T00:00:05Z",
+          "kind": "settle",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "usage": {
+              "known": true,
+              "input_uncached": 700,
+              "input_cached": 100,
+              "output_visible": 160,
+              "output_reasoning": 40,
+              "total_tokens": 1000,
+              "microcredits": 500
+            }
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 6,
+          "at": "2026-09-13T00:00:06Z",
+          "kind": "transition",
+          "payload": {
+            "to": "WAITING_APPROVAL",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 7,
+          "at": "2026-09-13T00:00:07Z",
+          "kind": "approval",
+          "payload": {
+            "approval_id": "read-approval",
+            "grant_id": "read-grant",
+            "grant_digest": "3ded0f7db9c603453eb398301805e07d2323c2c42ea5d91ea7682daff01d5ec5",
+            "decision": "granted",
+            "decided_at": "2026-09-13T00:00:00Z",
+            "expires_at": "2026-09-13T00:10:00Z"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 8,
+          "at": "2026-09-13T00:00:08Z",
+          "kind": "transition",
+          "payload": {
+            "to": "EXECUTE_STEP",
+            "guard": "approval_granted_and_revalidated"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 9,
+          "at": "2026-09-13T00:00:09Z",
+          "kind": "dispatch",
+          "payload": {
+            "call_id": "read-call",
+            "run_id": "read-run",
+            "workspace_id": "example",
+            "tool": "workspace.read",
+            "input_artifact": {
+              "id": "read-input",
+              "sha256": "675d78573c6dff90830c5323f5b06f1e77d54adc9252afa74bfd6c0ebbd1bdad",
+              "media_type": "application/json",
+              "size_bytes": 105
+            },
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "binding_digest": "2357e801c8cc284c4c149cd6403c0a5e907cddb684d25c7aaf89c6431a82a10e",
+            "grant_id": "read-grant",
+            "approval_id": "read-approval",
+            "deadline": "2026-09-13T00:10:00Z"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 10,
+          "at": "2026-09-13T00:00:10Z",
+          "kind": "transition",
+          "payload": {
+            "to": "OUTCOME_UNCERTAIN",
+            "guard": "reconciliation_required"
+          }
+        }
+      ],
+      "expected_state": "OUTCOME_UNCERTAIN",
+      "expected_spent_tokens": 1000,
+      "expected_held_tokens": 0,
+      "expected_spent_microcredits": 500,
+      "expected_held_microcredits": 0
+    },
+    {
+      "id": "cancel-after-dispatch",
+      "events": [
+        {
+          "run_id": "read-run",
+          "sequence": 1,
+          "at": "2026-09-13T00:00:01Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PREFLIGHT",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 2,
+          "at": "2026-09-13T00:00:02Z",
+          "kind": "transition",
+          "payload": {
+            "to": "PLAN",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 3,
+          "at": "2026-09-13T00:00:03Z",
+          "kind": "reserve",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "request_id": "model-request",
+            "tokens": 1536,
+            "microcredits": 1000
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 4,
+          "at": "2026-09-13T00:00:04Z",
+          "kind": "model",
+          "payload": {
+            "request_id": "model-request",
+            "run_id": "read-run",
+            "adapter_id": "synthetic-adapter",
+            "model_binding_id": "synthetic-model-binding",
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": [
+                  {
+                    "kind": "text",
+                    "text": "Read one bounded synthetic source window."
+                  }
+                ]
+              }
+            ],
+            "allowed_tools": [
+              "workspace.read"
+            ],
+            "input_token_bound": 1024,
+            "max_output_tokens": 512,
+            "deadline": "2026-09-13T00:10:00Z",
+            "reservation_id": "model-reservation"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 5,
+          "at": "2026-09-13T00:00:05Z",
+          "kind": "settle",
+          "payload": {
+            "reservation_id": "model-reservation",
+            "usage": {
+              "known": true,
+              "input_uncached": 700,
+              "input_cached": 100,
+              "output_visible": 160,
+              "output_reasoning": 40,
+              "total_tokens": 1000,
+              "microcredits": 500
+            }
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 6,
+          "at": "2026-09-13T00:00:06Z",
+          "kind": "transition",
+          "payload": {
+            "to": "WAITING_APPROVAL",
+            "guard": "authorized_next_step"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 7,
+          "at": "2026-09-13T00:00:07Z",
+          "kind": "approval",
+          "payload": {
+            "approval_id": "read-approval",
+            "grant_id": "read-grant",
+            "grant_digest": "3ded0f7db9c603453eb398301805e07d2323c2c42ea5d91ea7682daff01d5ec5",
+            "decision": "granted",
+            "decided_at": "2026-09-13T00:00:00Z",
+            "expires_at": "2026-09-13T00:10:00Z"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 8,
+          "at": "2026-09-13T00:00:08Z",
+          "kind": "transition",
+          "payload": {
+            "to": "EXECUTE_STEP",
+            "guard": "approval_granted_and_revalidated"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 9,
+          "at": "2026-09-13T00:00:09Z",
+          "kind": "dispatch",
+          "payload": {
+            "call_id": "read-call",
+            "run_id": "read-run",
+            "workspace_id": "example",
+            "tool": "workspace.read",
+            "input_artifact": {
+              "id": "read-input",
+              "sha256": "675d78573c6dff90830c5323f5b06f1e77d54adc9252afa74bfd6c0ebbd1bdad",
+              "media_type": "application/json",
+              "size_bytes": 105
+            },
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "binding_digest": "2357e801c8cc284c4c149cd6403c0a5e907cddb684d25c7aaf89c6431a82a10e",
+            "grant_id": "read-grant",
+            "approval_id": "read-approval",
+            "deadline": "2026-09-13T00:10:00Z"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 10,
+          "at": "2026-09-13T00:00:10Z",
+          "kind": "transition",
+          "payload": {
+            "to": "OUTCOME_UNCERTAIN",
+            "guard": "reconciliation_required"
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 11,
+          "at": "2026-09-13T00:00:11Z",
+          "kind": "reconcile",
+          "payload": {
+            "receipt_id": "read-receipt",
+            "run_id": "read-run",
+            "call_id": "read-call",
+            "identity": {
+              "source_digest": "366c837c64891359db4b746bf805e68aa092461a1429485da8037f5473c48462",
+              "policy_digest": "2f97e31754350c579c1722db58ea08ec2ea196970ffef74624a8e4b12541e0d5",
+              "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
+              "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
+              "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
+              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
+            },
+            "input_digest": "675d78573c6dff90830c5323f5b06f1e77d54adc9252afa74bfd6c0ebbd1bdad",
+            "output": {
+              "id": "read-output",
+              "sha256": "760bfdbee6b611a8ee54a59d54a2c6b39a484453c66262201606cc3d063358e7",
+              "media_type": "application/json",
+              "size_bytes": 695
+            },
+            "result_class": "ok",
+            "settled_at": "2026-09-13T00:00:10Z",
+            "verification": [
+              {
+                "requirement_id": "read-evidence",
+                "level": "focused-test",
+                "status": "passed",
+                "output_digest": "760bfdbee6b611a8ee54a59d54a2c6b39a484453c66262201606cc3d063358e7"
+              }
+            ]
+          }
+        },
+        {
+          "run_id": "read-run",
+          "sequence": 12,
+          "at": "2026-09-13T00:00:12Z",
+          "kind": "transition",
+          "payload": {
+            "to": "CANCELLED",
+            "guard": "failure_or_cancellation"
+          }
+        }
+      ],
+      "expected_state": "CANCELLED",
+      "expected_spent_tokens": 1000,
+      "expected_held_tokens": 0,
+      "expected_spent_microcredits": 500,
+      "expected_held_microcredits": 0
+    }
+  ]
+}
