@@ -1,0 +1,50 @@
+profile_id: full-workstation
+title: Complete agent workstation
+purpose: Full declarative laptop, agent platform, product clients, optional capability families, and isolation roles.
+assumes: []
+essential:
+  - platform.services
+  - host.declarative-system
+  - host.identity-secrets
+  - host.desktop
+  - dev.toolchains
+  - agent.launcher-policy
+  - agent.model-gateway
+  - agent.harness-registry
+  - agent.tool-registry
+  - agent.workspace-workers
+  - agent.lifecycle
+  - agent.first-party-loop
+  - agent.goal-controller
+  - agent.context-resume
+  - agent.reviewed-build
+  - agent.retrieval
+  - agent.skills-docs
+  - agent.memory-evidence
+  - agent.research-browser
+  - agent.compute-wasm
+  - agent.coordination
+  - agent.observation
+  - client.terminal
+  - client.web
+  - verification.gates
+recommended:
+  - host.voice
+  - host.personal-vm
+  - host.hardened-worker-vm
+  - distribution.release
+optional: []
+defer: []
+excludes: []
+cost:
+  build_effort: very-high
+  runtime_cost: medium
+  external_services: optional
+  hardware: laptop-with-virtualization
+minimum_evidence:
+  - source
+  - focused-test
+  - build
+  - activation
+  - live
+  - release

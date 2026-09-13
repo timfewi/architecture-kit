@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "goal controller policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "owner",
+    "states",
+    "transitions",
+    "waiting_external_model_turns",
+    "progress",
+    "no_progress",
+    "failure_fingerprint_fields",
+    "allowed_after_duplicate_failure",
+    "budgets",
+    "automatic_context",
+    "$schema"
+  ],
+  "properties": {
+    "owner": {
+      "const": "host goal controller"
+    },
+    "states": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "QUEUED",
+          "PREFLIGHT",
+          "PLAN",
+          "EXECUTE_STEP",
+          "OBSERVE",
+          "VERIFY",
+          "REPLAN",
+          "WAITING_APPROVAL",
+          "WAITING_EXTERNAL",
+          "COMPLETE",
+          "BLOCKED",
+          "FAILED",
+          "CANCELLED",
+          "OUTCOME_UNCERTAIN"
+        ]
+      },
+      "maxItems": 1000
+    },
+    "transitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "from",
+          "to",
+          "guard"
+        ],
+        "properties": {
+          "from": {
+            "enum": [
+              "QUEUED",
+              "PREFLIGHT",
+              "PLAN",
+              "EXECUTE_STEP",
+              "OBSERVE",
+              "VERIFY",
+              "REPLAN",
+              "WAITING_APPROVAL",
+              "WAITING_EXTERNAL",
+              "COMPLETE",
+              "BLOCKED",
+              "FAILED",
+              "CANCELLED",
+              "OUTCOME_UNCERTAIN"
+            ]
+          },
+          "to": {
+            "enum": [
+              "QUEUED",
+              "PREFLIGHT",
+              "PLAN",
+              "EXECUTE_STEP",
+              "OBSERVE",
+              "VERIFY",
+              "REPLAN",
+              "WAITING_APPROVAL",
+              "WAITING_EXTERNAL",
+              "COMPLETE",
+              "BLOCKED",
+              "FAILED",
+              "CANCELLED",
+              "OUTCOME_UNCERTAIN"
+            ]
+          },
+          "guard": {
+            "enum": [
+              "authorized_next_step",
+              "new_evidence",
+              "all_requirements_verified",
+              "approval_granted_and_revalidated",
+              "external_result_correlated",
+              "failure_or_cancellation",
+              "reconciliation_required"
+            ]
+          }
+        }
+      },
+      "maxItems": 1000,
+      "uniqueItems": true
+    },
+    "waiting_external_model_turns": {
+      "const": 0
+    },
+    "progress": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      },
+      "maxItems": 1000
+    },
+    "no_progress": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      },
+      "maxItems": 1000
+    },
+    "failure_fingerprint_fields": {
+      "const": [
+        "action_kind",
+        "normalized_error",
+        "input_digest",
+        "capability_revision"
+      ]
+    },
+    "allowed_after_duplicate_failure": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      },
+      "maxItems": 1000
+    },
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "preflight_max_retrieval_calls",
+        "preflight_max_minutes",
+        "research_max_rounds",
+        "research_max_primary_sources",
+        "deterministic_transport_failures_per_endpoint",
+        "model_visible_tool_output_bytes_per_phase",
+        "same_path_digest_max_rereads",
+        "progress_checkpoint_after_tool_calls",
+        "progress_checkpoint_after_minutes",
+        "fast_checks_per_coherent_source_state",
+        "full_checks_before_handoff",
+        "context_compactions_per_phase",
+        "finite_global_slice_limits_required"
+      ],
+      "properties": {
+        "preflight_max_retrieval_calls": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "preflight_max_minutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "research_max_rounds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "research_max_primary_sources": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "deterministic_transport_failures_per_endpoint": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "model_visible_tool_output_bytes_per_phase": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "same_path_digest_max_rereads": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "progress_checkpoint_after_tool_calls": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "progress_checkpoint_after_minutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "fast_checks_per_coherent_source_state": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "full_checks_before_handoff": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "context_compactions_per_phase": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "finite_global_slice_limits_required": {
+          "const": true
+        }
+      }
+    },
+    "automatic_context": {
+      "const": [
+        "current_policy",
+        "active_goal",
+        "requirement_matrix",
+        "digest_bound_resume_packet"
+      ]
+    },
+    "$schema": {
+      "const": "https://architecture-kit.invalid/schemas/controller-policy.schema.json"
+    }
+  },
+  "$id": "https://architecture-kit.invalid/schemas/controller-policy.schema.json"
+}

@@ -1,0 +1,170 @@
+{
+  "gates": [
+    {
+      "applies_to": [
+        "all"
+      ],
+      "decision_refs": [
+        "ADR-003",
+        "ADR-012"
+      ],
+      "id": "gate.source-safety",
+      "level": "source",
+      "purpose": "Exclude secrets, machine state, unsafe links, and undeclared inputs."
+    },
+    {
+      "applies_to": [
+        "agent.tool-registry"
+      ],
+      "decision_refs": [
+        "ADR-009",
+        "ADR-011"
+      ],
+      "id": "gate.schema-parity",
+      "level": "focused-test",
+      "purpose": "Prove canonical definition, generated catalog, and adapter-view parity."
+    },
+    {
+      "applies_to": [
+        "agent.launcher-policy"
+      ],
+      "decision_refs": [
+        "ADR-005",
+        "ADR-006"
+      ],
+      "id": "gate.policy-authority",
+      "level": "focused-test",
+      "purpose": "Prove orthogonal authority and exact approval denial."
+    },
+    {
+      "applies_to": [
+        "agent.workspace-workers",
+        "agent.lifecycle"
+      ],
+      "decision_refs": [
+        "ADR-012",
+        "ADR-013"
+      ],
+      "id": "gate.worker-isolation",
+      "level": "live",
+      "purpose": "Prove installed namespace, mount, network, environment, and cleanup boundaries."
+    },
+    {
+      "applies_to": [
+        "agent.harness-registry",
+        "agent.model-gateway"
+      ],
+      "decision_refs": [
+        "ADR-007",
+        "ADR-008"
+      ],
+      "id": "gate.harness-provider-parity",
+      "level": "live",
+      "purpose": "Prove multiple harnesses and providers through the neutral contracts."
+    },
+    {
+      "applies_to": [
+        "agent.goal-controller"
+      ],
+      "decision_refs": [
+        "ADR-023",
+        "ADR-024"
+      ],
+      "id": "gate.controller-progress",
+      "level": "focused-test",
+      "purpose": "Prove state transitions, progress deltas, budgets, waiting, and retry denial."
+    },
+    {
+      "applies_to": [
+        "agent.context-resume"
+      ],
+      "decision_refs": [
+        "ADR-028"
+      ],
+      "id": "gate.context-resume",
+      "level": "focused-test",
+      "purpose": "Prove minimal automatic context and digest-bound resume after compaction."
+    },
+    {
+      "applies_to": [
+        "agent.reviewed-build"
+      ],
+      "decision_refs": [
+        "ADR-029"
+      ],
+      "id": "gate.reviewed-build",
+      "level": "build",
+      "purpose": "Prove exact request validation, correlated result, and builder confinement."
+    },
+    {
+      "applies_to": [
+        "agent.retrieval"
+      ],
+      "decision_refs": [
+        "ADR-015"
+      ],
+      "id": "gate.retrieval-freshness",
+      "level": "live",
+      "purpose": "Prove multilingual exactness, generations, overlays, and clean equivalence."
+    },
+    {
+      "applies_to": [
+        "agent.memory-evidence"
+      ],
+      "decision_refs": [
+        "ADR-016"
+      ],
+      "id": "gate.memory-evidence",
+      "level": "focused-test",
+      "purpose": "Prove anchors, review, freshness, receipt identity, and race safety."
+    },
+    {
+      "applies_to": [
+        "agent.coordination"
+      ],
+      "decision_refs": [
+        "ADR-017",
+        "ADR-018"
+      ],
+      "id": "gate.capacity-collaboration",
+      "level": "live",
+      "purpose": "Prove finite mixed-profile capacity and grant-scoped peer communication."
+    },
+    {
+      "applies_to": [
+        "agent.observation"
+      ],
+      "decision_refs": [
+        "ADR-019"
+      ],
+      "id": "gate.observer-isolation",
+      "level": "live",
+      "purpose": "Prove backpressure, gaps, resync, and no agent-path outcome change."
+    },
+    {
+      "applies_to": [
+        "client.terminal",
+        "client.web"
+      ],
+      "decision_refs": [
+        "ADR-020"
+      ],
+      "id": "gate.client-parity",
+      "level": "live",
+      "purpose": "Prove functional parity and accessibility across terminal and web clients."
+    },
+    {
+      "applies_to": [
+        "distribution.release"
+      ],
+      "decision_refs": [
+        "ADR-026",
+        "ADR-027"
+      ],
+      "id": "gate.release",
+      "level": "release",
+      "purpose": "Prove signed artifacts, supported-host conformance, install, rollback, and fresh sessions."
+    }
+  ],
+  "$schema": "https://architecture-kit.invalid/schemas/verification-gates.schema.json"
+}

@@ -1,0 +1,416 @@
+{
+  "$schema": "https://architecture-kit.invalid/schemas/capabilities.schema.json",
+  "capabilities": [
+    {
+      "id": "artifact_read",
+      "tools": [
+        "artifact.read"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "read"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "browser_interact",
+      "tools": [
+        "browser.interact"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "external_write",
+        "network"
+      ],
+      "profiles": [
+        "full",
+        "research"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "browser_read",
+      "tools": [
+        "browser.snapshot"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "network"
+      ],
+      "profiles": [
+        "full",
+        "research"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "browser_upload",
+      "tools": [
+        "browser.upload"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "external_write",
+        "network"
+      ],
+      "profiles": [
+        "full",
+        "research"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "code_read",
+      "tools": [
+        "code.search",
+        "code.outline",
+        "code.references",
+        "code.graph",
+        "code.status"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "read"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "compute",
+      "tools": [
+        "data.query",
+        "compute.execute"
+      ],
+      "executors": [
+        "worker"
+      ],
+      "side_effects": [
+        "execute"
+      ],
+      "profiles": [
+        "compute",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "forge_read",
+      "tools": [
+        "forge.issue_view",
+        "forge.pull_request_view"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "network"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "forge_write",
+      "tools": [
+        "forge.issue_create",
+        "forge.pull_request_create",
+        "forge.pull_request_merge"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "external_write",
+        "network"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "git_inspect",
+      "tools": [
+        "workspace.git_status",
+        "workspace.git_diff",
+        "workspace.git_log",
+        "workspace.git_show"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "read"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "git_local_write",
+      "tools": [
+        "git.branch_create",
+        "git.stage",
+        "git.commit",
+        "git.merge"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "git_write"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "git_remote_read",
+      "tools": [
+        "git.fetch"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "git_write",
+        "network"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "git_remote_write",
+      "tools": [
+        "git.push"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "external_write",
+        "network"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "memory_propose",
+      "tools": [
+        "memory.propose"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "state_write"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "memory_read",
+      "tools": [
+        "memory.query"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "read"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "research",
+      "tools": [
+        "docs.resolve",
+        "docs.query",
+        "research.search",
+        "research.fetch"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "network"
+      ],
+      "profiles": [
+        "full",
+        "research"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "reviewed_build",
+      "tools": [
+        "build.request",
+        "build.status",
+        "build.result",
+        "build.cancel"
+      ],
+      "executors": [
+        "broker",
+        "host-builder"
+      ],
+      "side_effects": [
+        "execute",
+        "job_control",
+        "read"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "skill_read",
+      "tools": [
+        "skills.search",
+        "skills.load",
+        "skills.read_reference"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "read"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "tool_discovery",
+      "tools": [
+        "tools.search",
+        "tools.describe"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "read"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "wasm",
+      "tools": [
+        "wasm.transform"
+      ],
+      "executors": [
+        "worker"
+      ],
+      "side_effects": [
+        "execute"
+      ],
+      "profiles": [
+        "compute",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "workspace_execute",
+      "tools": [
+        "workspace.exec",
+        "workspace.verify"
+      ],
+      "executors": [
+        "worker"
+      ],
+      "side_effects": [
+        "execute"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "workspace_read",
+      "tools": [
+        "workspace.list",
+        "workspace.read",
+        "workspace.search",
+        "workspace.environment"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "read"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    },
+    {
+      "id": "workspace_write",
+      "tools": [
+        "workspace.create",
+        "workspace.mkdir",
+        "workspace.replace"
+      ],
+      "executors": [
+        "broker"
+      ],
+      "side_effects": [
+        "workspace_write"
+      ],
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "host_authoritative": true
+    }
+  ]
+}

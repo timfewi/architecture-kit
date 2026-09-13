@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://architecture-kit.invalid/schemas/benchmark.schema.json",
+  "title": "Measured synthetic retrieval receipt",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "const": "https://architecture-kit.invalid/schemas/benchmark.schema.json"
+    },
+    "kind": {
+      "const": "synthetic-retrieval"
+    },
+    "observed_on": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 10,
+      "format": "date"
+    },
+    "corpus_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "identities": {
+      "type": "object",
+      "properties": {
+        "rg": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "executable_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "required": [
+            "version",
+            "executable_sha256"
+          ],
+          "additionalProperties": false
+        },
+        "grep": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "executable_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "required": [
+            "version",
+            "executable_sha256"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rg",
+        "grep"
+      ],
+      "additionalProperties": false
+    },
+    "semantics": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "warmup_runs": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "samples_per_case": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000
+    },
+    "cache_state": {
+      "enum": [
+        "warm-uncontrolled",
+        "controlled-cold",
+        "controlled-warm"
+      ]
+    },
+    "estimator": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "candidate": {
+            "enum": [
+              "rg",
+              "grep"
+            ]
+          },
+          "case": {
+            "enum": [
+              "positive",
+              "negative",
+              "ambiguous"
+            ]
+          },
+          "argv": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024
+            },
+            "maxItems": 200
+          },
+          "samples_ms": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 60000
+            },
+            "maxItems": 10000,
+            "minItems": 1
+          },
+          "median_ms": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 60000
+          },
+          "exit_code": {
+            "enum": [
+              0,
+              1
+            ]
+          },
+          "stdout_bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000000
+          },
+          "result_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "correct": {
+            "const": true
+          }
+        },
+        "required": [
+          "candidate",
+          "case",
+          "argv",
+          "samples_ms",
+          "median_ms",
+          "exit_code",
+          "stdout_bytes",
+          "result_sha256",
+          "correct"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 100
+    },
+    "context_bytes": {
+      "type": "object",
+      "properties": {
+        "all_tool_metadata": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "discovery_summaries": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "initial_tool_metadata": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        }
+      },
+      "required": [
+        "all_tool_metadata",
+        "discovery_summaries",
+        "initial_tool_metadata"
+      ],
+      "additionalProperties": false
+    },
+    "tokens": {
+      "type": "null"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      },
+      "maxItems": 30,
+      "minItems": 1
+    },
+    "runner_sha256": {
+      "$ref": "common.schema.json#/$defs/digest"
+    },
+    "catalog_sha256": {
+      "$ref": "common.schema.json#/$defs/digest"
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "architecture",
+        "python",
+        "memory_limit_bytes"
+      ],
+      "properties": {
+        "system": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "architecture": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "python": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "memory_limit_bytes": {
+          "type": "null"
+        }
+      }
+    }
+  },
+  "required": [
+    "$schema",
+    "kind",
+    "observed_on",
+    "corpus_sha256",
+    "identities",
+    "semantics",
+    "warmup_runs",
+    "samples_per_case",
+    "cache_state",
+    "estimator",
+    "records",
+    "context_bytes",
+    "tokens",
+    "limitations",
+    "runner_sha256",
+    "catalog_sha256",
+    "environment"
+  ],
+  "additionalProperties": false
+}

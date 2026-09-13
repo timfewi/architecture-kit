@@ -1,0 +1,375 @@
+{
+  "components": [
+    {
+      "id": "platform.services",
+      "layer": "host",
+      "optional": false,
+      "purpose": "Portable host contract for supervision, credentials, IPC, storage and isolation; supplied by any conforming host.",
+      "requires": [],
+      "decision_refs": [
+        "ADR-003",
+        "ADR-007",
+        "ADR-027"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-002",
+        "ADR-003"
+      ],
+      "id": "host.declarative-system",
+      "layer": "host",
+      "optional": false,
+      "purpose": "Pinned declarative host, users, storage, services, rollback, and explicit activation.",
+      "requires": []
+    },
+    {
+      "decision_refs": [
+        "ADR-003"
+      ],
+      "id": "host.identity-secrets",
+      "layer": "host",
+      "optional": false,
+      "purpose": "Public identity declarations and host-mediated encrypted secret lifecycle.",
+      "requires": [
+        "host.declarative-system"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-025"
+      ],
+      "id": "host.desktop",
+      "layer": "client",
+      "optional": true,
+      "purpose": "Theme-integrated desktop, compositor, terminal, editor, and browser.",
+      "requires": [
+        "host.declarative-system"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-025"
+      ],
+      "id": "host.voice",
+      "layer": "client",
+      "optional": true,
+      "purpose": "Bounded local or cloud reader, speech, and dictation consumers.",
+      "requires": [
+        "host.desktop",
+        "host.identity-secrets"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-025"
+      ],
+      "id": "host.personal-vm",
+      "layer": "host",
+      "optional": true,
+      "purpose": "Usability-oriented personal desktop virtual machine.",
+      "requires": [
+        "host.declarative-system"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-025"
+      ],
+      "id": "host.hardened-worker-vm",
+      "layer": "host",
+      "optional": true,
+      "purpose": "Digest-bound default-deny virtual machine for hostile workloads.",
+      "requires": [
+        "host.declarative-system"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-002",
+        "ADR-011"
+      ],
+      "id": "dev.toolchains",
+      "layer": "host",
+      "optional": false,
+      "purpose": "Pinned capability-scoped development and verification toolchains.",
+      "requires": [
+        "platform.services"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-004",
+        "ADR-005",
+        "ADR-006"
+      ],
+      "id": "agent.launcher-policy",
+      "layer": "control",
+      "optional": false,
+      "purpose": "Immutable launcher policy and orthogonal authority composition.",
+      "requires": [
+        "platform.services"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-008"
+      ],
+      "id": "agent.model-gateway",
+      "layer": "control",
+      "optional": false,
+      "purpose": "Credential-isolated provider-neutral model transport and accounting.",
+      "requires": [
+        "agent.launcher-policy"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-007"
+      ],
+      "id": "agent.harness-registry",
+      "layer": "control",
+      "optional": false,
+      "purpose": "Immutable registry and neutral adapter binding for every harness.",
+      "requires": [
+        "agent.launcher-policy",
+        "agent.model-gateway"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ],
+      "id": "agent.tool-registry",
+      "layer": "control",
+      "optional": false,
+      "purpose": "Canonical typed tool definitions and progressive policy-derived catalogs.",
+      "requires": [
+        "agent.launcher-policy"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-012"
+      ],
+      "id": "agent.workspace-workers",
+      "layer": "data",
+      "optional": false,
+      "purpose": "Fresh isolated repository workers and safe source snapshots.",
+      "requires": [
+        "agent.launcher-policy",
+        "agent.tool-registry",
+        "dev.toolchains"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-013"
+      ],
+      "id": "agent.lifecycle",
+      "layer": "control",
+      "optional": false,
+      "purpose": "Process, cancellation, deadline, cleanup, and uncertain-outcome owner.",
+      "requires": [
+        "agent.launcher-policy"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-023",
+        "ADR-024"
+      ],
+      "id": "agent.goal-controller",
+      "layer": "control",
+      "optional": false,
+      "purpose": "Host-owned autonomous state machine, progress oracle, budgets, and completion.",
+      "requires": [
+        "agent.launcher-policy",
+        "agent.lifecycle"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-028"
+      ],
+      "id": "agent.context-resume",
+      "layer": "control",
+      "optional": false,
+      "purpose": "Digest-bound minimum context, compaction, issue projection, and resume packets.",
+      "requires": [
+        "agent.goal-controller"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-029"
+      ],
+      "id": "agent.reviewed-build",
+      "layer": "control",
+      "optional": true,
+      "purpose": "Optional typed source-bound reviewed build recipe service; Nix is one adapter.",
+      "requires": [
+        "agent.launcher-policy",
+        "agent.lifecycle"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-022",
+        "ADR-023"
+      ],
+      "id": "agent.first-party-loop",
+      "layer": "data",
+      "optional": true,
+      "purpose": "Optional native headless harness consuming all neutral platform owners.",
+      "requires": [
+        "agent.harness-registry",
+        "agent.tool-registry",
+        "agent.goal-controller",
+        "agent.context-resume"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-015"
+      ],
+      "id": "agent.retrieval",
+      "layer": "data",
+      "optional": false,
+      "purpose": "Precise multilingual source, outline, context, and relationship retrieval.",
+      "requires": [
+        "agent.tool-registry",
+        "agent.workspace-workers"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-010",
+        "ADR-014"
+      ],
+      "id": "agent.skills-docs",
+      "layer": "data",
+      "optional": false,
+      "purpose": "Progressive skills and pinned runtime documentation.",
+      "requires": [
+        "agent.tool-registry"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-014",
+        "ADR-016"
+      ],
+      "id": "agent.memory-evidence",
+      "layer": "data",
+      "optional": true,
+      "purpose": "Reviewed semantic memory, journals, artifacts, anchors, and receipts.",
+      "requires": [
+        "agent.tool-registry"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-021"
+      ],
+      "id": "agent.research-browser",
+      "layer": "data",
+      "optional": true,
+      "purpose": "Bounded research, document, PDF, and rendered browser capabilities.",
+      "requires": [
+        "agent.tool-registry",
+        "platform.services"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-010",
+        "ADR-012"
+      ],
+      "id": "agent.compute-wasm",
+      "layer": "data",
+      "optional": true,
+      "purpose": "Scratch computation and digest-bound portable transforms.",
+      "requires": [
+        "agent.tool-registry"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-017",
+        "ADR-018"
+      ],
+      "id": "agent.coordination",
+      "layer": "control",
+      "optional": true,
+      "purpose": "Capability-scoped peer directory, ledger, Agent Cards, and A2A projection.",
+      "requires": [
+        "agent.goal-controller",
+        "agent.workspace-workers"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-019"
+      ],
+      "id": "agent.observation",
+      "layer": "data",
+      "optional": true,
+      "purpose": "Asynchronous bounded event projection, snapshots, cursors, and reducers.",
+      "requires": [
+        "agent.coordination",
+        "agent.retrieval"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-020"
+      ],
+      "id": "client.terminal",
+      "layer": "client",
+      "optional": true,
+      "purpose": "Default Focus, Swarm, and Observe terminal client.",
+      "requires": [
+        "agent.observation"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-020"
+      ],
+      "id": "client.web",
+      "layer": "client",
+      "optional": true,
+      "purpose": "Authenticated accessible Focus, Swarm, and Observe web client.",
+      "requires": [
+        "agent.observation"
+      ]
+    },
+    {
+      "decision_refs": [
+        "ADR-001",
+        "ADR-026"
+      ],
+      "id": "verification.gates",
+      "layer": "verification",
+      "optional": false,
+      "purpose": "Requirement matrix and source through release evidence gates.",
+      "requires": []
+    },
+    {
+      "decision_refs": [
+        "ADR-027"
+      ],
+      "id": "distribution.release",
+      "layer": "distribution",
+      "optional": true,
+      "purpose": "Signed portable core and host-specific release artifacts and installers.",
+      "requires": [
+        "verification.gates"
+      ]
+    }
+  ],
+  "$schema": "https://architecture-kit.invalid/schemas/components.schema.json"
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "component catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "components",
+    "$schema"
+  ],
+  "properties": {
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "layer",
+          "purpose",
+          "requires",
+          "optional",
+          "decision_refs"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9.-]+$",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "layer": {
+            "enum": [
+              "host",
+              "control",
+              "data",
+              "client",
+              "distribution",
+              "verification"
+            ]
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "requires": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "maxItems": 1000
+          },
+          "optional": {
+            "type": "boolean"
+          },
+          "decision_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^ADR-[0-9]{3}$",
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "maxItems": 1000
+          }
+        }
+      },
+      "maxItems": 1000,
+      "uniqueItems": true
+    },
+    "$schema": {
+      "const": "https://architecture-kit.invalid/schemas/components.schema.json"
+    }
+  },
+  "$id": "https://architecture-kit.invalid/schemas/components.schema.json"
+}

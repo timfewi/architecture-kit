@@ -1,0 +1,30 @@
+profile_id: host-foundation
+title: Declarative host foundation
+purpose: Reproducible NixOS laptop without an agent runtime.
+assumes: []
+essential:
+  - platform.services
+  - host.declarative-system
+  - host.identity-secrets
+  - dev.toolchains
+  - verification.gates
+recommended:
+  - host.desktop
+optional:
+  - host.voice
+  - host.personal-vm
+  - host.hardened-worker-vm
+defer:
+  - distribution.release
+excludes:
+  - agent.launcher-policy
+cost:
+  build_effort: medium
+  runtime_cost: low
+  external_services: none
+  hardware: laptop
+minimum_evidence:
+  - source
+  - build
+  - activation
+  - live

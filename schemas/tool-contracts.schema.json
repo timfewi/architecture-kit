@@ -1,0 +1,3107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://architecture-kit.invalid/schemas/tool-contracts.schema.json",
+  "title": "Reference tool input and result contracts",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)(?!.*[\\\\\\u0000-\\u001f:])[^/]+(?:/[^/]+)*$"
+    },
+    "cwd": {
+      "anyOf": [
+        {
+          "const": "."
+        },
+        {
+          "$ref": "#/$defs/path"
+        }
+      ]
+    },
+    "url": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^https://[^\\s]+$"
+    },
+    "limit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+    },
+    "query": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "artifact": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1073741824
+        }
+      },
+      "required": [
+        "id",
+        "sha256",
+        "media_type",
+        "size_bytes"
+      ],
+      "additionalProperties": false
+    },
+    "anchor": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "start_byte": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1073741824
+        },
+        "end_byte": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1073741824
+        },
+        "excerpt": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "path",
+        "source_sha256",
+        "start_byte",
+        "end_byte",
+        "excerpt"
+      ],
+      "additionalProperties": false
+    },
+    "hit": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "excerpt": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 2048
+        },
+        "anchor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/anchor"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "excerpt",
+        "anchor"
+      ],
+      "additionalProperties": false
+    },
+    "hits": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/hit"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        "total": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "items",
+        "total"
+      ],
+      "additionalProperties": false
+    },
+    "text": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 16384
+        },
+        "sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "offset_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1073741824
+        },
+        "total_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1073741824
+        }
+      },
+      "required": [
+        "text",
+        "sha256",
+        "offset_bytes",
+        "total_bytes"
+      ],
+      "additionalProperties": false
+    },
+    "mutation": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "before_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "after_sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "changed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        }
+      },
+      "required": [
+        "target",
+        "before_sha256",
+        "after_sha256",
+        "changed"
+      ],
+      "additionalProperties": false
+    },
+    "job": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "$ref": "#/$defs/id"
+        },
+        "state": {
+          "enum": [
+            "queued",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "outcome_uncertain"
+          ]
+        },
+        "result": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "job_id",
+        "state",
+        "result"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "succeeded"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result": {
+                "$ref": "#/$defs/artifact"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "result": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "process": {
+      "type": "object",
+      "properties": {
+        "exit_code": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "signal": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "stdout": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 8192
+        },
+        "stderr": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 86400000
+        },
+        "receipt": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "exit_code",
+        "signal",
+        "stdout",
+        "stderr",
+        "duration_ms",
+        "receipt"
+      ],
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "exit_code": {
+              "type": "integer"
+            },
+            "signal": {
+              "type": "null"
+            }
+          }
+        },
+        {
+          "properties": {
+            "exit_code": {
+              "type": "null"
+            },
+            "signal": {
+              "type": "integer"
+            }
+          }
+        }
+      ]
+    },
+    "environment": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "ready",
+            "missing",
+            "stale",
+            "unsupported"
+          ]
+        },
+        "toolchain_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "missing": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        "command_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        }
+      },
+      "required": [
+        "status",
+        "toolchain_sha256",
+        "missing",
+        "command_ids"
+      ],
+      "additionalProperties": false
+    },
+    "listing": {
+      "type": "object",
+      "properties": {
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "$ref": "#/$defs/path"
+              },
+              "kind": {
+                "enum": [
+                  "file",
+                  "directory",
+                  "symlink"
+                ]
+              },
+              "size_bytes": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1073741824
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "path",
+              "kind",
+              "size_bytes"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        "total": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "entries",
+        "total"
+      ],
+      "additionalProperties": false
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "enum": [
+            "ready",
+            "missing",
+            "stale",
+            "partial",
+            "unavailable"
+          ]
+        },
+        "source_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "details": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "state",
+        "source_sha256",
+        "details"
+      ],
+      "additionalProperties": false
+    },
+    "git_status": {
+      "type": "object",
+      "properties": {
+        "branch": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "head": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "$ref": "#/$defs/path"
+              },
+              "index": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2
+              },
+              "worktree": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2
+              }
+            },
+            "required": [
+              "path",
+              "index",
+              "worktree"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 100
+        }
+      },
+      "required": [
+        "branch",
+        "head",
+        "entries"
+      ],
+      "additionalProperties": false
+    },
+    "table": {
+      "type": "object",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 0,
+          "maxItems": 32
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ],
+              "maxLength": 2048
+            },
+            "minItems": 0,
+            "maxItems": 32
+          },
+          "minItems": 0,
+          "maxItems": 100
+        }
+      },
+      "required": [
+        "columns",
+        "rows"
+      ],
+      "additionalProperties": false
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "enum": [
+            "invalid_input",
+            "denied",
+            "not_found",
+            "conflict",
+            "stale",
+            "unsupported",
+            "environment_missing",
+            "timeout",
+            "resource_limit",
+            "upstream_failure",
+            "outcome_uncertain"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "retry_requires": {
+          "anyOf": [
+            {
+              "enum": [
+                "changed_input",
+                "changed_authority",
+                "changed_source",
+                "changed_environment",
+                "reconcile_outcome",
+                "backoff"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable",
+        "retry_requires"
+      ],
+      "additionalProperties": false
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "enum": [
+            "exhaustive",
+            "ranked",
+            "selected"
+          ]
+        },
+        "completeness": {
+          "enum": [
+            "complete",
+            "partial",
+            "unknown"
+          ]
+        },
+        "freshness": {
+          "enum": [
+            "current",
+            "stale",
+            "unknown",
+            "not_applicable"
+          ]
+        },
+        "returned": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "truncated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "scope",
+        "completeness",
+        "freshness",
+        "returned",
+        "truncated"
+      ],
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "call_id": {
+          "$ref": "#/$defs/id"
+        },
+        "source_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "definition_sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "policy_sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "toolchain_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "elapsed_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 86400000
+        }
+      },
+      "required": [
+        "call_id",
+        "source_sha256",
+        "definition_sha256",
+        "policy_sha256",
+        "toolchain_sha256",
+        "elapsed_ms"
+      ],
+      "additionalProperties": false
+    },
+    "continuation": {
+      "type": "object",
+      "properties": {
+        "cursor": {
+          "$ref": "#/$defs/id"
+        },
+        "input_sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "expires_at": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40,
+          "format": "date-time",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{1,6})?Z$"
+        }
+      },
+      "required": [
+        "cursor",
+        "input_sha256",
+        "source_sha256",
+        "expires_at"
+      ],
+      "additionalProperties": false
+    },
+    "tools.search.input": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "$ref": "#/$defs/query"
+        },
+        "limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "query",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "tools.describe.input": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/id"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "workspace.list.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "path": {
+          "$ref": "#/$defs/cwd"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "limit": {
+          "$ref": "#/$defs/limit",
+          "default": 10
+        }
+      },
+      "required": [
+        "workspace_id",
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "workspace.read.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "offset_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1073741824
+        },
+        "max_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16384
+        },
+        "expected_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "workspace_id",
+        "path",
+        "offset_bytes",
+        "max_bytes",
+        "expected_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "workspace.search.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "path": {
+          "$ref": "#/$defs/cwd"
+        },
+        "query": {
+          "$ref": "#/$defs/query"
+        },
+        "mode": {
+          "enum": [
+            "literal",
+            "regex"
+          ]
+        },
+        "corpus": {
+          "enum": [
+            "tracked",
+            "worktree"
+          ]
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "ignored": {
+          "type": "boolean"
+        },
+        "result_mode": {
+          "enum": [
+            "paths",
+            "excerpts",
+            "count"
+          ]
+        },
+        "limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "workspace_id",
+        "path",
+        "query",
+        "mode",
+        "corpus",
+        "hidden",
+        "ignored",
+        "result_mode",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "workspace.create.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "content": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 16384
+        }
+      },
+      "required": [
+        "workspace_id",
+        "path",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "workspace.mkdir.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "path": {
+          "$ref": "#/$defs/path"
+        }
+      },
+      "required": [
+        "workspace_id",
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "workspace.replace.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "expected_sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "old_text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16384
+        },
+        "new_text": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 16384
+        },
+        "expected_matches": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "workspace_id",
+        "path",
+        "expected_sha256",
+        "old_text",
+        "new_text",
+        "expected_matches"
+      ],
+      "additionalProperties": false
+    },
+    "workspace.environment.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "workspace_id"
+      ],
+      "additionalProperties": false
+    },
+    "workspace.exec.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "command_id": {
+          "$ref": "#/$defs/id"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "minItems": 0,
+          "maxItems": 128
+        },
+        "cwd": {
+          "$ref": "#/$defs/cwd"
+        },
+        "stdin": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1800000
+        }
+      },
+      "required": [
+        "workspace_id",
+        "command_id",
+        "args",
+        "cwd",
+        "stdin",
+        "timeout_ms"
+      ],
+      "additionalProperties": false
+    },
+    "workspace.verify.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "profile_id": {
+          "$ref": "#/$defs/id"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "workspace_id",
+        "profile_id",
+        "source_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "workspace.git_status.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "limit": {
+          "$ref": "#/$defs/limit",
+          "default": 10
+        }
+      },
+      "required": [
+        "workspace_id"
+      ],
+      "additionalProperties": false
+    },
+    "workspace.git_diff.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/path"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        "cached": {
+          "type": "boolean"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "workspace_id",
+        "paths",
+        "cached"
+      ],
+      "additionalProperties": false
+    },
+    "workspace.git_log.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "workspace_id",
+        "revision",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "workspace.git_show.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "workspace_id",
+        "revision",
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "git.branch_create.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "expected_state_sha256": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "workspace_id",
+        "name",
+        "expected_state_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "git.stage.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/path"
+          },
+          "minItems": 1,
+          "maxItems": 100
+        },
+        "expected_state_sha256": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "workspace_id",
+        "paths",
+        "expected_state_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "git.commit.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "expected_state_sha256": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "workspace_id",
+        "message",
+        "expected_state_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "git.fetch.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "remote_id": {
+          "$ref": "#/$defs/id"
+        },
+        "expected_state_sha256": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "workspace_id",
+        "remote_id",
+        "expected_state_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "git.push.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "remote_id": {
+          "$ref": "#/$defs/id"
+        },
+        "branch": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "expected_state_sha256": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "workspace_id",
+        "remote_id",
+        "branch",
+        "expected_state_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "git.merge.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "source_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "strategy": {
+          "enum": [
+            "fast_forward_only",
+            "merge_commit"
+          ]
+        },
+        "expected_state_sha256": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "workspace_id",
+        "source_ref",
+        "strategy",
+        "expected_state_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "code.search.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "query": {
+          "$ref": "#/$defs/query"
+        },
+        "kind": {
+          "enum": [
+            "syntax",
+            "ranked"
+          ]
+        },
+        "language": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "workspace_id",
+        "query",
+        "kind",
+        "language",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "code.outline.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "workspace_id",
+        "path",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "code.references.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "symbol_id": {
+          "$ref": "#/$defs/id"
+        },
+        "generation": {
+          "$ref": "#/$defs/digest"
+        },
+        "limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "workspace_id",
+        "symbol_id",
+        "generation",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "code.graph.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "symbol_id": {
+          "$ref": "#/$defs/id"
+        },
+        "generation": {
+          "$ref": "#/$defs/digest"
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "workspace_id",
+        "symbol_id",
+        "generation",
+        "depth",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "code.status.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "workspace_id"
+      ],
+      "additionalProperties": false
+    },
+    "docs.resolve.input": {
+      "type": "object",
+      "properties": {
+        "library": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "release": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "library",
+        "release",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "docs.query.input": {
+      "type": "object",
+      "properties": {
+        "document_id": {
+          "$ref": "#/$defs/id"
+        },
+        "query": {
+          "$ref": "#/$defs/query"
+        },
+        "limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "document_id",
+        "query",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "research.search.input": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "$ref": "#/$defs/query"
+        },
+        "limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "query",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "research.fetch.input": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "$ref": "#/$defs/url"
+        },
+        "max_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16384
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "url",
+        "max_bytes"
+      ],
+      "additionalProperties": false
+    },
+    "browser.snapshot.input": {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "$ref": "#/$defs/id"
+        },
+        "url": {
+          "$ref": "#/$defs/url"
+        },
+        "limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "session_id",
+        "url",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "browser.interact.input": {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "$ref": "#/$defs/id"
+        },
+        "snapshot_sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "action": {
+          "enum": [
+            "click",
+            "fill",
+            "select",
+            "press"
+          ]
+        },
+        "element_id": {
+          "$ref": "#/$defs/id"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "session_id",
+        "snapshot_sha256",
+        "action",
+        "element_id",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "browser.upload.input": {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "$ref": "#/$defs/id"
+        },
+        "snapshot_sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "element_id": {
+          "$ref": "#/$defs/id"
+        },
+        "artifact": {
+          "$ref": "#/$defs/artifact"
+        }
+      },
+      "required": [
+        "session_id",
+        "snapshot_sha256",
+        "element_id",
+        "artifact"
+      ],
+      "additionalProperties": false
+    },
+    "artifact.read.input": {
+      "type": "object",
+      "properties": {
+        "artifact": {
+          "$ref": "#/$defs/artifact"
+        },
+        "offset_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1073741824
+        },
+        "max_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16384
+        }
+      },
+      "required": [
+        "artifact",
+        "offset_bytes",
+        "max_bytes"
+      ],
+      "additionalProperties": false
+    },
+    "data.query.input": {
+      "type": "object",
+      "properties": {
+        "artifact": {
+          "$ref": "#/$defs/artifact"
+        },
+        "language": {
+          "enum": [
+            "jq",
+            "sql"
+          ]
+        },
+        "query": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "artifact",
+        "language",
+        "query",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "compute.execute.input": {
+      "type": "object",
+      "properties": {
+        "runtime_id": {
+          "$ref": "#/$defs/id"
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16384
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifact"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30000
+        }
+      },
+      "required": [
+        "runtime_id",
+        "code",
+        "inputs",
+        "timeout_ms"
+      ],
+      "additionalProperties": false
+    },
+    "wasm.transform.input": {
+      "type": "object",
+      "properties": {
+        "component_sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "operation_id": {
+          "$ref": "#/$defs/id"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifact"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        }
+      },
+      "required": [
+        "component_sha256",
+        "operation_id",
+        "inputs"
+      ],
+      "additionalProperties": false
+    },
+    "build.request.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "recipe_id": {
+          "$ref": "#/$defs/id"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifact"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        "network": {
+          "enum": [
+            "denied",
+            "declared_fetches"
+          ]
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 86400000
+        },
+        "idempotency_key": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "workspace_id",
+        "source_sha256",
+        "recipe_id",
+        "inputs",
+        "network",
+        "timeout_ms",
+        "idempotency_key"
+      ],
+      "additionalProperties": false
+    },
+    "build.status.input": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "additionalProperties": false
+    },
+    "build.result.input": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "additionalProperties": false
+    },
+    "build.cancel.input": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "additionalProperties": false
+    },
+    "skills.search.input": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "$ref": "#/$defs/query"
+        },
+        "limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "query",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "skills.load.input": {
+      "type": "object",
+      "properties": {
+        "skill_id": {
+          "$ref": "#/$defs/id"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "skill_id"
+      ],
+      "additionalProperties": false
+    },
+    "skills.read_reference.input": {
+      "type": "object",
+      "properties": {
+        "skill_id": {
+          "$ref": "#/$defs/id"
+        },
+        "resource_id": {
+          "$ref": "#/$defs/id"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "skill_id",
+        "resource_id"
+      ],
+      "additionalProperties": false
+    },
+    "memory.query.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "query": {
+          "$ref": "#/$defs/query"
+        },
+        "limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "workspace_id",
+        "query",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "memory.propose.input": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/id"
+        },
+        "receipt_id": {
+          "$ref": "#/$defs/id"
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "claim": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              },
+              "anchors": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/anchor"
+                },
+                "minItems": 1,
+                "maxItems": 10
+              }
+            },
+            "required": [
+              "claim",
+              "anchors"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "workspace_id",
+        "receipt_id",
+        "claims"
+      ],
+      "additionalProperties": false
+    },
+    "forge.issue_view.input": {
+      "type": "object",
+      "properties": {
+        "repository_id": {
+          "$ref": "#/$defs/id"
+        },
+        "number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000000
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "repository_id",
+        "number"
+      ],
+      "additionalProperties": false
+    },
+    "forge.issue_create.input": {
+      "type": "object",
+      "properties": {
+        "repository_id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "body": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16384
+        },
+        "idempotency_key": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "repository_id",
+        "title",
+        "body",
+        "idempotency_key"
+      ],
+      "additionalProperties": false
+    },
+    "forge.pull_request_view.input": {
+      "type": "object",
+      "properties": {
+        "repository_id": {
+          "$ref": "#/$defs/id"
+        },
+        "number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000000
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "repository_id",
+        "number"
+      ],
+      "additionalProperties": false
+    },
+    "forge.pull_request_create.input": {
+      "type": "object",
+      "properties": {
+        "repository_id": {
+          "$ref": "#/$defs/id"
+        },
+        "base": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "head": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "body": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16384
+        },
+        "draft": {
+          "const": true
+        },
+        "idempotency_key": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "repository_id",
+        "base",
+        "head",
+        "title",
+        "body",
+        "draft",
+        "idempotency_key"
+      ],
+      "additionalProperties": false
+    },
+    "forge.pull_request_merge.input": {
+      "type": "object",
+      "properties": {
+        "repository_id": {
+          "$ref": "#/$defs/id"
+        },
+        "number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000000
+        },
+        "expected_head": {
+          "type": "string",
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+        },
+        "method": {
+          "enum": [
+            "merge",
+            "squash",
+            "rebase"
+          ]
+        }
+      },
+      "required": [
+        "repository_id",
+        "number",
+        "expected_head",
+        "method"
+      ],
+      "additionalProperties": false
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "ok",
+            "no_match",
+            "partial",
+            "error",
+            "cancelled",
+            "outcome_uncertain"
+          ]
+        },
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/error"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "coverage": {
+          "$ref": "#/$defs/coverage"
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "continuation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/continuation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "artifact": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "data",
+        "error",
+        "coverage",
+        "provenance",
+        "continuation",
+        "artifact"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "ok",
+                  "no_match",
+                  "partial"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "error": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "error",
+                  "outcome_uncertain"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "error": {
+                "$ref": "#/$defs/error"
+              },
+              "data": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "no_match"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "coverage": {
+                "properties": {
+                  "returned": {
+                    "const": 0
+                  },
+                  "completeness": {
+                    "const": "complete"
+                  },
+                  "truncated": {
+                    "const": false
+                  },
+                  "scope": {
+                    "const": "exhaustive"
+                  },
+                  "freshness": {
+                    "enum": [
+                      "current",
+                      "not_applicable"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "cancelled"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "type": "null"
+              },
+              "error": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "outcome_uncertain"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "error": {
+                "properties": {
+                  "code": {
+                    "const": "outcome_uncertain"
+                  },
+                  "retryable": {
+                    "const": false
+                  },
+                  "retry_requires": {
+                    "const": "reconcile_outcome"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "error"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "error": {
+                "properties": {
+                  "code": {
+                    "not": {
+                      "const": "outcome_uncertain"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "partial"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "coverage": {
+                "properties": {
+                  "completeness": {
+                    "enum": [
+                      "partial",
+                      "unknown"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "continuation": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "coverage": {
+                "properties": {
+                  "truncated": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "status": {
+                "const": "partial"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "result.hits": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/result"
+        },
+        {
+          "properties": {
+            "data": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/hits"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "ok",
+                  "no_match",
+                  "partial"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/hits"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "no_match"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "properties": {
+                  "items": {
+                    "maxItems": 0
+                  },
+                  "total": {
+                    "const": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "result.text": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/result"
+        },
+        {
+          "properties": {
+            "data": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/text"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "ok",
+                  "no_match",
+                  "partial"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/text"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "not": {
+                "const": "no_match"
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "result.mutation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/result"
+        },
+        {
+          "properties": {
+            "data": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/mutation"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "ok",
+                  "no_match",
+                  "partial"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/mutation"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "not": {
+                "const": "no_match"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "continuation": {
+              "type": "null"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "result.process": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/result"
+        },
+        {
+          "properties": {
+            "data": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/process"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "ok",
+                  "no_match",
+                  "partial"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/process"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "not": {
+                "const": "no_match"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "continuation": {
+              "type": "null"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "result.job": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/result"
+        },
+        {
+          "properties": {
+            "data": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/job"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "ok",
+                  "no_match",
+                  "partial"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/job"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "not": {
+                "const": "no_match"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "continuation": {
+              "type": "null"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "result.environment": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/result"
+        },
+        {
+          "properties": {
+            "data": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/environment"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "ok",
+                  "no_match",
+                  "partial"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/environment"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "not": {
+                "const": "no_match"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "continuation": {
+              "type": "null"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "result.listing": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/result"
+        },
+        {
+          "properties": {
+            "data": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/listing"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "ok",
+                  "no_match",
+                  "partial"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/listing"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "no_match"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "properties": {
+                  "entries": {
+                    "maxItems": 0
+                  },
+                  "total": {
+                    "const": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "result.status": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/result"
+        },
+        {
+          "properties": {
+            "data": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/status"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "ok",
+                  "no_match",
+                  "partial"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/status"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "not": {
+                "const": "no_match"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "continuation": {
+              "type": "null"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "result.git_status": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/result"
+        },
+        {
+          "properties": {
+            "data": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/git_status"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "ok",
+                  "no_match",
+                  "partial"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/git_status"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "not": {
+                "const": "no_match"
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "result.table": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/result"
+        },
+        {
+          "properties": {
+            "data": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/table"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "ok",
+                  "no_match",
+                  "partial"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/table"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "not": {
+                "const": "no_match"
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    }
+  }
+}

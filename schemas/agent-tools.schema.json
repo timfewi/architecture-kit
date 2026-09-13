@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://architecture-kit.invalid/schemas/agent-tools.schema.json",
+  "title": "Reference agent tool definitions",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "const": "https://architecture-kit.invalid/schemas/agent-tools.schema.json"
+    },
+    "scope": {
+      "const": "reference-agent-tools"
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_.-]*$"
+          },
+          "family": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "protocol": {
+            "const": "transport-neutral"
+          },
+          "executor": {
+            "enum": [
+              "broker",
+              "worker",
+              "host-builder"
+            ]
+          },
+          "authority": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "approval": {
+            "enum": [
+              "policy",
+              "exact-when-not-preauthorized"
+            ]
+          },
+          "effects": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "read",
+                "workspace_write",
+                "git_write",
+                "state_write",
+                "network",
+                "external_write",
+                "execute",
+                "job_control"
+              ]
+            },
+            "uniqueItems": true,
+            "minItems": 1,
+            "maxItems": 8
+          },
+          "default_surface": {
+            "type": "boolean"
+          },
+          "profiles": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "coding",
+                "research",
+                "compute",
+                "full"
+              ]
+            },
+            "uniqueItems": true,
+            "minItems": 1,
+            "maxItems": 4
+          },
+          "input_schema": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^schemas/[a-z-]+\\.schema\\.json#/(?:\\$defs/)[a-zA-Z0-9._-]+$"
+          },
+          "output_schema": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^schemas/[a-z-]+\\.schema\\.json#/(?:\\$defs/)[a-zA-Z0-9._-]+$"
+          },
+          "bounds": {
+            "type": "object",
+            "properties": {
+              "input_bytes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1048576
+              },
+              "output_bytes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1048576
+              },
+              "default_records": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "max_records": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000
+              },
+              "default_timeout_ms": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 86400000
+              },
+              "max_timeout_ms": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 86400000
+              }
+            },
+            "required": [
+              "input_bytes",
+              "output_bytes",
+              "default_records",
+              "max_records",
+              "default_timeout_ms",
+              "max_timeout_ms"
+            ],
+            "additionalProperties": false
+          },
+          "retry": {
+            "enum": [
+              "reconcile_before_retry",
+              "retry_after_changed_condition"
+            ]
+          },
+          "implementation_status": {
+            "const": "reference-contract"
+          },
+          "decision_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^ADR-[0-9]{3}$"
+            },
+            "uniqueItems": true,
+            "minItems": 1,
+            "maxItems": 30
+          }
+        },
+        "required": [
+          "name",
+          "family",
+          "purpose",
+          "protocol",
+          "executor",
+          "authority",
+          "approval",
+          "effects",
+          "default_surface",
+          "profiles",
+          "input_schema",
+          "output_schema",
+          "bounds",
+          "retry",
+          "implementation_status",
+          "decision_refs"
+        ],
+        "additionalProperties": false
+      },
+      "uniqueItems": true,
+      "minItems": 1,
+      "maxItems": 200
+    }
+  },
+  "required": [
+    "$schema",
+    "scope",
+    "tools"
+  ],
+  "additionalProperties": false
+}

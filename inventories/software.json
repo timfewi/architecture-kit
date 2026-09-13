@@ -1,0 +1,367 @@
+{
+  "direct_choices": [
+    {
+      "id": "platform.nixos",
+      "pin_policy": "locked-input",
+      "profiles": [
+        "host-foundation",
+        "greenfield-minimal",
+        "full-workstation"
+      ],
+      "purpose": "Declarative reference operating system",
+      "reference_choice": "NixOS with a locked nixpkgs input",
+      "replaceability": "required-reference",
+      "admission": "candidate",
+      "selection_rule": "Only for the optional declarative reference host; portable profiles supply equivalent services.",
+      "tool_refs": []
+    },
+    {
+      "id": "isolation.bubblewrap",
+      "pin_policy": "exact-version-and-hash",
+      "profiles": [
+        "agent-platform",
+        "greenfield-minimal",
+        "full-workstation"
+      ],
+      "purpose": "Fresh repository worker namespaces",
+      "reference_choice": "Bubblewrap",
+      "replaceability": "equivalent-allowed",
+      "admission": "candidate",
+      "selection_rule": "Linux native-code worker with reviewed mounts, namespaces and separate resource controls.",
+      "tool_refs": [
+        "workspace.exec",
+        "workspace.verify"
+      ]
+    },
+    {
+      "id": "container.rootless",
+      "pin_policy": "host-platform",
+      "profiles": [
+        "agent-platform",
+        "greenfield-minimal",
+        "full-workstation"
+      ],
+      "purpose": "Harness packaging and lifecycle",
+      "reference_choice": "Rootless OCI container runtime",
+      "replaceability": "equivalent-allowed",
+      "admission": "candidate",
+      "selection_rule": "Package a harness when OCI distribution/lifecycle adds value; not a complete execution boundary.",
+      "tool_refs": []
+    },
+    {
+      "id": "secrets.age",
+      "pin_policy": "exact-version-and-hash",
+      "profiles": [
+        "host-foundation",
+        "greenfield-minimal",
+        "full-workstation"
+      ],
+      "purpose": "Encrypted declarative secret deployment",
+      "reference_choice": "age-compatible encrypted files and host activation",
+      "replaceability": "equivalent-allowed",
+      "admission": "candidate",
+      "selection_rule": "Only when encrypted declarative host configuration is selected; never expose plaintext to tools.",
+      "tool_refs": []
+    },
+    {
+      "id": "language.rust",
+      "pin_policy": "exact-version-and-hash",
+      "profiles": [
+        "agent-platform",
+        "greenfield-minimal",
+        "full-workstation"
+      ],
+      "purpose": "Index, components, terminal client, and bounded native services",
+      "reference_choice": "Pinned Rust toolchain",
+      "replaceability": "equivalent-allowed",
+      "admission": "candidate",
+      "selection_rule": "Optional implementation choice for native components; preserve repository-native toolchains.",
+      "tool_refs": []
+    },
+    {
+      "id": "language.python",
+      "pin_policy": "exact-version-and-hash",
+      "profiles": [
+        "agent-platform",
+        "greenfield-minimal",
+        "full-workstation"
+      ],
+      "purpose": "Host orchestration and contract services",
+      "reference_choice": "Pinned Python runtime and locked packages",
+      "replaceability": "equivalent-allowed",
+      "admission": "candidate",
+      "selection_rule": "Local kit checker and optional orchestration; pin the validator environment separately.",
+      "tool_refs": []
+    },
+    {
+      "id": "language.javascript",
+      "pin_policy": "exact-version-and-hash",
+      "profiles": [
+        "agent-platform",
+        "full-workstation"
+      ],
+      "purpose": "Web client and compatible harness packaging",
+      "reference_choice": "Pinned Bun runtime and dependency closure",
+      "replaceability": "equivalent-allowed",
+      "admission": "candidate",
+      "selection_rule": "Optional client or adapter implementation; use existing repository runtime pins.",
+      "tool_refs": []
+    },
+    {
+      "id": "retrieval.scip",
+      "pin_policy": "exact-version-and-hash",
+      "profiles": [
+        "agent-platform",
+        "greenfield-minimal",
+        "full-workstation"
+      ],
+      "purpose": "Stable symbol relationship exchange",
+      "reference_choice": "SCIP-compatible index data",
+      "replaceability": "equivalent-allowed",
+      "admission": "candidate",
+      "selection_rule": "Require source-current language coverage and measured repeated semantic-query benefit.",
+      "tool_refs": [
+        "code.references",
+        "code.graph"
+      ]
+    },
+    {
+      "id": "retrieval.syntax",
+      "pin_policy": "exact-version-and-hash",
+      "profiles": [
+        "agent-platform",
+        "greenfield-minimal",
+        "full-workstation"
+      ],
+      "purpose": "Multilingual structural retrieval",
+      "reference_choice": "Tree-sitter-compatible parsers",
+      "replaceability": "equivalent-allowed",
+      "admission": "candidate",
+      "selection_rule": "Select one parser adapter for syntax questions; test malformed source and language coverage.",
+      "tool_refs": [
+        "code.search",
+        "code.outline"
+      ]
+    },
+    {
+      "id": "state.sqlite",
+      "pin_policy": "locked-input",
+      "profiles": [
+        "agent-platform",
+        "full-workstation"
+      ],
+      "purpose": "Bounded local durable metadata where required",
+      "reference_choice": "SQLite",
+      "replaceability": "equivalent-allowed",
+      "admission": "candidate",
+      "selection_rule": "Local metadata or repeated document retrieval/joins; read-only data connections for query workers.",
+      "tool_refs": [
+        "data.query"
+      ]
+    },
+    {
+      "id": "components.wasm",
+      "pin_policy": "exact-version-and-hash",
+      "profiles": [
+        "agent-platform",
+        "full-workstation"
+      ],
+      "purpose": "Digest-bound portable transforms",
+      "reference_choice": "Component Model runtime",
+      "replaceability": "optional",
+      "admission": "candidate",
+      "selection_rule": "Only repeated pure transforms whose setup and host-call costs amortize.",
+      "tool_refs": [
+        "wasm.transform"
+      ]
+    },
+    {
+      "id": "client.terminal",
+      "pin_policy": "exact-version-and-hash",
+      "profiles": [
+        "agent-platform",
+        "full-workstation"
+      ],
+      "purpose": "Accessible local terminal UI",
+      "reference_choice": "Ratatui-compatible terminal framework",
+      "replaceability": "equivalent-allowed",
+      "admission": "candidate",
+      "selection_rule": "Optional terminal presentation; do not make a framework choice part of core semantics.",
+      "tool_refs": []
+    },
+    {
+      "id": "browser.engine",
+      "pin_policy": "exact-version-and-hash",
+      "profiles": [
+        "agent-platform",
+        "full-workstation"
+      ],
+      "purpose": "Rendered inspection and web client",
+      "reference_choice": "Pinned Chromium-compatible engine",
+      "replaceability": "equivalent-allowed",
+      "admission": "candidate",
+      "selection_rule": "Only rendered state or interaction; static documents use bounded fetch.",
+      "tool_refs": [
+        "browser.snapshot",
+        "browser.interact"
+      ]
+    },
+    {
+      "id": "virtualization.qemu-kvm",
+      "pin_policy": "host-platform",
+      "profiles": [
+        "full-workstation"
+      ],
+      "purpose": "Personal and hardened virtual machines",
+      "reference_choice": "QEMU with KVM where available",
+      "replaceability": "optional",
+      "admission": "candidate",
+      "selection_rule": "Select a separate guest kernel when the threat model requires it; benchmark lifecycle cost.",
+      "tool_refs": []
+    },
+    {
+      "id": "search.ripgrep",
+      "reference_choice": "ripgrep",
+      "purpose": "Exact text retrieval",
+      "selection_rule": "Default for recursive code text after fixing corpus policy; tiny explicit-file workloads may favor grep.",
+      "tool_refs": [
+        "workspace.search"
+      ],
+      "admission": "candidate",
+      "pin_policy": "exact-version-and-hash",
+      "replaceability": "equivalent-allowed",
+      "profiles": [
+        "agent-platform",
+        "greenfield-minimal",
+        "full-workstation"
+      ]
+    },
+    {
+      "id": "search.paths",
+      "reference_choice": "Native directory API; optional fd or find",
+      "purpose": "Bounded path discovery",
+      "selection_rule": "Native listing first; fd for repeated name queries and find for metadata predicates.",
+      "tool_refs": [
+        "workspace.list"
+      ],
+      "admission": "candidate",
+      "pin_policy": "exact-version-and-hash",
+      "replaceability": "equivalent-allowed",
+      "profiles": [
+        "agent-platform",
+        "greenfield-minimal",
+        "full-workstation"
+      ]
+    },
+    {
+      "id": "data.jq",
+      "reference_choice": "jq",
+      "purpose": "JSON field projection",
+      "selection_rule": "Use selected fields and explicit streaming semantics; no ambient module paths.",
+      "tool_refs": [
+        "data.query"
+      ],
+      "admission": "candidate",
+      "pin_policy": "exact-version-and-hash",
+      "replaceability": "equivalent-allowed",
+      "profiles": [
+        "agent-platform",
+        "greenfield-minimal",
+        "full-workstation"
+      ]
+    },
+    {
+      "id": "vcs.git",
+      "reference_choice": "Git",
+      "purpose": "Source identity, canonical diff and exact history changes",
+      "selection_rule": "Use stable machine output and typed operations with separate mutation authority.",
+      "tool_refs": [
+        "workspace.git_status",
+        "workspace.git_diff",
+        "git.stage",
+        "git.commit",
+        "git.fetch",
+        "git.push"
+      ],
+      "admission": "candidate",
+      "pin_policy": "exact-version-and-hash",
+      "replaceability": "equivalent-allowed",
+      "profiles": [
+        "agent-platform",
+        "greenfield-minimal",
+        "full-workstation"
+      ]
+    },
+    {
+      "id": "isolation.cgroups",
+      "reference_choice": "Linux cgroups with optional systemd scopes",
+      "purpose": "Job resource ceilings and lifecycle accounting",
+      "selection_rule": "Require actual delegated controllers and supervisor-owned cancellation; separate from filesystem isolation.",
+      "tool_refs": [
+        "workspace.exec",
+        "workspace.verify"
+      ],
+      "admission": "candidate",
+      "pin_policy": "exact-version-and-hash",
+      "replaceability": "equivalent-allowed",
+      "profiles": [
+        "agent-platform",
+        "greenfield-minimal",
+        "full-workstation"
+      ]
+    },
+    {
+      "id": "isolation.seccomp",
+      "reference_choice": "seccomp and optional Landlock",
+      "purpose": "Layered syscall and ambient-right restriction",
+      "selection_rule": "Probe exact supported restrictions; mandatory missing boundaries block support.",
+      "tool_refs": [
+        "workspace.exec",
+        "workspace.verify"
+      ],
+      "admission": "candidate",
+      "pin_policy": "exact-version-and-hash",
+      "replaceability": "equivalent-allowed",
+      "profiles": [
+        "agent-platform",
+        "greenfield-minimal",
+        "full-workstation"
+      ]
+    },
+    {
+      "id": "data.analytics",
+      "reference_choice": "Optional DuckDB or Miller",
+      "purpose": "Specialized table aggregation",
+      "selection_rule": "Admit only with an equal-result workload beating the existing parser/SQLite after setup cost.",
+      "tool_refs": [
+        "data.query"
+      ],
+      "admission": "candidate",
+      "pin_policy": "exact-version-and-hash",
+      "replaceability": "equivalent-allowed",
+      "profiles": [
+        "agent-platform",
+        "greenfield-minimal",
+        "full-workstation"
+      ]
+    },
+    {
+      "id": "verification.native",
+      "reference_choice": "Repository-native formatter, linter, type checker and tests",
+      "purpose": "Evidence-producing project checks",
+      "selection_rule": "Respect project pins and commands; no universal replacement toolchain.",
+      "tool_refs": [
+        "workspace.verify"
+      ],
+      "admission": "candidate",
+      "pin_policy": "exact-version-and-hash",
+      "replaceability": "equivalent-allowed",
+      "profiles": [
+        "agent-platform",
+        "greenfield-minimal",
+        "full-workstation"
+      ]
+    }
+  ],
+  "$schema": "https://architecture-kit.invalid/schemas/software.schema.json"
+}

@@ -1,0 +1,1738 @@
+{
+  "$schema": "https://architecture-kit.invalid/schemas/agent-tools.schema.json",
+  "scope": "reference-agent-tools",
+  "tools": [
+    {
+      "name": "tools.search",
+      "family": "tools",
+      "purpose": "Discover authorized capabilities by task; return compact names and descriptions.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "tool_discovery",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": true,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/tools.search.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.hits",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "tools.describe",
+      "family": "tools",
+      "purpose": "Load the exact input/output contracts for one discovered capability.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "tool_discovery",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": true,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/tools.describe.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.text",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "workspace.list",
+      "family": "workspace",
+      "purpose": "List one granted directory; do not recurse implicitly.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "workspace_read",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": true,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/workspace.list.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.listing",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "workspace.read",
+      "family": "workspace",
+      "purpose": "Read a bounded UTF-8 byte window bound to an optional expected file digest.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "workspace_read",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": true,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/workspace.read.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.text",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "workspace.search",
+      "family": "workspace",
+      "purpose": "Find literal or regex text in an explicitly selected corpus; incomplete scanning remains partial.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "workspace_read",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": true,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/workspace.search.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.hits",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "workspace.create",
+      "family": "workspace",
+      "purpose": "Create a new UTF-8 file exclusively; an existing target is a conflict.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "workspace_write",
+      "approval": "policy",
+      "effects": [
+        "workspace_write"
+      ],
+      "default_surface": true,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/workspace.create.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.mutation",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "workspace.mkdir",
+      "family": "workspace",
+      "purpose": "Create exactly one directory with an existing parent.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "workspace_write",
+      "approval": "policy",
+      "effects": [
+        "workspace_write"
+      ],
+      "default_surface": true,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/workspace.mkdir.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.mutation",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "workspace.replace",
+      "family": "workspace",
+      "purpose": "Replace exact text only at the expected digest and match count.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "workspace_write",
+      "approval": "policy",
+      "effects": [
+        "workspace_write"
+      ],
+      "default_surface": true,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/workspace.replace.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.mutation",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "workspace.environment",
+      "family": "workspace",
+      "purpose": "Report immutable command handles, dependency gaps and toolchain freshness without loading hooks.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "workspace_read",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": true,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/workspace.environment.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.environment",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "workspace.exec",
+      "family": "workspace",
+      "purpose": "Run one approved immutable executable with argv in a fresh isolated worker.",
+      "protocol": "transport-neutral",
+      "executor": "worker",
+      "authority": "workspace_execute",
+      "approval": "policy",
+      "effects": [
+        "execute"
+      ],
+      "default_surface": true,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/workspace.exec.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.process",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 1800000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "workspace.verify",
+      "family": "workspace",
+      "purpose": "Run one repository-declared check profile against the selected snapshot.",
+      "protocol": "transport-neutral",
+      "executor": "worker",
+      "authority": "workspace_execute",
+      "approval": "policy",
+      "effects": [
+        "execute"
+      ],
+      "default_surface": true,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/workspace.verify.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.process",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "workspace.git_status",
+      "family": "workspace",
+      "purpose": "Inspect stable Git status, including an unborn branch and untracked paths.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "git_inspect",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": true,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/workspace.git_status.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.git_status",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "workspace.git_diff",
+      "family": "workspace",
+      "purpose": "Read bounded canonical changes for explicit paths and index/worktree selection.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "git_inspect",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": true,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/workspace.git_diff.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.text",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "workspace.git_log",
+      "family": "workspace",
+      "purpose": "Inspect bounded commit metadata without executing hooks or text conversion.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "git_inspect",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/workspace.git_log.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.hits",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "workspace.git_show",
+      "family": "workspace",
+      "purpose": "Read one explicit revision and path from a granted repository.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "git_inspect",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/workspace.git_show.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.text",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "git.branch_create",
+      "family": "git",
+      "purpose": "Create a feature branch without replacing an existing branch.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "git_local_write",
+      "approval": "exact-when-not-preauthorized",
+      "effects": [
+        "git_write"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/git.branch_create.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.mutation",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "git.stage",
+      "family": "git",
+      "purpose": "Stage explicit paths at the expected source snapshot.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "git_local_write",
+      "approval": "exact-when-not-preauthorized",
+      "effects": [
+        "git_write"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/git.stage.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.mutation",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "git.commit",
+      "family": "git",
+      "purpose": "Commit the reviewed index at its expected digest.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "git_local_write",
+      "approval": "exact-when-not-preauthorized",
+      "effects": [
+        "git_write"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/git.commit.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.mutation",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "git.fetch",
+      "family": "git",
+      "purpose": "Fetch one registered remote; this changes local Git metadata.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "git_remote_read",
+      "approval": "exact-when-not-preauthorized",
+      "effects": [
+        "git_write",
+        "network"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/git.fetch.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.mutation",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "git.push",
+      "family": "git",
+      "purpose": "Push an explicit branch; expected remote identity prevents blind overwrites.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "git_remote_write",
+      "approval": "exact-when-not-preauthorized",
+      "effects": [
+        "external_write",
+        "network"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/git.push.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.mutation",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "git.merge",
+      "family": "git",
+      "purpose": "Integrate an explicit source ref and report conflicts without discarding edits.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "git_local_write",
+      "approval": "exact-when-not-preauthorized",
+      "effects": [
+        "git_write"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/git.merge.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.mutation",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "code.search",
+      "family": "code",
+      "purpose": "Find syntax or ranked code candidates; lexical hits are not semantic references.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "code_read",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/code.search.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.hits",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-015"
+      ]
+    },
+    {
+      "name": "code.outline",
+      "family": "code",
+      "purpose": "Return a bounded declaration outline for one current source file.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "code_read",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/code.outline.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.hits",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-015"
+      ]
+    },
+    {
+      "name": "code.references",
+      "family": "code",
+      "purpose": "Return references to an evidenced stable symbol with explicit index freshness.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "code_read",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/code.references.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.hits",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-015"
+      ]
+    },
+    {
+      "name": "code.graph",
+      "family": "code",
+      "purpose": "Explore one evidenced symbol's relationships within a finite depth and node budget.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "code_read",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/code.graph.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.hits",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-015"
+      ]
+    },
+    {
+      "name": "code.status",
+      "family": "code",
+      "purpose": "Report language coverage and index generation without generating an index.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "code_read",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/code.status.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.status",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-015"
+      ]
+    },
+    {
+      "name": "docs.resolve",
+      "family": "docs",
+      "purpose": "Resolve a library and exact requested release to a documentation identity.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "research",
+      "approval": "policy",
+      "effects": [
+        "network"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "research",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/docs.resolve.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.hits",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "docs.query",
+      "family": "docs",
+      "purpose": "Retrieve bounded primary API evidence for an already resolved documentation identity.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "research",
+      "approval": "policy",
+      "effects": [
+        "network"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "research",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/docs.query.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.hits",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "research.search",
+      "family": "research",
+      "purpose": "Discover public primary sources; snippets remain discovery evidence.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "research",
+      "approval": "policy",
+      "effects": [
+        "network"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "research",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/research.search.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.hits",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "research.fetch",
+      "family": "research",
+      "purpose": "Retrieve a selected public HTTPS document with digest-bound continuation.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "research",
+      "approval": "policy",
+      "effects": [
+        "network"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "research",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/research.fetch.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.text",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "browser.snapshot",
+      "family": "browser",
+      "purpose": "Read rendered page state from one authorized browser session.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "browser_read",
+      "approval": "policy",
+      "effects": [
+        "network"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "research",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/browser.snapshot.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.hits",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "browser.interact",
+      "family": "browser",
+      "purpose": "Perform one scoped rendered-page action at an expected snapshot.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "browser_interact",
+      "approval": "exact-when-not-preauthorized",
+      "effects": [
+        "network",
+        "external_write"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "research",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/browser.interact.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.status",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "browser.upload",
+      "family": "browser",
+      "purpose": "Upload a granted artifact to one page element at an expected snapshot.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "browser_upload",
+      "approval": "exact-when-not-preauthorized",
+      "effects": [
+        "network",
+        "external_write"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "research",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/browser.upload.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.status",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "artifact.read",
+      "family": "artifact",
+      "purpose": "Read an authorized immutable artifact window; a digest alone never grants access.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "artifact_read",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/artifact.read.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.text",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "data.query",
+      "family": "data",
+      "purpose": "Project or aggregate one data artifact in a scratch worker with read-only inputs.",
+      "protocol": "transport-neutral",
+      "executor": "worker",
+      "authority": "compute",
+      "approval": "policy",
+      "effects": [
+        "execute"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "compute",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/data.query.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.table",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "compute.execute",
+      "family": "compute",
+      "purpose": "Evaluate bounded scratch-only code with no repository, network or credentials.",
+      "protocol": "transport-neutral",
+      "executor": "worker",
+      "authority": "compute",
+      "approval": "policy",
+      "effects": [
+        "execute"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "compute",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/compute.execute.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.process",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "wasm.transform",
+      "family": "wasm",
+      "purpose": "Invoke one allowlisted component and operation bound to immutable digests.",
+      "protocol": "transport-neutral",
+      "executor": "worker",
+      "authority": "wasm",
+      "approval": "policy",
+      "effects": [
+        "execute"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "compute",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/wasm.transform.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.process",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "build.request",
+      "family": "build",
+      "purpose": "Request one reviewed build recipe and immutable source/input set; never activate it.",
+      "protocol": "transport-neutral",
+      "executor": "host-builder",
+      "authority": "reviewed_build",
+      "approval": "policy",
+      "effects": [
+        "execute"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/build.request.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.job",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 86400000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-029"
+      ]
+    },
+    {
+      "name": "build.status",
+      "family": "build",
+      "purpose": "Observe one owned build without launching duplicate work.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "reviewed_build",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/build.status.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.job",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 86400000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-029"
+      ]
+    },
+    {
+      "name": "build.result",
+      "family": "build",
+      "purpose": "Observe one owned build without launching duplicate work.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "reviewed_build",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/build.result.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.job",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 86400000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-029"
+      ]
+    },
+    {
+      "name": "build.cancel",
+      "family": "build",
+      "purpose": "Cancel one owned build and reconcile its terminal outcome.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "reviewed_build",
+      "approval": "policy",
+      "effects": [
+        "job_control"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/build.cancel.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.job",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 86400000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-029"
+      ]
+    },
+    {
+      "name": "skills.search",
+      "family": "skills",
+      "purpose": "Discover focused reusable guidance by capability without loading bodies.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "skill_read",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/skills.search.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.hits",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "skills.load",
+      "family": "skills",
+      "purpose": "Load one previously discovered guidance document by identity.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "skill_read",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/skills.load.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.text",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "skills.read_reference",
+      "family": "skills",
+      "purpose": "Read one needed reference from a loaded skill's declared resources.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "skill_read",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/skills.read_reference.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.text",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "memory.query",
+      "family": "memory",
+      "purpose": "Retrieve scoped reviewed claims with freshness and source evidence.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "memory_read",
+      "approval": "policy",
+      "effects": [
+        "read"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/memory.query.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.hits",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "memory.propose",
+      "family": "memory",
+      "purpose": "Propose up to three reusable claims against a current verification receipt.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "memory_propose",
+      "approval": "policy",
+      "effects": [
+        "state_write"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/memory.propose.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.mutation",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "forge.issue_view",
+      "family": "forge",
+      "purpose": "Read one issue through a registered hosting adapter.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "forge_read",
+      "approval": "policy",
+      "effects": [
+        "network"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/forge.issue_view.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.text",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "forge.issue_create",
+      "family": "forge",
+      "purpose": "Create one explicit issue with an idempotency key.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "forge_write",
+      "approval": "exact-when-not-preauthorized",
+      "effects": [
+        "network",
+        "external_write"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/forge.issue_create.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.mutation",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "forge.pull_request_view",
+      "family": "forge",
+      "purpose": "Read one change request through a registered hosting adapter.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "forge_read",
+      "approval": "policy",
+      "effects": [
+        "network"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/forge.pull_request_view.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.text",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "retry_after_changed_condition",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "forge.pull_request_create",
+      "family": "forge",
+      "purpose": "Create a draft change request for exact base and head refs.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "forge_write",
+      "approval": "exact-when-not-preauthorized",
+      "effects": [
+        "network",
+        "external_write"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/forge.pull_request_create.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.mutation",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    },
+    {
+      "name": "forge.pull_request_merge",
+      "family": "forge",
+      "purpose": "Merge only the reviewed expected head using the selected merge method.",
+      "protocol": "transport-neutral",
+      "executor": "broker",
+      "authority": "forge_write",
+      "approval": "exact-when-not-preauthorized",
+      "effects": [
+        "network",
+        "external_write"
+      ],
+      "default_surface": false,
+      "profiles": [
+        "coding",
+        "full"
+      ],
+      "input_schema": "schemas/tool-contracts.schema.json#/$defs/forge.pull_request_merge.input",
+      "output_schema": "schemas/tool-contracts.schema.json#/$defs/result.mutation",
+      "bounds": {
+        "input_bytes": 65536,
+        "output_bytes": 32768,
+        "default_records": 10,
+        "max_records": 100,
+        "default_timeout_ms": 30000,
+        "max_timeout_ms": 30000
+      },
+      "retry": "reconcile_before_retry",
+      "implementation_status": "reference-contract",
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "decisions": [
+    {
+      "anchor": "adr-001-optimize-for-correctness-authority-evidence-containment-and-recovery",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-001",
+      "status": "accepted",
+      "title": "Optimize for correctness, authority, evidence, containment, and recovery"
+    },
+    {
+      "anchor": "adr-002-keep-the-reference-laptop-declarative-and-reproducible",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-002",
+      "status": "accepted",
+      "title": "Keep the reference laptop declarative and reproducible"
+    },
+    {
+      "anchor": "adr-003-separate-portable-policy-from-host-identity-and-hardware",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-003",
+      "status": "accepted",
+      "title": "Separate portable policy from host identity and hardware"
+    },
+    {
+      "anchor": "adr-004-separate-control-plane-from-data-plane",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-004",
+      "status": "accepted",
+      "title": "Separate control plane from data plane"
+    },
+    {
+      "anchor": "adr-005-make-the-launcher-the-immutable-authority-composer",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-005",
+      "status": "accepted",
+      "title": "Make the launcher the immutable authority composer"
+    },
+    {
+      "anchor": "adr-006-keep-capability-authority-profile-and-approval-orthogonal",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-006",
+      "status": "accepted",
+      "title": "Keep capability, authority, profile, and approval orthogonal"
+    },
+    {
+      "anchor": "adr-007-keep-the-core-harness--and-provider-neutral",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-007",
+      "status": "accepted",
+      "title": "Keep the core harness- and provider-neutral"
+    },
+    {
+      "anchor": "adr-008-route-models-through-a-host-owned-model-gateway",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-008",
+      "status": "accepted",
+      "title": "Route models through a host-owned model gateway"
+    },
+    {
+      "anchor": "adr-009-use-one-canonical-typed-tool-definition-source",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-009",
+      "status": "accepted",
+      "title": "Use one canonical typed tool-definition source"
+    },
+    {
+      "anchor": "adr-010-keep-the-default-tool-surface-small-and-progressive",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-010",
+      "status": "accepted",
+      "title": "Keep the default tool surface small and progressive"
+    },
+    {
+      "anchor": "adr-011-use-stateless-bounded-tool-protocols-with-absolute-deadlines",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-011",
+      "status": "accepted",
+      "title": "Use stateless, bounded tool protocols with absolute deadlines"
+    },
+    {
+      "anchor": "adr-012-execute-repository-code-only-in-fresh-isolated-workers",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-012",
+      "status": "accepted",
+      "title": "Execute repository code only in fresh isolated workers"
+    },
+    {
+      "anchor": "adr-013-treat-supervision-cancellation-and-reaping-as-correctness",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-013",
+      "status": "accepted",
+      "title": "Treat supervision, cancellation, and reaping as correctness"
+    },
+    {
+      "anchor": "adr-014-separate-task-conversation-memory-evidence-and-derived-state",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-014",
+      "status": "accepted",
+      "title": "Separate task, conversation, memory, evidence, and derived state"
+    },
+    {
+      "anchor": "adr-015-use-precise-source-bound-multilingual-retrieval",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-015",
+      "status": "accepted",
+      "title": "Use precise, source-bound multilingual retrieval"
+    },
+    {
+      "anchor": "adr-016-use-reviewed-memory-and-receipt-bound-evidence",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-016",
+      "status": "accepted",
+      "title": "Use reviewed memory and receipt-bound evidence"
+    },
+    {
+      "anchor": "adr-017-enforce-host-issued-agent-profiles-and-finite-capacity",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-017",
+      "status": "accepted",
+      "title": "Enforce host-issued agent profiles and finite capacity"
+    },
+    {
+      "anchor": "adr-018-use-capability-scoped-peer-discovery-and-a-coordination-ledger",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-018",
+      "status": "accepted",
+      "title": "Use capability-scoped peer discovery and a coordination ledger"
+    },
+    {
+      "anchor": "adr-019-keep-observation-asynchronous-and-reconstructible",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-019",
+      "status": "accepted",
+      "title": "Keep observation asynchronous and reconstructible"
+    },
+    {
+      "anchor": "adr-020-provide-one-focus-swarm-and-observe-product-surface",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-020",
+      "status": "accepted",
+      "title": "Provide one Focus, Swarm, and Observe product surface"
+    },
+    {
+      "anchor": "adr-021-keep-external-research-and-browser-content-untrusted",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-021",
+      "status": "accepted",
+      "title": "Keep external research and browser content untrusted"
+    },
+    {
+      "anchor": "adr-022-add-the-first-party-loop-as-an-ordinary-optional-harness",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-022",
+      "status": "accepted",
+      "title": "Add the first-party loop as an ordinary optional harness"
+    },
+    {
+      "anchor": "adr-023-put-autonomous-progress-in-a-host-owned-state-machine",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-023",
+      "status": "accepted",
+      "title": "Put autonomous progress in a host-owned state machine"
+    },
+    {
+      "anchor": "adr-024-bind-retries-waiting-budgets-and-completion-to-receipts",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-024",
+      "status": "accepted",
+      "title": "Bind retries, waiting, budgets, and completion to receipts"
+    },
+    {
+      "anchor": "adr-025-keep-desktop-voice-personal-vm-and-hardened-worker-roles-distinct",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-025",
+      "status": "accepted",
+      "title": "Keep desktop, voice, personal VM, and hardened worker roles distinct"
+    },
+    {
+      "anchor": "adr-026-separate-source-build-activation-live-and-release-evidence",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-026",
+      "status": "accepted",
+      "title": "Separate source, build, activation, live, and release evidence"
+    },
+    {
+      "anchor": "adr-027-package-portable-core-separately-from-host-implementations",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-027",
+      "status": "accepted",
+      "title": "Package portable core separately from host implementations"
+    },
+    {
+      "anchor": "adr-028-load-only-digest-bound-minimum-context-and-resume-packets",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-028",
+      "status": "accepted",
+      "title": "Load only digest-bound minimum context and resume packets"
+    },
+    {
+      "anchor": "adr-029-use-a-typed-reviewed-build-capability",
+      "document": "ARCHITECTURE.md",
+      "id": "ADR-029",
+      "status": "accepted",
+      "title": "Use a typed reviewed build capability"
+    }
+  ],
+  "$schema": "https://architecture-kit.invalid/schemas/decisions.schema.json"
+}

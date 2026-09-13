@@ -1,0 +1,439 @@
+[
+  {
+    "tool": "tools.search",
+    "input": {
+      "query": "example",
+      "limit": 1
+    }
+  },
+  {
+    "tool": "tools.describe",
+    "input": {
+      "name": "example"
+    }
+  },
+  {
+    "tool": "workspace.list",
+    "input": {
+      "workspace_id": "example",
+      "path": "."
+    }
+  },
+  {
+    "tool": "workspace.read",
+    "input": {
+      "workspace_id": "example",
+      "path": "src/example.txt",
+      "offset_bytes": 0,
+      "max_bytes": 1,
+      "expected_sha256": null
+    }
+  },
+  {
+    "tool": "workspace.search",
+    "input": {
+      "workspace_id": "example",
+      "path": ".",
+      "query": "example",
+      "mode": "literal",
+      "corpus": "tracked",
+      "hidden": false,
+      "ignored": false,
+      "result_mode": "paths",
+      "limit": 1
+    }
+  },
+  {
+    "tool": "workspace.create",
+    "input": {
+      "workspace_id": "example",
+      "path": "src/example.txt",
+      "content": "example"
+    }
+  },
+  {
+    "tool": "workspace.mkdir",
+    "input": {
+      "workspace_id": "example",
+      "path": "src/example.txt"
+    }
+  },
+  {
+    "tool": "workspace.replace",
+    "input": {
+      "workspace_id": "example",
+      "path": "src/example.txt",
+      "expected_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "old_text": "example",
+      "new_text": "example",
+      "expected_matches": 1
+    }
+  },
+  {
+    "tool": "workspace.environment",
+    "input": {
+      "workspace_id": "example"
+    }
+  },
+  {
+    "tool": "workspace.exec",
+    "input": {
+      "workspace_id": "example",
+      "command_id": "example",
+      "args": [],
+      "cwd": ".",
+      "stdin": null,
+      "timeout_ms": 1
+    }
+  },
+  {
+    "tool": "workspace.verify",
+    "input": {
+      "workspace_id": "example",
+      "profile_id": "example",
+      "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  },
+  {
+    "tool": "workspace.git_status",
+    "input": {
+      "workspace_id": "example"
+    }
+  },
+  {
+    "tool": "workspace.git_diff",
+    "input": {
+      "workspace_id": "example",
+      "paths": [],
+      "cached": false
+    }
+  },
+  {
+    "tool": "workspace.git_log",
+    "input": {
+      "workspace_id": "example",
+      "revision": "example",
+      "limit": 1
+    }
+  },
+  {
+    "tool": "workspace.git_show",
+    "input": {
+      "workspace_id": "example",
+      "revision": "example",
+      "path": "src/example.txt"
+    }
+  },
+  {
+    "tool": "git.branch_create",
+    "input": {
+      "workspace_id": "example",
+      "name": "example",
+      "expected_state_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  },
+  {
+    "tool": "git.stage",
+    "input": {
+      "workspace_id": "example",
+      "paths": [
+        "src/example.txt"
+      ],
+      "expected_state_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  },
+  {
+    "tool": "git.commit",
+    "input": {
+      "workspace_id": "example",
+      "message": "example",
+      "expected_state_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  },
+  {
+    "tool": "git.fetch",
+    "input": {
+      "workspace_id": "example",
+      "remote_id": "example",
+      "expected_state_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  },
+  {
+    "tool": "git.push",
+    "input": {
+      "workspace_id": "example",
+      "remote_id": "example",
+      "branch": "example",
+      "expected_state_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  },
+  {
+    "tool": "git.merge",
+    "input": {
+      "workspace_id": "example",
+      "source_ref": "example",
+      "strategy": "fast_forward_only",
+      "expected_state_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  },
+  {
+    "tool": "code.search",
+    "input": {
+      "workspace_id": "example",
+      "query": "example",
+      "kind": "syntax",
+      "language": null,
+      "limit": 1
+    }
+  },
+  {
+    "tool": "code.outline",
+    "input": {
+      "workspace_id": "example",
+      "path": "src/example.txt",
+      "limit": 1
+    }
+  },
+  {
+    "tool": "code.references",
+    "input": {
+      "workspace_id": "example",
+      "symbol_id": "example",
+      "generation": "0000000000000000000000000000000000000000000000000000000000000000",
+      "limit": 1
+    }
+  },
+  {
+    "tool": "code.graph",
+    "input": {
+      "workspace_id": "example",
+      "symbol_id": "example",
+      "generation": "0000000000000000000000000000000000000000000000000000000000000000",
+      "depth": 1,
+      "limit": 1
+    }
+  },
+  {
+    "tool": "code.status",
+    "input": {
+      "workspace_id": "example"
+    }
+  },
+  {
+    "tool": "docs.resolve",
+    "input": {
+      "library": "example",
+      "release": null,
+      "limit": 1
+    }
+  },
+  {
+    "tool": "docs.query",
+    "input": {
+      "document_id": "example",
+      "query": "example",
+      "limit": 1
+    }
+  },
+  {
+    "tool": "research.search",
+    "input": {
+      "query": "example",
+      "limit": 1
+    }
+  },
+  {
+    "tool": "research.fetch",
+    "input": {
+      "url": "https://example.org/document",
+      "max_bytes": 1,
+      "cursor": null
+    }
+  },
+  {
+    "tool": "browser.snapshot",
+    "input": {
+      "session_id": "example",
+      "url": "https://example.org/document",
+      "limit": 1
+    }
+  },
+  {
+    "tool": "browser.interact",
+    "input": {
+      "session_id": "example",
+      "snapshot_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "action": "click",
+      "element_id": "example",
+      "value": null
+    }
+  },
+  {
+    "tool": "browser.upload",
+    "input": {
+      "session_id": "example",
+      "snapshot_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "element_id": "example",
+      "artifact": {
+        "id": "example",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "media_type": "example",
+        "size_bytes": 0
+      }
+    }
+  },
+  {
+    "tool": "artifact.read",
+    "input": {
+      "artifact": {
+        "id": "example",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "media_type": "example",
+        "size_bytes": 0
+      },
+      "offset_bytes": 0,
+      "max_bytes": 1
+    }
+  },
+  {
+    "tool": "data.query",
+    "input": {
+      "artifact": {
+        "id": "example",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "media_type": "example",
+        "size_bytes": 0
+      },
+      "language": "jq",
+      "query": "example",
+      "limit": 1
+    }
+  },
+  {
+    "tool": "compute.execute",
+    "input": {
+      "runtime_id": "example",
+      "code": "example",
+      "inputs": [],
+      "timeout_ms": 1
+    }
+  },
+  {
+    "tool": "wasm.transform",
+    "input": {
+      "component_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "operation_id": "example",
+      "inputs": []
+    }
+  },
+  {
+    "tool": "build.request",
+    "input": {
+      "workspace_id": "example",
+      "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "recipe_id": "example",
+      "inputs": [],
+      "network": "denied",
+      "timeout_ms": 1,
+      "idempotency_key": "example"
+    }
+  },
+  {
+    "tool": "build.status",
+    "input": {
+      "job_id": "example"
+    }
+  },
+  {
+    "tool": "build.result",
+    "input": {
+      "job_id": "example"
+    }
+  },
+  {
+    "tool": "build.cancel",
+    "input": {
+      "job_id": "example"
+    }
+  },
+  {
+    "tool": "skills.search",
+    "input": {
+      "query": "example",
+      "limit": 1
+    }
+  },
+  {
+    "tool": "skills.load",
+    "input": {
+      "skill_id": "example"
+    }
+  },
+  {
+    "tool": "skills.read_reference",
+    "input": {
+      "skill_id": "example",
+      "resource_id": "example"
+    }
+  },
+  {
+    "tool": "memory.query",
+    "input": {
+      "workspace_id": "example",
+      "query": "example",
+      "limit": 1
+    }
+  },
+  {
+    "tool": "memory.propose",
+    "input": {
+      "workspace_id": "example",
+      "receipt_id": "example",
+      "claims": []
+    }
+  },
+  {
+    "tool": "forge.issue_view",
+    "input": {
+      "repository_id": "example",
+      "number": 1
+    }
+  },
+  {
+    "tool": "forge.issue_create",
+    "input": {
+      "repository_id": "example",
+      "title": "example",
+      "body": "example",
+      "idempotency_key": "example"
+    }
+  },
+  {
+    "tool": "forge.pull_request_view",
+    "input": {
+      "repository_id": "example",
+      "number": 1
+    }
+  },
+  {
+    "tool": "forge.pull_request_create",
+    "input": {
+      "repository_id": "example",
+      "base": "example",
+      "head": "example",
+      "title": "example",
+      "body": "example",
+      "draft": true,
+      "idempotency_key": "example"
+    }
+  },
+  {
+    "tool": "forge.pull_request_merge",
+    "input": {
+      "repository_id": "example",
+      "number": 1,
+      "expected_head": "0000000000000000000000000000000000000000",
+      "method": "merge"
+    }
+  }
+]

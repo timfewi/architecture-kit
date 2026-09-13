@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Architecture kit manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "generated_on",
+    "artifacts",
+    "catalog",
+    "$schema"
+  ],
+  "properties": {
+    "language": {
+      "const": "en"
+    },
+    "generated_on": {
+      "type": "string",
+      "format": "date",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "kind",
+          "sha256",
+          "size_bytes"
+        ],
+        "properties": {
+          "path": {
+            "$ref": "common.schema.json#/$defs/path"
+          },
+          "kind": {
+            "enum": [
+              "markdown",
+              "yaml",
+              "json",
+              "json-schema",
+              "python",
+              "javascript",
+              "text",
+              "nix",
+              "shell",
+              "just"
+            ]
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "maxItems": 1000,
+      "uniqueItems": true
+    },
+    "catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_count",
+        "tool_count",
+        "tool_catalog_sha256",
+        "default_tool_count"
+      ],
+      "properties": {
+        "decision_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "tool_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "tool_catalog_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "default_tool_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        }
+      }
+    },
+    "$schema": {
+      "const": "https://architecture-kit.invalid/schemas/manifest.schema.json"
+    }
+  },
+  "$id": "https://architecture-kit.invalid/schemas/manifest.schema.json"
+}

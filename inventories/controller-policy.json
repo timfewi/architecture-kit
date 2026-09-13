@@ -1,0 +1,345 @@
+{
+  "allowed_after_duplicate_failure": [
+    "change input or assumption",
+    "use a different authorized tool",
+    "escalate the exact requirement",
+    "wait for external state",
+    "enter BLOCKED"
+  ],
+  "automatic_context": [
+    "current_policy",
+    "active_goal",
+    "requirement_matrix",
+    "digest_bound_resume_packet"
+  ],
+  "budgets": {
+    "context_compactions_per_phase": 1,
+    "deterministic_transport_failures_per_endpoint": 1,
+    "fast_checks_per_coherent_source_state": 1,
+    "finite_global_slice_limits_required": true,
+    "full_checks_before_handoff": 1,
+    "model_visible_tool_output_bytes_per_phase": 51200,
+    "preflight_max_minutes": 5,
+    "preflight_max_retrieval_calls": 8,
+    "progress_checkpoint_after_minutes": 30,
+    "progress_checkpoint_after_tool_calls": 20,
+    "research_max_primary_sources": 12,
+    "research_max_rounds": 2,
+    "same_path_digest_max_rereads": 1
+  },
+  "failure_fingerprint_fields": [
+    "action_kind",
+    "normalized_error",
+    "input_digest",
+    "capability_revision"
+  ],
+  "no_progress": [
+    "same path and digest read again",
+    "same search reformulated without new evidence",
+    "same deterministic failure",
+    "status message without state change",
+    "full verification repeated on an unchanged snapshot"
+  ],
+  "owner": "host goal controller",
+  "progress": [
+    "relevant source diff plus stronger verification",
+    "requirement state transition",
+    "external job status transition",
+    "new primary evidence that changes the next action"
+  ],
+  "states": [
+    "QUEUED",
+    "PREFLIGHT",
+    "PLAN",
+    "EXECUTE_STEP",
+    "OBSERVE",
+    "VERIFY",
+    "REPLAN",
+    "WAITING_APPROVAL",
+    "WAITING_EXTERNAL",
+    "COMPLETE",
+    "BLOCKED",
+    "FAILED",
+    "CANCELLED",
+    "OUTCOME_UNCERTAIN"
+  ],
+  "transitions": [
+    {
+      "from": "QUEUED",
+      "to": "PREFLIGHT",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "QUEUED",
+      "to": "CANCELLED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "QUEUED",
+      "to": "FAILED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "PREFLIGHT",
+      "to": "PLAN",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "PREFLIGHT",
+      "to": "WAITING_APPROVAL",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "PREFLIGHT",
+      "to": "WAITING_EXTERNAL",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "PREFLIGHT",
+      "to": "BLOCKED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "PREFLIGHT",
+      "to": "FAILED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "PREFLIGHT",
+      "to": "CANCELLED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "PREFLIGHT",
+      "to": "OUTCOME_UNCERTAIN",
+      "guard": "reconciliation_required"
+    },
+    {
+      "from": "PLAN",
+      "to": "EXECUTE_STEP",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "PLAN",
+      "to": "WAITING_APPROVAL",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "PLAN",
+      "to": "WAITING_EXTERNAL",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "PLAN",
+      "to": "BLOCKED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "PLAN",
+      "to": "FAILED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "PLAN",
+      "to": "CANCELLED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "EXECUTE_STEP",
+      "to": "OBSERVE",
+      "guard": "new_evidence"
+    },
+    {
+      "from": "EXECUTE_STEP",
+      "to": "WAITING_APPROVAL",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "EXECUTE_STEP",
+      "to": "WAITING_EXTERNAL",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "EXECUTE_STEP",
+      "to": "BLOCKED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "EXECUTE_STEP",
+      "to": "FAILED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "EXECUTE_STEP",
+      "to": "CANCELLED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "EXECUTE_STEP",
+      "to": "OUTCOME_UNCERTAIN",
+      "guard": "reconciliation_required"
+    },
+    {
+      "from": "OBSERVE",
+      "to": "VERIFY",
+      "guard": "new_evidence"
+    },
+    {
+      "from": "OBSERVE",
+      "to": "WAITING_EXTERNAL",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "OBSERVE",
+      "to": "BLOCKED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "OBSERVE",
+      "to": "FAILED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "OBSERVE",
+      "to": "CANCELLED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "OBSERVE",
+      "to": "OUTCOME_UNCERTAIN",
+      "guard": "reconciliation_required"
+    },
+    {
+      "from": "VERIFY",
+      "to": "REPLAN",
+      "guard": "new_evidence"
+    },
+    {
+      "from": "VERIFY",
+      "to": "WAITING_APPROVAL",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "VERIFY",
+      "to": "WAITING_EXTERNAL",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "VERIFY",
+      "to": "COMPLETE",
+      "guard": "all_requirements_verified"
+    },
+    {
+      "from": "VERIFY",
+      "to": "BLOCKED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "VERIFY",
+      "to": "FAILED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "VERIFY",
+      "to": "CANCELLED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "VERIFY",
+      "to": "OUTCOME_UNCERTAIN",
+      "guard": "reconciliation_required"
+    },
+    {
+      "from": "REPLAN",
+      "to": "EXECUTE_STEP",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "REPLAN",
+      "to": "WAITING_APPROVAL",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "REPLAN",
+      "to": "WAITING_EXTERNAL",
+      "guard": "authorized_next_step"
+    },
+    {
+      "from": "REPLAN",
+      "to": "BLOCKED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "REPLAN",
+      "to": "FAILED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "REPLAN",
+      "to": "CANCELLED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "WAITING_APPROVAL",
+      "to": "EXECUTE_STEP",
+      "guard": "approval_granted_and_revalidated"
+    },
+    {
+      "from": "WAITING_APPROVAL",
+      "to": "BLOCKED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "WAITING_APPROVAL",
+      "to": "CANCELLED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "WAITING_EXTERNAL",
+      "to": "OBSERVE",
+      "guard": "external_result_correlated"
+    },
+    {
+      "from": "WAITING_EXTERNAL",
+      "to": "BLOCKED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "WAITING_EXTERNAL",
+      "to": "FAILED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "WAITING_EXTERNAL",
+      "to": "CANCELLED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "WAITING_EXTERNAL",
+      "to": "OUTCOME_UNCERTAIN",
+      "guard": "reconciliation_required"
+    },
+    {
+      "from": "OUTCOME_UNCERTAIN",
+      "to": "OBSERVE",
+      "guard": "external_result_correlated"
+    },
+    {
+      "from": "OUTCOME_UNCERTAIN",
+      "to": "WAITING_EXTERNAL",
+      "guard": "external_result_correlated"
+    },
+    {
+      "from": "OUTCOME_UNCERTAIN",
+      "to": "FAILED",
+      "guard": "failure_or_cancellation"
+    },
+    {
+      "from": "OUTCOME_UNCERTAIN",
+      "to": "CANCELLED",
+      "guard": "failure_or_cancellation"
+    }
+  ],
+  "waiting_external_model_turns": 0,
+  "$schema": "https://architecture-kit.invalid/schemas/controller-policy.schema.json"
+}

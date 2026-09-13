@@ -1,0 +1,4 @@
+# Validator release verified from upstream on 2026-09-13.
+# Provision through a reviewed immutable toolchain; do not install during checks.
+jsonschema==4.26.0
+PyYAML==6.0.3

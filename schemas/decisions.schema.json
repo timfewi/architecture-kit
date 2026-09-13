@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Architecture decision index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "decisions",
+    "$schema"
+  ],
+  "properties": {
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "status",
+          "document",
+          "anchor"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^ADR-[0-9]{3}$",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "status": {
+            "const": "accepted"
+          },
+          "document": {
+            "const": "ARCHITECTURE.md"
+          },
+          "anchor": {
+            "type": "string",
+            "pattern": "^adr-[0-9]{3}-",
+            "minLength": 1,
+            "maxLength": 2048
+          }
+        }
+      },
+      "maxItems": 1000,
+      "uniqueItems": true
+    },
+    "$schema": {
+      "const": "https://architecture-kit.invalid/schemas/decisions.schema.json"
+    }
+  },
+  "$id": "https://architecture-kit.invalid/schemas/decisions.schema.json"
+}

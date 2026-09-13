@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reviewed build capability",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "owner",
+    "request_contract",
+    "result_contract",
+    "authorization",
+    "execution_invariants",
+    "$schema"
+  ],
+  "properties": {
+    "owner": {
+      "const": "reviewed build owner"
+    },
+    "request_contract": {
+      "$ref": "#/$defs/contract"
+    },
+    "result_contract": {
+      "$ref": "#/$defs/contract"
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "matching_policy",
+        "policy_expansion"
+      ],
+      "properties": {
+        "matching_policy": {
+          "const": "host-may-execute-without-operator-intervention"
+        },
+        "policy_expansion": {
+          "const": "exact-operator-approval-required"
+        }
+      }
+    },
+    "execution_invariants": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      },
+      "maxItems": 1000
+    },
+    "$schema": {
+      "const": "https://architecture-kit.invalid/schemas/build-capability.schema.json"
+    }
+  },
+  "$defs": {
+    "contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "required_fields"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "required_fields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "maxItems": 1000
+        }
+      }
+    }
+  },
+  "$id": "https://architecture-kit.invalid/schemas/build-capability.schema.json"
+}

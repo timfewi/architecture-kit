@@ -1,0 +1,52 @@
+profile_id: agent-platform
+title: Portable agent platform
+purpose: Complete agent architecture on any host that supplies the declared host boundary.
+assumes:
+  - host process supervision
+  - host credential mediation
+  - immutable policy
+  - isolated workspace execution
+  - owner-only local IPC
+  - durable receipts
+essential:
+  - platform.services
+  - dev.toolchains
+  - agent.launcher-policy
+  - agent.model-gateway
+  - agent.harness-registry
+  - agent.tool-registry
+  - agent.workspace-workers
+  - agent.lifecycle
+  - agent.goal-controller
+  - agent.context-resume
+  - agent.retrieval
+  - agent.skills-docs
+  - verification.gates
+recommended: []
+optional:
+  - agent.first-party-loop
+  - agent.memory-evidence
+  - agent.coordination
+  - agent.observation
+  - agent.research-browser
+  - client.terminal
+  - client.web
+  - agent.reviewed-build
+  - agent.compute-wasm
+  - distribution.release
+defer: []
+excludes:
+  - host.desktop
+  - host.voice
+  - host.personal-vm
+  - host.hardened-worker-vm
+cost:
+  build_effort: medium
+  runtime_cost: low
+  external_services: optional
+  hardware: host-dependent
+minimum_evidence:
+  - source
+  - focused-test
+  - build
+  - live

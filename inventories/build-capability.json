@@ -1,0 +1,37 @@
+{
+  "authorization": {
+    "matching_policy": "host-may-execute-without-operator-intervention",
+    "policy_expansion": "exact-operator-approval-required"
+  },
+  "execution_invariants": [
+    "the host validates the source digest, recipe, inputs, network policy, and timeout",
+    "the builder cannot activate a system or run an arbitrary caller command",
+    "the result is correlated to the exact request and source snapshot",
+    "manual hash or command transfer is not part of the normal workflow",
+    "the controller enters WAITING_EXTERNAL without model turns while the build runs"
+  ],
+  "owner": "reviewed build owner",
+  "request_contract": {
+    "id": "build.request",
+    "name": "BuildRequest",
+    "required_fields": [
+      "workspace_id",
+      "source_sha256",
+      "recipe_id",
+      "inputs",
+      "network",
+      "timeout_ms",
+      "idempotency_key"
+    ]
+  },
+  "result_contract": {
+    "id": "build.result",
+    "name": "BuildResult",
+    "required_fields": [
+      "job_id",
+      "state",
+      "result"
+    ]
+  },
+  "$schema": "https://architecture-kit.invalid/schemas/build-capability.schema.json"
+}

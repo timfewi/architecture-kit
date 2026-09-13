@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "verification gate catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "gates",
+    "$schema"
+  ],
+  "properties": {
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "level",
+          "purpose",
+          "applies_to",
+          "decision_refs"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9.-]+$",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "level": {
+            "enum": [
+              "source",
+              "focused-test",
+              "build",
+              "activation",
+              "live",
+              "release"
+            ]
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "applies_to": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "maxItems": 1000
+          },
+          "decision_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^ADR-[0-9]{3}$",
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "maxItems": 1000
+          }
+        }
+      },
+      "maxItems": 1000,
+      "uniqueItems": true
+    },
+    "$schema": {
+      "const": "https://architecture-kit.invalid/schemas/verification-gates.schema.json"
+    }
+  },
+  "$id": "https://architecture-kit.invalid/schemas/verification-gates.schema.json"
+}

@@ -1,0 +1,89 @@
+{
+  "sources": [
+    {
+      "id": "R1",
+      "url": "https://raw.githubusercontent.com/BurntSushi/ripgrep/15.2.0/GUIDE.md",
+      "retrieved_on": "2026-09-13",
+      "content_sha256": "156337b59d9813beadc8f7489e9e86da9eec2c09e755e6baa31ec2c40c7e77eb",
+      "coverage": "literal and recursive search; automatic filtering; first 20500 bytes across two reads"
+    },
+    {
+      "id": "R2",
+      "url": "https://raw.githubusercontent.com/jqlang/jq/master/docs/content/manual/v1.8/manual.yml",
+      "retrieved_on": "2026-09-13",
+      "content_sha256": "45fc28cb40e1f013e54aeee1d5ddfdff9224879f6fedb92a22c882e67530d62b",
+      "coverage": "manual introduction and invocation options; first 16000 bytes across two reads"
+    },
+    {
+      "id": "R3",
+      "url": "https://raw.githubusercontent.com/sourcegraph/scip/main/README.md",
+      "retrieved_on": "2026-09-13",
+      "content_sha256": "fce767acbc4242c6f589fedf6f81a3089d6da766789e4d5a0a5673d2f6a927c0",
+      "coverage": "complete README"
+    },
+    {
+      "id": "R4",
+      "url": "https://sqlite.org/fts5.html",
+      "retrieved_on": "2026-09-13",
+      "content_sha256": "80c54c657c9f70c453716b71425f2d2061ec2d2ccfd208489dd428b01ef126fc",
+      "coverage": "FTS5 overview and initial query examples; first 6500 bytes"
+    },
+    {
+      "id": "R5",
+      "url": "https://raw.githubusercontent.com/containers/bubblewrap/main/SECURITY.md",
+      "retrieved_on": "2026-09-13",
+      "content_sha256": "7a9ad6fa2d449cecc21bf340800efa3c0f4052af230fb06c73b260ddcc370c1c",
+      "coverage": "complete security document; main branch snapshot"
+    },
+    {
+      "id": "R6",
+      "url": "https://raw.githubusercontent.com/systemd/systemd/main/man/systemd.resource-control.xml",
+      "retrieved_on": "2026-09-13",
+      "content_sha256": "d57641df40e45811403de91e55059b6a8f7506c6812a85cbe9c6ba22900587d8",
+      "coverage": "resource hierarchy introduction; first 6500 bytes"
+    },
+    {
+      "id": "R7",
+      "url": "https://docs.kernel.org/userspace-api/landlock.html",
+      "retrieved_on": "2026-09-13",
+      "content_sha256": "7746e078e83109565fe096f9119fe25bc8b7cc412505b04de118bbb164feea40",
+      "coverage": "rights and ABI detection introduction; first 10000 bytes; development kernel documentation"
+    },
+    {
+      "id": "R8",
+      "url": "https://raw.githubusercontent.com/bytecodealliance/wasmtime/main/docs/examples-interrupting-wasm.md",
+      "retrieved_on": "2026-09-13",
+      "content_sha256": "f8c20e920202635fd562835c016440233fa40f424ba1dc7c4f1e37cb6ef66662",
+      "coverage": "complete interruption document"
+    },
+    {
+      "id": "R9",
+      "url": "https://raw.githubusercontent.com/json-schema-org/json-schema-spec/2020-12/jsonschema-validation.xml",
+      "retrieved_on": "2026-09-13",
+      "content_sha256": "dcba094c316c17922cb95cc36affc53b9d9521139bfd5a3afdd1cc810ab39773",
+      "coverage": "first 8000 bytes; published draft introduction and annotation semantics"
+    },
+    {
+      "id": "R10",
+      "url": "https://raw.githubusercontent.com/sharkdp/hyperfine/master/README.md",
+      "retrieved_on": "2026-09-13",
+      "content_sha256": "399ef574c247bb7421b02eaa4b410b068eda747dce3e2a4690a9358b023ae16b",
+      "coverage": "README through licensing introduction; first 11000 bytes"
+    },
+    {
+      "id": "R11",
+      "url": "https://raw.githubusercontent.com/python-jsonschema/jsonschema/v4.26.0/docs/referencing.rst",
+      "retrieved_on": "2026-09-13",
+      "content_sha256": "493da2dbdf93a34066387e93c175e682961e6239ab68731a34f95b97a5219407",
+      "coverage": "first 8000 bytes; in-memory registry and validation API"
+    },
+    {
+      "id": "R12",
+      "url": "https://api.github.com/repos/yaml/pyyaml/releases/latest",
+      "retrieved_on": "2026-09-13",
+      "content_sha256": "c9382935ccd138c54a33adc29d3db2e78de278364ab42906af002898edd32c2a",
+      "coverage": "complete release API response; tag 6.0.3, prerelease false"
+    }
+  ],
+  "$schema": "https://architecture-kit.invalid/schemas/research-sources.schema.json"
+}

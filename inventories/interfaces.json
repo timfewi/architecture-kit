@@ -1,0 +1,370 @@
+{
+  "interfaces": [
+    {
+      "decision_refs": [
+        "ADR-004",
+        "ADR-005",
+        "ADR-006"
+      ],
+      "fields": [
+        "session_id",
+        "repository_id",
+        "profile_id",
+        "authorities",
+        "resource_limits",
+        "policy_digest"
+      ],
+      "id": "launch-policy",
+      "invariants": [
+        "model and tools cannot mutate it",
+        "changes require a fresh session"
+      ],
+      "owner": "host launcher",
+      "purpose": "Immutable session authority composition"
+    },
+    {
+      "decision_refs": [
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ],
+      "fields": [
+        "name",
+        "description",
+        "policy",
+        "input_contract",
+        "output_contract",
+        "bounds",
+        "result_semantics",
+        "definition_digest"
+      ],
+      "id": "tool-definition",
+      "invariants": [
+        "closed finite contracts",
+        "one canonical owner"
+      ],
+      "owner": "tool registry",
+      "purpose": "Canonical bounded operational tool contract"
+    },
+    {
+      "decision_refs": [
+        "ADR-007",
+        "ADR-008"
+      ],
+      "fields": [
+        "binding_id",
+        "model_id",
+        "request_id",
+        "body_digest",
+        "deadline",
+        "usage"
+      ],
+      "id": "model-gateway",
+      "invariants": [
+        "exact provider binding",
+        "no credential in harness"
+      ],
+      "owner": "host model gateway",
+      "purpose": "Provider-neutral credential-isolated model request"
+    },
+    {
+      "decision_refs": [
+        "ADR-016",
+        "ADR-026"
+      ],
+      "fields": [
+        "call_id",
+        "source_digest",
+        "policy_digest",
+        "toolchain_revision",
+        "result_class",
+        "output_digest"
+      ],
+      "id": "execution-receipt",
+      "invariants": [
+        "single terminal append",
+        "receipt existence alone is not success"
+      ],
+      "owner": "host evidence owner",
+      "purpose": "Bind an operation to its exact inputs and result"
+    },
+    {
+      "decision_refs": [
+        "ADR-017"
+      ],
+      "fields": [
+        "agent_id",
+        "model_family",
+        "profile_revision",
+        "capabilities",
+        "workspace_grants",
+        "capacity",
+        "expiry"
+      ],
+      "id": "agent-profile",
+      "invariants": [
+        "host issued",
+        "effective limit is the minimum of all ceilings"
+      ],
+      "owner": "host scheduler",
+      "purpose": "Effective agent capabilities, grants, and capacity"
+    },
+    {
+      "decision_refs": [
+        "ADR-017",
+        "ADR-018"
+      ],
+      "fields": [
+        "agent_id",
+        "role",
+        "adapter_id",
+        "skills",
+        "profile_digest",
+        "scoped_grants",
+        "expiry"
+      ],
+      "id": "agent-card",
+      "invariants": [
+        "descriptive only",
+        "no credentials or authority claims"
+      ],
+      "owner": "coordination owner",
+      "purpose": "Presentation-safe scoped peer identity"
+    },
+    {
+      "decision_refs": [
+        "ADR-018"
+      ],
+      "fields": [
+        "requester_id",
+        "scope_id",
+        "grant_revision",
+        "peers",
+        "cursor"
+      ],
+      "id": "peer-directory",
+      "invariants": [
+        "current grants only",
+        "revocation recomputes visibility"
+      ],
+      "owner": "coordination owner",
+      "purpose": "Grant-intersection peer discovery"
+    },
+    {
+      "decision_refs": [
+        "ADR-018"
+      ],
+      "fields": [
+        "task_id",
+        "sender_id",
+        "recipient_id",
+        "scope_id",
+        "grant_revision",
+        "state",
+        "idempotency_key"
+      ],
+      "id": "coordination-ledger",
+      "invariants": [
+        "terminal tasks are immutable",
+        "every execution is reauthorized"
+      ],
+      "owner": "coordination owner",
+      "purpose": "Durable messages, tasks, claims, leases, and artifacts"
+    },
+    {
+      "decision_refs": [
+        "ADR-019",
+        "ADR-020"
+      ],
+      "fields": [
+        "epoch",
+        "cursor",
+        "agents",
+        "tasks",
+        "capacity",
+        "gaps",
+        "resync_required"
+      ],
+      "id": "observe-state",
+      "invariants": [
+        "never authoritative for scheduling",
+        "gaps are visible"
+      ],
+      "owner": "observation owner",
+      "purpose": "Deterministic content-minimized live projection"
+    },
+    {
+      "decision_refs": [
+        "ADR-014",
+        "ADR-020"
+      ],
+      "fields": [
+        "run_id",
+        "objective",
+        "messages",
+        "tool_activity",
+        "approvals",
+        "evidence"
+      ],
+      "id": "conversation-view",
+      "invariants": [
+        "no provider wire data",
+        "scope-checked"
+      ],
+      "owner": "conversation owner",
+      "purpose": "Authorized run and evidence projection"
+    },
+    {
+      "decision_refs": [
+        "ADR-018",
+        "ADR-020"
+      ],
+      "fields": [
+        "operation",
+        "agent_id",
+        "expected_state",
+        "scope_id",
+        "deadline"
+      ],
+      "id": "agent-control",
+      "invariants": [
+        "no new authority",
+        "uncertain outcomes remain uncertain"
+      ],
+      "owner": "host dispatcher",
+      "purpose": "Existing authorized agent lifecycle controls"
+    },
+    {
+      "decision_refs": [
+        "ADR-023",
+        "ADR-024"
+      ],
+      "fields": [
+        "goal_id",
+        "state",
+        "requirements_digest",
+        "budget",
+        "progress_delta",
+        "next_action"
+      ],
+      "id": "goal-state",
+      "invariants": [
+        "controller owns transitions",
+        "waiting external runs no model turns"
+      ],
+      "owner": "goal controller",
+      "purpose": "Host-owned autonomous lifecycle state"
+    },
+    {
+      "decision_refs": [
+        "ADR-024"
+      ],
+      "fields": [
+        "goal_id",
+        "step_id",
+        "source_snapshot_digest",
+        "toolchain_revision",
+        "action",
+        "required_capability",
+        "input_digest",
+        "result_class",
+        "output_digest",
+        "diff_summary",
+        "verification_delta",
+        "budget_consumed",
+        "next_state"
+      ],
+      "id": "step-receipt",
+      "invariants": [
+        "one receipt per settled step",
+        "same failure fingerprint blocks unchanged retry"
+      ],
+      "owner": "goal controller",
+      "purpose": "Durable bounded step settlement"
+    },
+    {
+      "decision_refs": [
+        "ADR-028"
+      ],
+      "fields": [
+        "goal_id",
+        "policy_digest",
+        "requirements_digest",
+        "source_digest",
+        "toolchain_revision",
+        "last_step_id",
+        "open_requirements",
+        "controller_state",
+        "external_requests",
+        "next_action"
+      ],
+      "id": "resume-packet",
+      "invariants": [
+        "bounded and content-minimized",
+        "digest mismatch rejects reuse"
+      ],
+      "owner": "context owner",
+      "purpose": "Minimum digest-bound context for launch, resume, and compaction"
+    },
+    {
+      "decision_refs": [
+        "ADR-029"
+      ],
+      "fields": [
+        "workspace_id",
+        "source_sha256",
+        "recipe_id",
+        "inputs",
+        "network",
+        "timeout_ms",
+        "idempotency_key"
+      ],
+      "id": "build-request",
+      "invariants": [
+        "exact output and inputs",
+        "no activation or arbitrary command"
+      ],
+      "owner": "reviewed build owner",
+      "purpose": "Request one reviewed build recipe"
+    },
+    {
+      "decision_refs": [
+        "ADR-029"
+      ],
+      "fields": [
+        "job_id",
+        "state",
+        "result"
+      ],
+      "id": "build-result",
+      "invariants": [
+        "must match request identity",
+        "store path is host validated"
+      ],
+      "owner": "reviewed build owner",
+      "purpose": "Correlate one reviewed build outcome"
+    },
+    {
+      "decision_refs": [
+        "ADR-023",
+        "ADR-026"
+      ],
+      "fields": [
+        "matrix_id",
+        "profile_id",
+        "requirements",
+        "minimum_levels",
+        "receipts",
+        "status"
+      ],
+      "id": "evidence-matrix",
+      "invariants": [
+        "model cannot close requirements",
+        "changed bindings invalidate dependent evidence"
+      ],
+      "owner": "verification owner",
+      "purpose": "Controller-owned requirement completion matrix"
+    }
+  ],
+  "$schema": "https://architecture-kit.invalid/schemas/interfaces.schema.json"
+}

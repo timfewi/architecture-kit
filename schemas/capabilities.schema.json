@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "capability catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "capabilities",
+    "$schema"
+  ],
+  "properties": {
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "tools",
+          "executors",
+          "side_effects",
+          "profiles",
+          "host_authoritative"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]+$",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "tools": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "maxItems": 1000
+          },
+          "executors": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "maxItems": 1000
+          },
+          "side_effects": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "maxItems": 1000
+          },
+          "profiles": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "maxItems": 1000
+          },
+          "host_authoritative": {
+            "const": true
+          }
+        }
+      },
+      "maxItems": 1000,
+      "uniqueItems": true
+    },
+    "$schema": {
+      "const": "https://architecture-kit.invalid/schemas/capabilities.schema.json"
+    }
+  },
+  "$id": "https://architecture-kit.invalid/schemas/capabilities.schema.json"
+}

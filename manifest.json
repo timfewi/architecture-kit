@@ -1,0 +1,319 @@
+{
+  "$schema": "https://architecture-kit.invalid/schemas/manifest.schema.json",
+  "language": "en",
+  "generated_on": "2026-09-13",
+  "artifacts": [
+    {
+      "path": ".envrc",
+      "kind": "shell",
+      "sha256": "f809b2c4b56500d4d453cb856f857c4c5ae8367779e32f62abf5303e33e0b58f",
+      "size_bytes": 169
+    },
+    {
+      "path": ".gitignore",
+      "kind": "text",
+      "sha256": "76649909e28512017d47472849b573eb132238b52f414d3081e2212d4fa2ebab",
+      "size_bytes": 50
+    },
+    {
+      "path": "ARCHITECTURE.md",
+      "kind": "markdown",
+      "sha256": "b5bccf217dcc75f4e95af9c877126f6311c3123a7fb97eb226318099394f4f33",
+      "size_bytes": 31498
+    },
+    {
+      "path": "BENCHMARKS.md",
+      "kind": "markdown",
+      "sha256": "3324de946a733e95b89c2478c1478589f151ab01c8df86f0bc139b8adc5f98a1",
+      "size_bytes": 3247
+    },
+    {
+      "path": "CHANGELOG.md",
+      "kind": "markdown",
+      "sha256": "de710a7f696184800491466f591b09ebfd64c951edd3eecdf56cc7428eafc065",
+      "size_bytes": 1311
+    },
+    {
+      "path": "DEVELOPMENT.md",
+      "kind": "markdown",
+      "sha256": "8974ccc2a70701cb7293dab324d0c5345946df2e91420813d3d3b8b71dc28027",
+      "size_bytes": 6594
+    },
+    {
+      "path": "LESSONS.md",
+      "kind": "markdown",
+      "sha256": "a9de852b37d7178728d010c3b2235a907d82b1dfe46f54c49cefe448b8d1100d",
+      "size_bytes": 6621
+    },
+    {
+      "path": "README.md",
+      "kind": "markdown",
+      "sha256": "f51967871acfa222be04868ef2c68d660d9da4bd6965a6290df18a4221671564",
+      "size_bytes": 4801
+    },
+    {
+      "path": "REBUILD-GUIDE.md",
+      "kind": "markdown",
+      "sha256": "5419fd43d6259f887866fe7da9365eae557154abc8c084a04a86c17a7dd564db",
+      "size_bytes": 6851
+    },
+    {
+      "path": "TOOLING.md",
+      "kind": "markdown",
+      "sha256": "ecc0fc794a0e715b60c1f477f6c8dfad29efab1c77feb8412dfeeac0794850fb",
+      "size_bytes": 11254
+    },
+    {
+      "path": "VERIFICATION.md",
+      "kind": "markdown",
+      "sha256": "946af9cf942b65c4898d9a125d613c7d9be3ab2e7344dd5bfd0e9e30829c2461",
+      "size_bytes": 7938
+    },
+    {
+      "path": "examples/tool-inputs.json",
+      "kind": "json",
+      "sha256": "43ba4e0150a49a031e96ec6cb096bafe34051b80e23aabcc6f6a30147d93bfb6",
+      "size_bytes": 9079
+    },
+    {
+      "path": "examples/tool-results.json",
+      "kind": "json",
+      "sha256": "a6ae1001271bc606bdb351726340619a43bc901d96173506c429a8262d8ba490",
+      "size_bytes": 10355
+    },
+    {
+      "path": "flake.nix",
+      "kind": "nix",
+      "sha256": "a6582b9dfd522f810112f67a554af86919fc53c5dabd7c6ab318a5d758b09c80",
+      "size_bytes": 2380
+    },
+    {
+      "path": "inventories/agent-tools.json",
+      "kind": "json",
+      "sha256": "506b7d89a5cb4daef54db58222b29f2fbbc1617234687942f560323775de55e5",
+      "size_bytes": 51649
+    },
+    {
+      "path": "inventories/build-capability.json",
+      "kind": "json",
+      "sha256": "591ac224cc7f6f9bcdf5ebfe747a8a00862af4093ebda02286f44cadf077b187",
+      "size_bytes": 1130
+    },
+    {
+      "path": "inventories/capabilities.json",
+      "kind": "json",
+      "sha256": "57d4f7521b21c63d82cbab2c66aa3fbc5ad2cb2e38f175507aa316b575527b40",
+      "size_bytes": 7354
+    },
+    {
+      "path": "inventories/components.json",
+      "kind": "json",
+      "sha256": "2ac7fe75c4356a3ec875e3eb706c668b6f24c9d72ea3a028937f0312cf44cda0",
+      "size_bytes": 9293
+    },
+    {
+      "path": "inventories/controller-policy.json",
+      "kind": "json",
+      "sha256": "9cc554d388b60850ff2ca9c527a41e0e6f8e289595472280a911ff0f8f8c5794",
+      "size_bytes": 7804
+    },
+    {
+      "path": "inventories/decisions.json",
+      "kind": "json",
+      "sha256": "06ebdfa944f75f28fabefdf67a3d51e5e5aa0af6a53005894b3576ed9b766c4b",
+      "size_bytes": 7475
+    },
+    {
+      "path": "inventories/interfaces.json",
+      "kind": "json",
+      "sha256": "614ac0e9de6a100c71629834356e76925985f1dfbef18357e9e88d1dc2a13a6a",
+      "size_bytes": 8521
+    },
+    {
+      "path": "inventories/software.json",
+      "kind": "json",
+      "sha256": "9cdaba6b321e851f984b041d2e9219a9d4c37ca3f9111f74aedba2010201b7ef",
+      "size_bytes": 12290
+    },
+    {
+      "path": "inventories/verification-gates.json",
+      "kind": "json",
+      "sha256": "d0051cc6b27631498713fdb05ad402e2449c7f88ca719ee6cc7d070222df0460",
+      "size_bytes": 4268
+    },
+    {
+      "path": "justfile",
+      "kind": "just",
+      "sha256": "59c2ae0c714b3620dd13a4bee7a7aca54956aa5fc5884c77c923b01504dbc7f4",
+      "size_bytes": 1723
+    },
+    {
+      "path": "profiles/agent-platform.yaml",
+      "kind": "yaml",
+      "sha256": "cf6abe6af2d96b881f9efe0947311144f56c08ef9297d582e207ea63f1f74677",
+      "size_bytes": 1165
+    },
+    {
+      "path": "profiles/full-workstation.yaml",
+      "kind": "yaml",
+      "sha256": "2179b08477001504eab5d4268ea61b664bc011c914dc7ca2aaf7bef2b21ad2f1",
+      "size_bytes": 1143
+    },
+    {
+      "path": "profiles/greenfield-minimal.yaml",
+      "kind": "yaml",
+      "sha256": "b1dbcc42caae521860937f713d4a4ddd0fbd2caeb1dfe1f298c24685b7bec5e9",
+      "size_bytes": 1058
+    },
+    {
+      "path": "profiles/host-foundation.yaml",
+      "kind": "yaml",
+      "sha256": "3c69ee9a344f715564b6267103695a21fcbd0165460f5ef4e6bb01950edf4d4b",
+      "size_bytes": 594
+    },
+    {
+      "path": "requirements.txt",
+      "kind": "text",
+      "sha256": "74bc6a44cd46d234fcae9f17b0b8166483a591da7652f690a66510291ab1feea",
+      "size_bytes": 173
+    },
+    {
+      "path": "research/FINDINGS.md",
+      "kind": "markdown",
+      "sha256": "443750fcd2e2ddfc480da76511141d7c173d75455f363647096b19c158ac6454",
+      "size_bytes": 13385
+    },
+    {
+      "path": "research/retrieval-measurement.json",
+      "kind": "json",
+      "sha256": "d156dcac0f346c4c8ca40f08d59cf27a5cf9966098315f51179ee50d76bbc288",
+      "size_bytes": 21177
+    },
+    {
+      "path": "research/sources.json",
+      "kind": "json",
+      "sha256": "f26981f809a0699a5cb5c1c57ab1b12701f4ced56befc69487a96863d86aefd1",
+      "size_bytes": 4039
+    },
+    {
+      "path": "schemas/agent-tools.schema.json",
+      "kind": "json-schema",
+      "sha256": "9f05c6de08c6d6812eccf7b3440cb6b47ba4cc30a17fceb29bc49a5f606e218f",
+      "size_bytes": 5162
+    },
+    {
+      "path": "schemas/benchmark.schema.json",
+      "kind": "json-schema",
+      "sha256": "d23b8325e5e67ad6f321f20354ac1385f2df77e2c70574679c766dca85daec14",
+      "size_bytes": 5926
+    },
+    {
+      "path": "schemas/build-capability.schema.json",
+      "kind": "json-schema",
+      "sha256": "6978c9a4192f6dec92166b12362ccc8eee50b2aec2e7ac91609cce98b1115cbb",
+      "size_bytes": 2009
+    },
+    {
+      "path": "schemas/capabilities.schema.json",
+      "kind": "json-schema",
+      "sha256": "fa9dead09c79777a879538534d3bc68379843541f6e849aa92faebbafa468c3a",
+      "size_bytes": 2086
+    },
+    {
+      "path": "schemas/common.schema.json",
+      "kind": "json-schema",
+      "sha256": "0b25eb0ad07af71818fb0c8f667f6dcca42df8dc553b9da6ca151d838b905adf",
+      "size_bytes": 821
+    },
+    {
+      "path": "schemas/components.schema.json",
+      "kind": "json-schema",
+      "sha256": "f6b81911699421546b8f1204838d851b918e6aa41b42571c157f194ca189a149",
+      "size_bytes": 1933
+    },
+    {
+      "path": "schemas/controller-policy.schema.json",
+      "kind": "json-schema",
+      "sha256": "533358e58478a5684b1c4640359a7f6f4e1f7d83ba35ea7ba38b86d3d7bd9f89",
+      "size_bytes": 6249
+    },
+    {
+      "path": "schemas/decisions.schema.json",
+      "kind": "json-schema",
+      "sha256": "9470d939ad1c65fcbe32c06cbcdba558768ddb6bc78bf91bf4d3fee1a3ad20f8",
+      "size_bytes": 1353
+    },
+    {
+      "path": "schemas/interfaces.schema.json",
+      "kind": "json-schema",
+      "sha256": "4255c4f9acc092508e042c550296374f3b86dc8e8d68d6ac14b3366ad78f3dbd",
+      "size_bytes": 2026
+    },
+    {
+      "path": "schemas/manifest.schema.json",
+      "kind": "json-schema",
+      "sha256": "3b3c1c1643e2e09dac49574b116166ce14593b9d4ac68d52b0818e6a9aecc87c",
+      "size_bytes": 2329
+    },
+    {
+      "path": "schemas/profile.schema.json",
+      "kind": "json-schema",
+      "sha256": "df1755a8fad5ca5bffa04f863fff0486ceb3f42d366296a83b189d86996e93ca",
+      "size_bytes": 2700
+    },
+    {
+      "path": "schemas/research-sources.schema.json",
+      "kind": "json-schema",
+      "sha256": "afa4bc2104abc1bca5312a2d994ccdba84f6919b5d4d365bd17c206740eccf0f",
+      "size_bytes": 1354
+    },
+    {
+      "path": "schemas/software.schema.json",
+      "kind": "json-schema",
+      "sha256": "f65bcb4651f98134ccde5a364c9919f2823ae298b241640cf7134af665a307bb",
+      "size_bytes": 2382
+    },
+    {
+      "path": "schemas/tool-contracts.schema.json",
+      "kind": "json-schema",
+      "sha256": "151e51eea22cf6f007844e142154cac310fdc367a4fa6d9bdf638e9037ae6479",
+      "size_bytes": 65016
+    },
+    {
+      "path": "schemas/verification-gates.schema.json",
+      "kind": "json-schema",
+      "sha256": "94c360e868fda17fe8e487c5a189d79b37d8477a07da84fa016ae7ae5df71023",
+      "size_bytes": 1861
+    },
+    {
+      "path": "scripts/benchmark_retrieval.py",
+      "kind": "python",
+      "sha256": "a86bed39aebf40d6d935bc891aab695d1d0a6afcb13bacab34ef6d326aed6a8c",
+      "size_bytes": 6097
+    },
+    {
+      "path": "scripts/check_kit.py",
+      "kind": "python",
+      "sha256": "ff01dacc3991ca950b69640fc5c56136c0f23975b3fee577caad3d5e758f699a",
+      "size_bytes": 22504
+    },
+    {
+      "path": "tests/test_schemas.py",
+      "kind": "python",
+      "sha256": "4c7c85825412afc6903ad887c97d708136b2ef3d0e91047047cca7a5dd67c721",
+      "size_bytes": 10095
+    },
+    {
+      "path": "tests/test_semantics.py",
+      "kind": "python",
+      "sha256": "a5243d8f7ef60c80b98b9c25103be2b0b105e65c088b1c2931ccfe6d525c7286",
+      "size_bytes": 8374
+    }
+  ],
+  "catalog": {
+    "decision_count": 29,
+    "tool_count": 51,
+    "default_tool_count": 13,
+    "tool_catalog_sha256": "506b7d89a5cb4daef54db58222b29f2fbbc1617234687942f560323775de55e5"
+  }
+}

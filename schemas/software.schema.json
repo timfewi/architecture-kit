@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reference software catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "direct_choices",
+    "$schema"
+  ],
+  "properties": {
+    "direct_choices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "purpose",
+          "reference_choice",
+          "pin_policy",
+          "replaceability",
+          "profiles",
+          "admission",
+          "selection_rule",
+          "tool_refs"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9.-]+$",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "reference_choice": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "pin_policy": {
+            "enum": [
+              "locked-input",
+              "exact-version-and-hash",
+              "host-platform"
+            ]
+          },
+          "replaceability": {
+            "enum": [
+              "required-reference",
+              "equivalent-allowed",
+              "optional"
+            ]
+          },
+          "profiles": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "maxItems": 1000
+          },
+          "admission": {
+            "const": "candidate"
+          },
+          "selection_rule": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "tool_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "maxItems": 100,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        }
+      },
+      "maxItems": 1000,
+      "uniqueItems": true
+    },
+    "$schema": {
+      "const": "https://architecture-kit.invalid/schemas/software.schema.json"
+    }
+  },
+  "$id": "https://architecture-kit.invalid/schemas/software.schema.json"
+}

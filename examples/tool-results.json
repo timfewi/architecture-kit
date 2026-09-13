@@ -1,0 +1,335 @@
+[
+  {
+    "schema_ref": "schemas/tool-contracts.schema.json#/$defs/result.hits",
+    "result": {
+      "status": "ok",
+      "data": {
+        "items": [
+          {
+            "id": "fixture-symbol",
+            "label": "Example symbol",
+            "excerpt": "def example():",
+            "anchor": {
+              "path": "src/example.py",
+              "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "start_byte": 0,
+              "end_byte": 14,
+              "excerpt": "def example():"
+            }
+          }
+        ],
+        "total": 1
+      },
+      "error": null,
+      "coverage": {
+        "scope": "exhaustive",
+        "completeness": "complete",
+        "freshness": "current",
+        "returned": 1,
+        "truncated": false
+      },
+      "provenance": {
+        "call_id": "synthetic-example",
+        "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "policy_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "toolchain_sha256": null,
+        "elapsed_ms": 0
+      },
+      "continuation": null,
+      "artifact": null
+    }
+  },
+  {
+    "schema_ref": "schemas/tool-contracts.schema.json#/$defs/result.text",
+    "result": {
+      "status": "ok",
+      "data": {
+        "text": "Grüße\n",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "offset_bytes": 0,
+        "total_bytes": 8
+      },
+      "error": null,
+      "coverage": {
+        "scope": "exhaustive",
+        "completeness": "complete",
+        "freshness": "current",
+        "returned": 1,
+        "truncated": false
+      },
+      "provenance": {
+        "call_id": "synthetic-example",
+        "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "policy_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "toolchain_sha256": null,
+        "elapsed_ms": 0
+      },
+      "continuation": null,
+      "artifact": null
+    }
+  },
+  {
+    "schema_ref": "schemas/tool-contracts.schema.json#/$defs/result.mutation",
+    "result": {
+      "status": "ok",
+      "data": {
+        "target": "src/example.py",
+        "before_sha256": null,
+        "after_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "changed": 1
+      },
+      "error": null,
+      "coverage": {
+        "scope": "exhaustive",
+        "completeness": "complete",
+        "freshness": "current",
+        "returned": 1,
+        "truncated": false
+      },
+      "provenance": {
+        "call_id": "synthetic-example",
+        "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "policy_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "toolchain_sha256": null,
+        "elapsed_ms": 0
+      },
+      "continuation": null,
+      "artifact": null
+    }
+  },
+  {
+    "schema_ref": "schemas/tool-contracts.schema.json#/$defs/result.process",
+    "result": {
+      "status": "ok",
+      "data": {
+        "exit_code": 0,
+        "signal": null,
+        "stdout": "checked\n",
+        "stderr": "",
+        "duration_ms": 1,
+        "receipt": "synthetic-receipt"
+      },
+      "error": null,
+      "coverage": {
+        "scope": "exhaustive",
+        "completeness": "complete",
+        "freshness": "current",
+        "returned": 1,
+        "truncated": false
+      },
+      "provenance": {
+        "call_id": "synthetic-example",
+        "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "policy_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "toolchain_sha256": null,
+        "elapsed_ms": 0
+      },
+      "continuation": null,
+      "artifact": null
+    }
+  },
+  {
+    "schema_ref": "schemas/tool-contracts.schema.json#/$defs/result.job",
+    "result": {
+      "status": "ok",
+      "data": {
+        "job_id": "example-build",
+        "state": "succeeded",
+        "result": {
+          "id": "build-output",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "media_type": "application/octet-stream",
+          "size_bytes": 0
+        }
+      },
+      "error": null,
+      "coverage": {
+        "scope": "exhaustive",
+        "completeness": "complete",
+        "freshness": "current",
+        "returned": 1,
+        "truncated": false
+      },
+      "provenance": {
+        "call_id": "synthetic-example",
+        "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "policy_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "toolchain_sha256": null,
+        "elapsed_ms": 0
+      },
+      "continuation": null,
+      "artifact": null
+    }
+  },
+  {
+    "schema_ref": "schemas/tool-contracts.schema.json#/$defs/result.environment",
+    "result": {
+      "status": "ok",
+      "data": {
+        "status": "ready",
+        "toolchain_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "missing": [],
+        "command_ids": [
+          "check"
+        ]
+      },
+      "error": null,
+      "coverage": {
+        "scope": "exhaustive",
+        "completeness": "complete",
+        "freshness": "current",
+        "returned": 1,
+        "truncated": false
+      },
+      "provenance": {
+        "call_id": "synthetic-example",
+        "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "policy_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "toolchain_sha256": null,
+        "elapsed_ms": 0
+      },
+      "continuation": null,
+      "artifact": null
+    }
+  },
+  {
+    "schema_ref": "schemas/tool-contracts.schema.json#/$defs/result.listing",
+    "result": {
+      "status": "ok",
+      "data": {
+        "entries": [
+          {
+            "path": "src/example.py",
+            "kind": "file",
+            "size_bytes": 14
+          }
+        ],
+        "total": 1
+      },
+      "error": null,
+      "coverage": {
+        "scope": "exhaustive",
+        "completeness": "complete",
+        "freshness": "current",
+        "returned": 1,
+        "truncated": false
+      },
+      "provenance": {
+        "call_id": "synthetic-example",
+        "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "policy_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "toolchain_sha256": null,
+        "elapsed_ms": 0
+      },
+      "continuation": null,
+      "artifact": null
+    }
+  },
+  {
+    "schema_ref": "schemas/tool-contracts.schema.json#/$defs/result.status",
+    "result": {
+      "status": "ok",
+      "data": {
+        "state": "ready",
+        "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "details": "Synthetic example, not runtime evidence."
+      },
+      "error": null,
+      "coverage": {
+        "scope": "exhaustive",
+        "completeness": "complete",
+        "freshness": "current",
+        "returned": 1,
+        "truncated": false
+      },
+      "provenance": {
+        "call_id": "synthetic-example",
+        "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "policy_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "toolchain_sha256": null,
+        "elapsed_ms": 0
+      },
+      "continuation": null,
+      "artifact": null
+    }
+  },
+  {
+    "schema_ref": "schemas/tool-contracts.schema.json#/$defs/result.git_status",
+    "result": {
+      "status": "ok",
+      "data": {
+        "branch": "main",
+        "head": null,
+        "entries": [
+          {
+            "path": "src/example.py",
+            "index": "?",
+            "worktree": "?"
+          }
+        ]
+      },
+      "error": null,
+      "coverage": {
+        "scope": "exhaustive",
+        "completeness": "complete",
+        "freshness": "current",
+        "returned": 1,
+        "truncated": false
+      },
+      "provenance": {
+        "call_id": "synthetic-example",
+        "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "policy_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "toolchain_sha256": null,
+        "elapsed_ms": 0
+      },
+      "continuation": null,
+      "artifact": null
+    }
+  },
+  {
+    "schema_ref": "schemas/tool-contracts.schema.json#/$defs/result.table",
+    "result": {
+      "status": "ok",
+      "data": {
+        "columns": [
+          "name",
+          "count"
+        ],
+        "rows": [
+          [
+            "example",
+            1
+          ]
+        ]
+      },
+      "error": null,
+      "coverage": {
+        "scope": "exhaustive",
+        "completeness": "complete",
+        "freshness": "current",
+        "returned": 1,
+        "truncated": false
+      },
+      "provenance": {
+        "call_id": "synthetic-example",
+        "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "policy_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "toolchain_sha256": null,
+        "elapsed_ms": 0
+      },
+      "continuation": null,
+      "artifact": null
+    }
+  }
+]

@@ -1,0 +1,48 @@
+profile_id: greenfield-minimal
+title: Minimal secure greenfield laptop
+purpose: Lowest-complexity NixOS laptop with the essential coding-agent core.
+assumes: []
+essential:
+  - platform.services
+  - host.declarative-system
+  - host.identity-secrets
+  - dev.toolchains
+  - agent.launcher-policy
+  - agent.model-gateway
+  - agent.harness-registry
+  - agent.tool-registry
+  - agent.workspace-workers
+  - agent.lifecycle
+  - agent.goal-controller
+  - agent.context-resume
+  - agent.reviewed-build
+  - agent.retrieval
+  - agent.skills-docs
+  - verification.gates
+recommended:
+  - host.desktop
+  - agent.first-party-loop
+  - agent.memory-evidence
+  - client.terminal
+optional:
+  - agent.coordination
+  - agent.observation
+  - agent.research-browser
+  - agent.compute-wasm
+  - client.web
+defer:
+  - host.voice
+  - host.personal-vm
+  - host.hardened-worker-vm
+  - distribution.release
+excludes: []
+cost:
+  build_effort: medium
+  runtime_cost: low
+  external_services: optional
+  hardware: laptop
+minimum_evidence:
+  - source
+  - focused-test
+  - build
+  - activation
