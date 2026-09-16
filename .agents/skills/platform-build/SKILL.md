@@ -10,6 +10,11 @@ Start with the bootstrap doctor and next commands in the temporary build guide.
 Read the selected task's source references and acceptance criteria; do not preload
 all architecture files or require the platform's future tools to orient yourself.
 
+When the requested first milestone is a useful coding workflow, read the clone
+root's `FAST-START.md` and use its initial slice to order the relevant backlog
+items. The fast start does not waive dependencies, acceptance criteria or the
+remaining work for a complete platform target.
+
 Implement one bounded work item at a time. Preserve the final selected target
 through compaction and handoffs. A starter integration is a milestone, not
 completion of the whole platform. Add narrowly scoped child tasks when a work

@@ -6,10 +6,10 @@ default:
     @just --list
 
 # Full kit acceptance; missing validator dependencies are an error.
-check: lint format-check test test-bootstrap verify
+check: lint format-check privacy-check test test-bootstrap verify
 
 # Narrow checks without the JSON Schema validator; not full acceptance.
-check-fast: lint format-check test-semantics test-runtime-semantics test-skills test-bootstrap structural
+check-fast: lint format-check privacy-check test-semantics test-runtime-semantics test-skills test-bootstrap structural
 
 # Lint Python and the Direnv entry point without executing .envrc.
 lint:
@@ -27,6 +27,14 @@ format:
     ruff format --isolated scripts tests .agents
     nixfmt flake.nix
     just --fmt
+
+# Reject common personal paths, credentials and secret-bearing file types.
+privacy-check:
+    python3 -B scripts/check_publication.py
+
+# Audit local release prerequisites without publishing or changing visibility.
+release-audit:
+    python3 -B scripts/check_release.py
 
 # Run semantic and full JSON Schema regression tests.
 test:

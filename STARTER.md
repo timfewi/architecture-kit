@@ -1,4 +1,4 @@
-# Portable agent starter
+# Portable agent starter contract
 
 Use this path when host setup and Home Manager already live in separate
 repositories. This kit defines their required service boundary, not their
@@ -9,9 +9,14 @@ synthetic contract replay. It is **not a runnable production agent**. The exampl
 adapter, model, handlers, service IDs, grants and receipts are synthetic. Their
 digests express fixture identity, not executable availability or approval.
 
+For a coding-focused implementation order, use
+[FAST-START.md](FAST-START.md). The fast start selects a narrow vertical slice
+of this contract; it does not add an implementation or define weaker conformance.
+
 ## Start here
 
-1. Select [agent-starter](profiles/agent-starter.yaml).
+1. Select [agent-starter](profiles/agent-starter.yaml) and choose the general or
+   coding-focused implementation order.
 2. Review [agent-config.json](examples/agent-config.json), especially the explicit
    tools, external service bindings and finite budgets.
 3. Use the [runtime payloads](schemas/runtime-contracts.schema.json) and existing

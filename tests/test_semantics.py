@@ -174,6 +174,7 @@ class SemanticTests(unittest.TestCase):
             "flake.lock": "json",
             ".envrc": "shell",
             "justfile": "just",
+            ".github/ISSUE_TEMPLATE/bug_report.yml": "yaml",
         }.items():
             with self.subTest(path=path):
                 self.assertEqual(kit.artifact_kind(path), expected)

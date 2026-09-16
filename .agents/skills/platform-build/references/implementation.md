@@ -5,6 +5,10 @@ tool-contracts schemas. Preserve their ownership and evidence levels. This kit
 contains declarations and synthetic replay; verify every claimed runtime against
 actual source, processes and tests in the clone.
 
+For a coding-focused first milestone, use FAST-START.md to select the initial
+operations and evidence sequence. It is an ordering guide over the same
+contracts, not a reduced runtime or a source implementation.
+
 ## A small implementation
 
 Select a repository-native stack at the implementation-design work item. Prefer

@@ -1,5 +1,17 @@
 # Architecture kit changes
 
+## Unreleased
+
+- Removed a host-specific integration name from reusable development guidance.
+- Removed repository-layout-specific package names from portable skill guidance.
+- Added generic adoption guidance and private open-source preparation policies.
+- Added contribution, conduct, security, issue and pull-request templates.
+- Added a privacy check for common personal paths, credentials and secret files.
+- Added a non-publishing release audit for local open-source prerequisites.
+- Added a documentation-only coding harness fast start with a minimal tool slice,
+  implementation order, evidence levels and explicit deferred scope.
+- Reworked the README into a short task-based entry point with links to details.
+
 ## 2026-09-13
 
 - Made architecture/interface names stable and independent of project generations.

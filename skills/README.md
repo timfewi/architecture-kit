@@ -21,11 +21,11 @@ No model, host vendor or particular tool transport is required.
 
 ## Public and private packaging
 
-Use these portable sources as the common layer for harness-tools/public after
-normal publication/license review. Keep private environment details in separately
-named skills or references in harness-tools/private. A private extension records
-the common skill name and digest; it must be reviewed when that digest changes.
-Reject conflicting names instead of silently shadowing the public skill.
+Use these portable sources as the common package after normal
+publication/license review. Keep environment-specific details in a separately
+controlled extension package. An extension records the common skill name and
+digest; it must be reviewed when that digest changes. Reject conflicting names
+instead of silently shadowing the common skill.
 Do not duplicate whole common skill bodies or infer authorization from an overlay.
 
 A host adapter resolves capability hints and projects a reviewed catalog into its

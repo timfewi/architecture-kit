@@ -1,0 +1,39 @@
+name: Bug report
+description: Report a reproducible defect in the kit
+title: "bug: "
+body:
+  - type: markdown
+    attributes:
+      value: Do not include credentials, personal data, private endpoints or vulnerability details. Follow SECURITY.md for security reports.
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Observed behavior
+      description: Describe what happened and why it is incorrect.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Give minimal steps using synthetic or public data.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Kit revision
+      description: Commit identifier or release version.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification output
+      description: List the relevant Just recipes and results.

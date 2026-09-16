@@ -9,6 +9,9 @@ Choose exactly one profile and resolve its component dependencies. For the
 smallest agent platform on existing infrastructure, use `agent-starter` and
 [STARTER.md](STARTER.md). It leaves Host and Home Manager implementations in
 their own repositories and defines only the required service interfaces.
+Use [FAST-START.md](FAST-START.md) when the first milestone is one bounded coding
+workflow. It preserves the same starter requirements while deferring unrelated
+extensions.
 Use `greenfield-minimal` for the reference laptop, or `agent-platform`
 for the broader portable capability set. Use
 `full-workstation` only when the optional research, browser, voice, client, and
@@ -29,6 +32,12 @@ to prove a minimal core. Refer to TOOLING.md for exact operation contracts.
 The host-free starter skips phases 1 and 10. Reviewed builds, additional harnesses,
 coordination and richer clients are selected extensions or later proof milestones,
 not prerequisites for the synthetic starter contract suite.
+
+For a fast-start implementation, take the smallest dependency-closed path
+through phases 2 to 6: launcher policy and workspace identity; canonical tool
+definitions and broker; worker isolation and lifecycle; one adapter; then the
+durable controller and resume owner. The numbered phases describe architectural
+areas, not permission to implement a later area's dependency after its consumer.
 
 ## Phase 1 — Declarative host foundation
 

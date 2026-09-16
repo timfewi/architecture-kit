@@ -1,8 +1,8 @@
 # Development environment
 
 The optional Flake supplies a hook-free development shell for x86_64-linux and
-aarch64-linux. It does not make Nix or Example host part of the architecture's
-portable runtime contract.
+aarch64-linux. It does not make Nix or a particular agent host part of the
+architecture's portable runtime contract.
 
 ## Pinned inputs
 
@@ -89,6 +89,8 @@ Review and commit the complete intended changes according to your Git policy.
 | `just` | List recipes. |
 | `just check` | Lint, format checks, all regression tests, full schema and manifest validation. |
 | `just check-fast` | Lint, formatting, semantic tests and manifest checks; excludes full JSON Schema validation. |
+| `just privacy-check` | Reject common personal paths, email addresses, credentials and secret-bearing files in reusable artifacts. |
+| `just release-audit` | Check local publication prerequisites; never publishes or changes repository visibility. |
 | `just format` | Format Python, flake.nix and justfile; does not refresh the manifest. |
 | `just test-runtime-semantics` | Independent starter event-replay and negative tests; no actual runtime execution. |
 | `just refresh-reference` | Regenerate synthetic fixtures after reviewed config/schema changes; inspect the diff. |
@@ -120,16 +122,17 @@ The helper bounds captured output and uses POSIX process groups for cancellation
 it is not an execution sandbox. Unsupported native hosts may read the instructions
 and use a reviewed POSIX execution environment for helper-run checks.
 
-## Example host worker integration (optional)
+## Agent worker integration (optional)
 
 This Flake defines an environment; it does not register or activate an agent
 worker profile. Interactive Direnv trust does not grant broker execution rights.
-The installed Example host local preparation path reads selected manifests and
-package attributes; it does not evaluate this devShell or install requirements.txt.
+A host's local preparation path may read selected manifests and package
+attributes; it must not implicitly evaluate this devShell or install
+requirements.txt.
 
 A reviewed worker profile must explicitly include this Python environment and
 the required command set. A project-exported profile can wrap the hook-free
-default shell with Example host's toolchain helper in the operator's pinned
+default shell with the host's toolchain helper in the operator's pinned
 provisioning configuration. Bind every toolchain input, including flake.nix,
 flake.lock and requirements.txt. Registration and activation remain host-owner
 actions; a repository registered after launch requires a new agent session.

@@ -1,13 +1,13 @@
 {
   "$schema": "https://architecture-kit.invalid/schemas/manifest.schema.json",
   "language": "en",
-  "generated_on": "2026-09-13",
+  "generated_on": "2026-09-16",
   "artifacts": [
     {
       "path": ".agents/README.md",
       "kind": "markdown",
-      "sha256": "ca5050141545fdc349315c71b69dafcd548f84e75f69cac51c9fd82dfd53388f",
-      "size_bytes": 4883
+      "sha256": "0196c232f112c27b97846554a24edb7dc80a132cf1412f7c0178b56a7e9668e7",
+      "size_bytes": 5166
     },
     {
       "path": ".agents/bootstrap.py",
@@ -36,8 +36,8 @@
     {
       "path": ".agents/skills/platform-build/SKILL.md",
       "kind": "markdown",
-      "sha256": "0030fb80b4aa62916ff630f393f60630253b8b8904779cff9bda71d9b049cc9d",
-      "size_bytes": 1669
+      "sha256": "4906a69670e498a8ab45dee18a146a3c49f895e112c3645f8289a1f73809b84c",
+      "size_bytes": 1953
     },
     {
       "path": ".agents/skills/platform-build/references/handoff.md",
@@ -48,8 +48,8 @@
     {
       "path": ".agents/skills/platform-build/references/implementation.md",
       "kind": "markdown",
-      "sha256": "0bb5c28a9f5fd197548a8af1cb9fa17abdd26d29c5baeb664493fbea395277af",
-      "size_bytes": 2950
+      "sha256": "955504ed27f132cfd416707914b65578079236893931d6665f30869b0d4bde64",
+      "size_bytes": 3162
     },
     {
       "path": ".agents/templates/handoff.md",
@@ -74,6 +74,30 @@
       "kind": "shell",
       "sha256": "f809b2c4b56500d4d453cb856f857c4c5ae8367779e32f62abf5303e33e0b58f",
       "size_bytes": 169
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+      "kind": "yaml",
+      "sha256": "725ba5c3f60461eefd3691b325fc3f61cd0905c49da7972f645ce9580697a78f",
+      "size_bytes": 1088
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "kind": "yaml",
+      "sha256": "1f103c6a9dd07cd13a9a6f17ace6b813f47747eb9cb7e00488cb2073caaf91bb",
+      "size_bytes": 28
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.yml",
+      "kind": "yaml",
+      "sha256": "ff0800f4c9ad72545bd5c2e98e8e8a3f307c6c75280b2aee75918bbadb046aa0",
+      "size_bytes": 729
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "kind": "markdown",
+      "sha256": "54d54a1aa88e4bd1d3e5483ece3f91dfe732c821d692a668d07a6c9edb43cdfb",
+      "size_bytes": 544
     },
     {
       "path": ".gitignore",
@@ -102,14 +126,32 @@
     {
       "path": "CHANGELOG.md",
       "kind": "markdown",
-      "sha256": "f8485fe17e2c5fbc9386353d4fe13a62f392bddbe67301dd2fcf0d37e682fe27",
-      "size_bytes": 1893
+      "sha256": "bfa5aca317d839f68eddeb9b74ad07d319fec585b67801394be42a92030c112a",
+      "size_bytes": 2613
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "kind": "markdown",
+      "sha256": "460185cb065adfd321524b971ff7368c6a5a2d302ded0f47b74fdc3c14c34dcc",
+      "size_bytes": 1121
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "kind": "markdown",
+      "sha256": "8e2f3e114c78e312bad65ce3e7ffa2433707b16397534a0689c2ca04e8ee621a",
+      "size_bytes": 1867
     },
     {
       "path": "DEVELOPMENT.md",
       "kind": "markdown",
-      "sha256": "2f0b6763e5fe198710a633a8301f8379d7fb1fe73b9f7bdbeb659f300e0494f1",
-      "size_bytes": 7826
+      "sha256": "a16349ef6c6225c3591e75a10227e357a46835f13e660559f3042e8b571ba419",
+      "size_bytes": 8076
+    },
+    {
+      "path": "FAST-START.md",
+      "kind": "markdown",
+      "sha256": "b6e0747940adca6aa048692fe02aee5dcaad70c4f0ee9f735a1f9da109bf3682",
+      "size_bytes": 6695
     },
     {
       "path": "LESSONS.md",
@@ -118,22 +160,34 @@
       "size_bytes": 6621
     },
     {
+      "path": "OPEN_SOURCE.md",
+      "kind": "markdown",
+      "sha256": "2ee6dc6b7cc721a81607a09033b362b2020d41c2d6195e37c03fe710594a2da8",
+      "size_bytes": 2354
+    },
+    {
       "path": "README.md",
       "kind": "markdown",
-      "sha256": "096073438cac941b431ee02475b5209df27dd9ca5c36f155f365d98e1de1711a",
-      "size_bytes": 5967
+      "sha256": "b9c01b0eba9e91e5ef54f5e2c55bdfb150d3c9586591d7854703b34fffa1e1bd",
+      "size_bytes": 2542
     },
     {
       "path": "REBUILD-GUIDE.md",
       "kind": "markdown",
-      "sha256": "e29a9fe84c87647548c7e3afaed308f995de143abde35f0016fc3c589cb1b19a",
-      "size_bytes": 7715
+      "sha256": "e137cf836f09c2e305be7b7cb6647a305a75abb54b05fd6441a9244477ac4018",
+      "size_bytes": 8280
+    },
+    {
+      "path": "SECURITY.md",
+      "kind": "markdown",
+      "sha256": "6a1cbd120fe15a0d4609962d7f752258280694732ef04e56b4f6036f902cfc04",
+      "size_bytes": 1201
     },
     {
       "path": "STARTER.md",
       "kind": "markdown",
-      "sha256": "f3f017e086acd7ef387f76b2fccb845a3ffec9048962699ed52fad5b0bf68dfe",
-      "size_bytes": 16244
+      "sha256": "8a79186eb37df1b6af2261a46dab8e46c2369a147ac83c8a501cd0e73198ed1f",
+      "size_bytes": 16527
     },
     {
       "path": "TOOLING.md",
@@ -246,8 +300,8 @@
     {
       "path": "justfile",
       "kind": "just",
-      "sha256": "59290b519f67b790ffefdeed1e8397fc4c9f195e8f6fd4533e66fc3d921f9c37",
-      "size_bytes": 2503
+      "sha256": "2e9fa4165f50d82035e9b3374dc54e2c1e1b25d09d8c2a6c7289d4760bfa17af",
+      "size_bytes": 2801
     },
     {
       "path": "profiles/agent-platform.yaml",
@@ -420,8 +474,20 @@
     {
       "path": "scripts/check_kit.py",
       "kind": "python",
-      "sha256": "65c95fa25ee148f3682dc907e42e4c71e8109617033c4bb262a0ce12b5eb975a",
-      "size_bytes": 23699
+      "sha256": "c8a456917e50fafe9339936fb5fbf526a8c52f1c1489440aad5e2707274fc809",
+      "size_bytes": 23723
+    },
+    {
+      "path": "scripts/check_publication.py",
+      "kind": "python",
+      "sha256": "6cf0f307d9f4295acaf46b45f0c410c84fd5fceae135cfd2d5264dfdc1d2442c",
+      "size_bytes": 2857
+    },
+    {
+      "path": "scripts/check_release.py",
+      "kind": "python",
+      "sha256": "53f0ada881e76d00580cf559ca96b367c56c4baa833f32c63264e70484009346",
+      "size_bytes": 2069
     },
     {
       "path": "scripts/check_skills.py",
@@ -444,8 +510,8 @@
     {
       "path": "skills/README.md",
       "kind": "markdown",
-      "sha256": "3f980234bb8d784579702e5963ea9915d76c559a6b326ae73df4fe37428eff02",
-      "size_bytes": 2576
+      "sha256": "10d4d24907612e4c7bf025b961c9eee8c20f62a44719a0eaecbaa581fa769d4f",
+      "size_bytes": 2526
     },
     {
       "path": "skills/catalog.json",
@@ -490,6 +556,18 @@
       "size_bytes": 1581
     },
     {
+      "path": "tests/test_publication.py",
+      "kind": "python",
+      "sha256": "ddc523414af7fc2ac5fc98b7ea49a4ba84cc6cc9cb3ede5eded4977f83a000c8",
+      "size_bytes": 1765
+    },
+    {
+      "path": "tests/test_release.py",
+      "kind": "python",
+      "sha256": "4b4c9dbad33a5fe28d58da4f8e19ad371b94db78c6f5c64beba37d1e2485f43d",
+      "size_bytes": 1888
+    },
+    {
       "path": "tests/test_runtime_semantics.py",
       "kind": "python",
       "sha256": "531cbdbb55201c84863432e6ff6b788b1f18c7aea3ef4f464a177705f3428bb6",
@@ -504,8 +582,8 @@
     {
       "path": "tests/test_semantics.py",
       "kind": "python",
-      "sha256": "a5243d8f7ef60c80b98b9c25103be2b0b105e65c088b1c2931ccfe6d525c7286",
-      "size_bytes": 8374
+      "sha256": "ab93617f635065f4b33c25d4941ea01893310a96fe786b05587f487363814629",
+      "size_bytes": 8435
     },
     {
       "path": "tests/test_skills.py",

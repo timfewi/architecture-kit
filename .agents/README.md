@@ -12,6 +12,11 @@ with retrieval, skills, memory, coordination, observation, terminal and web
 clients. The existing agent-starter is the first integration milestone, not
 the final completion target. Host and Home Manager configuration stay external.
 
+When the immediate target is a single useful coding workflow, read
+[the coding harness fast start](../FAST-START.md) before the full backlog. It
+defines the smallest vertical slice and the claims allowed at each milestone;
+the backlog remains the source for complete platform work.
+
 ## Local commands
 
 Use the existing Python environment declared in flake.nix and requirements.txt,

@@ -485,6 +485,7 @@ def artifact_kind(path):
     kinds = {
         ".md": "markdown",
         ".yaml": "yaml",
+        ".yml": "yaml",
         ".json": "json",
         ".py": "python",
         ".mjs": "javascript",
