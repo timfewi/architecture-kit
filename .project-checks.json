@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "checks": [
+    {
+      "name": "nix-format",
+      "argv": ["nixfmt", "--check", "flake.nix"],
+      "requires": ["nixfmt"],
+      "timeout_seconds": 60,
+      "profiles": ["fast"]
+    },
+    {
+      "name": "just-format",
+      "argv": ["just", "--fmt", "--check"],
+      "requires": ["just"],
+      "timeout_seconds": 60,
+      "profiles": ["fast"]
+    },
+    {
+      "name": "python-lint",
+      "argv": ["ruff", "check", "--isolated", "--select", "E4,E7,E9,F,I,PLW1510", "scripts", "tests", ".agents"],
+      "requires": ["ruff"],
+      "timeout_seconds": 120,
+      "profiles": ["fast"]
+    },
+    {
+      "name": "python-format",
+      "argv": ["ruff", "format", "--isolated", "--check", "scripts", "tests", ".agents"],
+      "requires": ["ruff"],
+      "timeout_seconds": 120,
+      "profiles": ["fast"]
+    },
+    {
+      "name": "shell",
+      "argv": ["shellcheck", "--shell=bash", ".envrc"],
+      "requires": ["shellcheck"],
+      "timeout_seconds": 120,
+      "profiles": ["fast"]
+    },
+    {
+      "name": "privacy",
+      "argv": ["python3", "-B", "scripts/check_publication.py"],
+      "requires": ["python3"],
+      "timeout_seconds": 120,
+      "profiles": ["fast"]
+    },
+    {
+      "name": "semantic-tests",
+      "argv": ["python3", "-B", "-m", "unittest", "discover", "-s", "tests", "-p", "test_semantics.py"],
+      "requires": ["python3"],
+      "timeout_seconds": 300,
+      "profiles": ["fast"]
+    },
+    {
+      "name": "skills",
+      "argv": ["python3", "-B", "scripts/check_skills.py"],
+      "requires": ["python3"],
+      "timeout_seconds": 120,
+      "profiles": ["fast"]
+    },
+    {
+      "name": "structural",
+      "argv": ["python3", "-B", "scripts/check_kit.py", "--structural"],
+      "requires": ["python3"],
+      "timeout_seconds": 300,
+      "profiles": ["fast"]
+    },
+    {
+      "name": "acceptance",
+      "argv": ["just", "check"],
+      "requires": ["just", "python3", "ruff", "shellcheck", "nixfmt"],
+      "timeout_seconds": 3600,
+      "profiles": ["full"]
+    }
+  ],
+  "watch_ignore": [".direnv", "result", "result-*", "__pycache__", ".ruff_cache"]
+}
