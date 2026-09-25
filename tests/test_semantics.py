@@ -173,6 +173,7 @@ class SemanticTests(unittest.TestCase):
             "flake.nix": "nix",
             "flake.lock": "json",
             ".envrc": "shell",
+            "LICENSE": "text",
             "justfile": "just",
             ".github/ISSUE_TEMPLATE/bug_report.yml": "yaml",
         }.items():

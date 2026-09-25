@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Licensed the kit under MIT after reviewing the self-contained source and
+  pinned public Nixpkgs development dependency.
+- Replaced private-state release wording with the open-source policy and
+  documented the standalone development boundary.
 - Removed a host-specific integration name from reusable development guidance.
 - Removed repository-layout-specific package names from portable skill guidance.
 - Added generic adoption guidance and private open-source preparation policies.

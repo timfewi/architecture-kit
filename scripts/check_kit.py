@@ -495,6 +495,7 @@ def artifact_kind(path):
     named = {
         ".gitignore": "text",
         ".envrc": "shell",
+        "LICENSE": "text",
         "justfile": "just",
         "flake.lock": "json",
     }

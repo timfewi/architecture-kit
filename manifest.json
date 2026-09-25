@@ -1,7 +1,7 @@
 {
   "$schema": "https://architecture-kit.invalid/schemas/manifest.schema.json",
   "language": "en",
-  "generated_on": "2026-09-16",
+  "generated_on": "2026-09-25",
   "artifacts": [
     {
       "path": ".agents/README.md",
@@ -102,8 +102,14 @@
     {
       "path": ".gitignore",
       "kind": "text",
-      "sha256": "76649909e28512017d47472849b573eb132238b52f414d3081e2212d4fa2ebab",
-      "size_bytes": 50
+      "sha256": "7ab58a80e0670fa335f9ea4f5355c986307d5b47095aeb7a5eabe27134a81ee8",
+      "size_bytes": 62
+    },
+    {
+      "path": ".project-checks.json",
+      "kind": "json",
+      "sha256": "f8c12841a7bbd7e99a5d4ea9eec7d0f9b55e3e4e8fd9d1e3bebf3a12f7b7c21a",
+      "size_bytes": 2129
     },
     {
       "path": "AGENTS.md",
@@ -126,8 +132,8 @@
     {
       "path": "CHANGELOG.md",
       "kind": "markdown",
-      "sha256": "bfa5aca317d839f68eddeb9b74ad07d319fec585b67801394be42a92030c112a",
-      "size_bytes": 2613
+      "sha256": "9f123c4c8fff3bd7fc60814934b4e9eebeb589ed4a618d93d8c917f01324e962",
+      "size_bytes": 2859
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -160,16 +166,22 @@
       "size_bytes": 6621
     },
     {
+      "path": "LICENSE",
+      "kind": "text",
+      "sha256": "cca0ee67ca0b099684a13938a968f8aaf7c34754b6609ce20ac0fb4088433552",
+      "size_bytes": 1086
+    },
+    {
       "path": "OPEN_SOURCE.md",
       "kind": "markdown",
-      "sha256": "2ee6dc6b7cc721a81607a09033b362b2020d41c2d6195e37c03fe710594a2da8",
-      "size_bytes": 2354
+      "sha256": "195dda891868d3eaa17d3170b23a5419cec17e3f2405ebf87a095f6b957092ea",
+      "size_bytes": 2108
     },
     {
       "path": "README.md",
       "kind": "markdown",
-      "sha256": "b9c01b0eba9e91e5ef54f5e2c55bdfb150d3c9586591d7854703b34fffa1e1bd",
-      "size_bytes": 2542
+      "sha256": "656dc0446bf259d1085138f3a6f4977757cf0011e97007953744847daf31e3eb",
+      "size_bytes": 2651
     },
     {
       "path": "REBUILD-GUIDE.md",
@@ -474,8 +486,8 @@
     {
       "path": "scripts/check_kit.py",
       "kind": "python",
-      "sha256": "c8a456917e50fafe9339936fb5fbf526a8c52f1c1489440aad5e2707274fc809",
-      "size_bytes": 23723
+      "sha256": "c1352e2bd59be9affc68f8a98ed2c6567aed959d98ad09dc0a16a1abeccc3acd",
+      "size_bytes": 23750
     },
     {
       "path": "scripts/check_publication.py",
@@ -582,8 +594,8 @@
     {
       "path": "tests/test_semantics.py",
       "kind": "python",
-      "sha256": "ab93617f635065f4b33c25d4941ea01893310a96fe786b05587f487363814629",
-      "size_bytes": 8435
+      "sha256": "253f792dcb562a68990664c9cbfcf0996f0af3e4a9972b9420abae6bd7c880c8",
+      "size_bytes": 8466
     },
     {
       "path": "tests/test_skills.py",

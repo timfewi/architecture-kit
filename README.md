@@ -61,8 +61,9 @@ Keep credentials, personal data, machine paths and environment-specific policy
 outside the kit. Reusable source and documentation are English.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md) and
-[OPEN_SOURCE.md](OPEN_SOURCE.md) for project policies. This repository remains
-private until its owner deliberately publishes it.
+[OPEN_SOURCE.md](OPEN_SOURCE.md) for project policies. The kit is licensed under
+the [MIT License](LICENSE); its optional development environment uses public,
+pinned Nixpkgs and does not depend on a private agent runtime or skill catalog.
 
 <!-- bootstrap-start -->
 The temporary [build assistance](.agents/README.md) is removed when an

@@ -1,15 +1,15 @@
-# Open-source preparation
+# Open-source release policy
 
-This repository is private. Nothing in this document authorizes publication,
-changes repository visibility or creates a release.
+The kit is licensed under the [MIT License](LICENSE). This policy documents
+release checks; it does not itself change repository visibility or create a
+release.
 
 ## Release gates
 
 Complete every gate against the exact revision proposed for publication:
 
-- choose a license after confirming ownership, third-party obligations and the
-  intended patent and contribution terms;
-- add the exact license text and record the decision in the changelog;
+- confirm ownership, third-party obligations and the intended patent and
+  contribution terms for the MIT license recorded in the changelog;
 - review the full Git history, branches, tags and large-file storage for secrets,
   personal data, private endpoints, internal names and non-redistributable files;
 - remove sensitive history with a reviewed history-rewrite procedure when
@@ -31,14 +31,10 @@ not inspect repository-host settings, decide whether identity metadata may be
 published, choose a license, modify Git state or perform publication. A passing
 result supplements the manual gates above; it does not replace them.
 
-## Current private-state boundary
+## Local checkout boundary
 
-The current checkout may retain private Git metadata such as author identities
-and a private remote URL. Those values are outside the reusable kit artifacts,
-but they are part of repository history and configuration and therefore require
-explicit review before publication.
-
-No license is supplied yet. Until the owner selects and adds one, all rights are
-reserved by default and outside parties do not have permission to copy, modify
-or redistribute the project. This is an intentional publication blocker, not a
-license recommendation.
+A local checkout may retain Git metadata such as author identities and remote
+URLs. Those values are outside the reusable kit artifacts, but they are part of
+repository history and configuration and require explicit review before
+publication. No runtime, host deployment, or private catalog is included in
+the kit.
