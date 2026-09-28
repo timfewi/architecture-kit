@@ -1,7 +1,7 @@
 {
   "$schema": "https://architecture-kit.invalid/schemas/manifest.schema.json",
   "language": "en",
-  "generated_on": "2026-09-25",
+  "generated_on": "2026-09-28",
   "artifacts": [
     {
       "path": ".agents/README.md",
@@ -486,14 +486,14 @@
     {
       "path": "scripts/check_kit.py",
       "kind": "python",
-      "sha256": "c1352e2bd59be9affc68f8a98ed2c6567aed959d98ad09dc0a16a1abeccc3acd",
-      "size_bytes": 23750
+      "sha256": "9567049260180bfe195e5c80672649043ccc7b12e65a500c6d923bfe407469b6",
+      "size_bytes": 23791
     },
     {
       "path": "scripts/check_publication.py",
       "kind": "python",
-      "sha256": "6cf0f307d9f4295acaf46b45f0c410c84fd5fceae135cfd2d5264dfdc1d2442c",
-      "size_bytes": 2857
+      "sha256": "08a1fa9b6703ba23f69d0745acc73e52c3f33c32470e58e48b8f404c18ee60b5",
+      "size_bytes": 2875
     },
     {
       "path": "scripts/check_release.py",
@@ -504,8 +504,8 @@
     {
       "path": "scripts/check_skills.py",
       "kind": "python",
-      "sha256": "0b17797afacc78f73f8384ab0f2843183beb6f9abcf7db42aca09790c8964985",
-      "size_bytes": 5875
+      "sha256": "d16996fe9a78acc00b452c027bc865380079795c298e88ece1b0824b757e5910",
+      "size_bytes": 6604
     },
     {
       "path": "scripts/make_reference.py",
@@ -570,8 +570,8 @@
     {
       "path": "tests/test_publication.py",
       "kind": "python",
-      "sha256": "ddc523414af7fc2ac5fc98b7ea49a4ba84cc6cc9cb3ede5eded4977f83a000c8",
-      "size_bytes": 1765
+      "sha256": "c42c17470c852bd2e0d91d1d8f5a3c007ca6ca3bf4663516a3c2819d0b335a4a",
+      "size_bytes": 1982
     },
     {
       "path": "tests/test_release.py",
@@ -594,14 +594,14 @@
     {
       "path": "tests/test_semantics.py",
       "kind": "python",
-      "sha256": "253f792dcb562a68990664c9cbfcf0996f0af3e4a9972b9420abae6bd7c880c8",
-      "size_bytes": 8466
+      "sha256": "013791a1a6f84b280c78bc15b4ada7c196d9353a3916d4b9d938b8ab440a9b85",
+      "size_bytes": 8603
     },
     {
       "path": "tests/test_skills.py",
       "kind": "python",
-      "sha256": "b2c3e00d94eb557ac88fd7fc4475521a437891a427708646e7aec61061a80b49",
-      "size_bytes": 3041
+      "sha256": "95f0ceab13d905cdeb65861cd8e171c780ce5019f94fe3a861b15891597d10c6",
+      "size_bytes": 4025
     }
   ],
   "catalog": {

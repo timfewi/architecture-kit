@@ -135,6 +135,25 @@ def check(root):
     names = {s["name"] for s in expected["skills"]}
     pilot = json.loads((root / "skills/routing-pilot.json").read_text(encoding="utf-8"))
     require(
+        isinstance(pilot, dict) and isinstance(pilot.get("cases"), list),
+        "invalid routing-pilot cases",
+    )
+    for case in pilot["cases"]:
+        require(
+            isinstance(case, dict)
+            and isinstance(case.get("request"), str)
+            and bool(case["request"].strip())
+            and isinstance(case.get("reason"), str)
+            and bool(case["reason"].strip())
+            and isinstance(case.get("expected"), list)
+            and all(isinstance(name, str) for name in case["expected"]),
+            "invalid routing-pilot case",
+        )
+        require(
+            len(set(case["expected"])) == len(case["expected"]),
+            "duplicate routing-pilot skill",
+        )
+    require(
         all(set(case["expected"]) <= names for case in pilot["cases"]),
         "unknown routing-pilot skill",
     )

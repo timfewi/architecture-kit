@@ -40,6 +40,11 @@ class PublicationPrivacyTests(unittest.TestCase):
             (cache / "local.txt").write_text(
                 "person" + "@example.org /" + "home/person/project\n", encoding="utf-8"
             )
+            index = root / ".ast-index"
+            index.mkdir()
+            (index / "index.sqlite").write_text(
+                "person" + "@example.org /" + "home/person/project\n", encoding="utf-8"
+            )
             self.assertEqual(check_publication.findings(root), [])
 
 

@@ -19,7 +19,14 @@ else:
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://architecture-kit.invalid/"
 DIALECT = "https://json-schema.org/draft/2020-12/schema"
-IGNORED = {".git", ".direnv", ".ruff_cache", "__pycache__", ".pytest_cache"}
+IGNORED = {
+    ".ast-index",
+    ".git",
+    ".direnv",
+    ".ruff_cache",
+    "__pycache__",
+    ".pytest_cache",
+}
 MAX_FILE_BYTES = 2 * 1024 * 1024
 
 

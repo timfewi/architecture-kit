@@ -69,6 +69,29 @@ class SkillTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "symlink"):
                 check_skills.catalog(root)
 
+    def test_malformed_routing_pilot_is_rejected_cleanly(self):
+        with tempfile.TemporaryDirectory(prefix="skill-test-") as temp:
+            root = Path(temp)
+            directory = root / "skills/example"
+            directory.mkdir(parents=True)
+            (directory / "SKILL.md").write_text(
+                "---\nname: example\ndescription: Example\n---\nBody\n"
+            )
+            (root / "skills/catalog.json").write_text(
+                json.dumps(check_skills.catalog(root))
+            )
+            pilot = root / "skills/routing-pilot.json"
+            for value in [
+                [],
+                {"cases": {}},
+                {"cases": [None]},
+                {"cases": [{"expected": "example"}]},
+            ]:
+                with self.subTest(value=value):
+                    pilot.write_text(json.dumps(value))
+                    with self.assertRaisesRegex(ValueError, "routing-pilot"):
+                        check_skills.check(root)
+
 
 if __name__ == "__main__":
     unittest.main()

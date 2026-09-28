@@ -190,6 +190,9 @@ class SemanticTests(unittest.TestCase):
             state.mkdir()
             (state / "cached-state").write_text("local machine state", encoding="utf-8")
             (state / "gc-root").symlink_to(root / "missing-store-path")
+            index = root / ".ast-index"
+            index.mkdir()
+            (index / "index.sqlite").write_bytes(b"local index state")
             self.assertEqual(kit.source_files(root), [".envrc"])
 
     def test_actual_kit_semantics(self):

@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 
 IGNORED_DIRECTORIES = {
+    ".ast-index",
     ".git",
     ".direnv",
     ".ruff_cache",
