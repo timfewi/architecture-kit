@@ -108,8 +108,8 @@
     {
       "path": ".project-checks.json",
       "kind": "json",
-      "sha256": "f8c12841a7bbd7e99a5d4ea9eec7d0f9b55e3e4e8fd9d1e3bebf3a12f7b7c21a",
-      "size_bytes": 2129
+      "sha256": "fb6da8439db0e3f70503d9ba862e89d440dd5f9f182e106dfc5d718b9aeab424",
+      "size_bytes": 574
     },
     {
       "path": "AGENTS.md",
