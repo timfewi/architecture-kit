@@ -47,6 +47,20 @@ class PublicationPrivacyTests(unittest.TestCase):
             )
             self.assertEqual(check_publication.findings(root), [])
 
+    def test_symlink_is_reported_without_reading_target(self):
+        with tempfile.TemporaryDirectory(prefix="kit-publication-") as directory:
+            base = Path(directory)
+            root = base / "kit"
+            root.mkdir()
+            outside = base / "private.txt"
+            outside.write_text("person" + "@example.org\n", encoding="utf-8")
+            (root / "linked.md").symlink_to(outside)
+
+            self.assertEqual(
+                check_publication.findings(root),
+                [("linked.md", "symlink in reusable artifact", None)],
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

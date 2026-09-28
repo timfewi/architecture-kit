@@ -136,14 +136,3 @@ default shell with the host's toolchain helper in the operator's pinned
 provisioning configuration. Bind every toolchain input, including flake.nix,
 flake.lock and requirements.txt. Registration and activation remain host-owner
 actions; a repository registered after launch requires a new agent session.
-
-## Verification status
-
-The source was parsed/formatted and the Just recipes were exercised using the
-existing isolated worker tools. Lock generation could not fetch the uncached
-Nixpkgs input in that no-network worker. Consequently flake.lock is not supplied
-by this change; its exact revision is already pinned in flake.nix.
-
-The pinned shell, environment smoke derivation and full schema suite still need
-to run after authorized provisioning. Checks with the worker's base versions
-do not prove the newly declared closure, nor either target platform's build.

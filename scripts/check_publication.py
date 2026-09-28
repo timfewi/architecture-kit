@@ -53,7 +53,7 @@ def source_files(root):
     for path in sorted(root.rglob("*")):
         if any(part in IGNORED_DIRECTORIES for part in path.relative_to(root).parts):
             continue
-        if path.is_file() and not path.is_symlink():
+        if path.is_symlink() or path.is_file():
             yield path
 
 
@@ -62,6 +62,9 @@ def findings(root):
     patterns = rules()
     for path in source_files(root):
         relative = path.relative_to(root).as_posix()
+        if path.is_symlink():
+            result.append((relative, "symlink in reusable artifact", None))
+            continue
         if path.name in SENSITIVE_NAMES or path.suffix.lower() in SENSITIVE_SUFFIXES:
             result.append((relative, "secret-bearing filename", None))
         raw = path.read_bytes()

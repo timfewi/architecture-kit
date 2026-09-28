@@ -150,8 +150,8 @@
     {
       "path": "DEVELOPMENT.md",
       "kind": "markdown",
-      "sha256": "a16349ef6c6225c3591e75a10227e357a46835f13e660559f3042e8b571ba419",
-      "size_bytes": 8076
+      "sha256": "1255e00e7f840827d2f57a7dd8827f62680adebf96e0f6b5dfc597f0983381a0",
+      "size_bytes": 7513
     },
     {
       "path": "FAST-START.md",
@@ -492,8 +492,8 @@
     {
       "path": "scripts/check_publication.py",
       "kind": "python",
-      "sha256": "08a1fa9b6703ba23f69d0745acc73e52c3f33c32470e58e48b8f404c18ee60b5",
-      "size_bytes": 2875
+      "sha256": "77654568edabe3f9cf9d3ed61f484368b62c9c6b37dc71d5eb9cd777a6f4285d",
+      "size_bytes": 2997
     },
     {
       "path": "scripts/check_release.py",
@@ -570,8 +570,8 @@
     {
       "path": "tests/test_publication.py",
       "kind": "python",
-      "sha256": "c42c17470c852bd2e0d91d1d8f5a3c007ca6ca3bf4663516a3c2819d0b335a4a",
-      "size_bytes": 1982
+      "sha256": "2e241c9ee3f449f79bea79c190fa855ff378759b4f7e1892aa1b68a4fbee5b3c",
+      "size_bytes": 2560
     },
     {
       "path": "tests/test_release.py",
