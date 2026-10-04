@@ -1,0 +1,478 @@
+{
+  "$schema": "https://architecture-kit.invalid/schemas/harness-tools.schema.json",
+  "version": 1,
+  "reviewed_on": "2026-10-04",
+  "scope": "Architecture/interface guidance, selected implementation excerpts and test definitions; whole-file byte receipts do not imply full source audit or runtime acceptance.",
+  "collection_files": {
+    "README.md": "27e66ae1f7f78be5ab533f49fca86e0a2af4d223b7c2b59e414f24c2339b1b84"
+  },
+  "sources": [
+    {
+      "id": "architecture-kit",
+      "checkout": "public/architecture-kit",
+      "role": "kit",
+      "purpose": "Portable specifications and local verification.",
+      "observation": "This repository contains contracts and synthetic validators, not an implemented agent platform.",
+      "files": {}
+    },
+    {
+      "id": "ascii-designer-mcp",
+      "checkout": "public/ascii-designer-mcp",
+      "role": "tool",
+      "purpose": "CLI/MCP ASCII rendering pipeline.",
+      "observation": "Cheap frame previews precede costly render jobs; job status, cancellation and seam measurements are explicit.",
+      "files": {
+        "README.md": "407a348bd8c4d2f659fbc26e36c76db084eeeb155b3bbd218b8d06894bb1b614",
+        ".project-checks.json": "b606fea8be513f44e5ca025846777056e3b39b628b9a67372aa3f55bf26706c3",
+        "src/ascii_designer/jobs.py": "4348afaa2c35cc7ca7a4661383c98cbf83fe43f9c2b458fdcdbb0760f7fcfd9e",
+        "tests/integration/test_mcp.py": "e0f418955d72ef70044f735caeb9c22814181b1069f408d8e079b74d5dce229f"
+      }
+    },
+    {
+      "id": "ast-index-nix",
+      "checkout": "public/ast-index-nix",
+      "role": "tool",
+      "purpose": "Local-first AST index with CLI and MCP adapters.",
+      "observation": "One shared library serves CLI, stdio and socket views; name-resolved edges have explicit precision limits.",
+      "files": {
+        "README.md": "b762e9cc681f93955ca738a7f6b660e5a2ac3c7d07c8963a62713957cd00d714",
+        ".project-checks.json": "4d13b5ca28110321cd987afa4fce6ea7d2ceea12a00714eca296d3f59bf83088",
+        "src/resolve.rs": "f2daf7621d35d8a5c60e84f5e2a7fa705cdf9b8f4c324d87c5c5c95b8b19dd72",
+        "tests/integration.rs": "584df330bad55c6885465e7fdd8808e50050fa2db78f699edbf69b8641a073b9"
+      }
+    },
+    {
+      "id": "project-check-nix",
+      "checkout": "public/project-check-nix",
+      "role": "tool",
+      "purpose": "Declared argv verification and dependency documentation.",
+      "observation": "Plans inspect prerequisites without running commands; opted-in documentation renders from explicit source data.",
+      "files": {
+        "README.md": "5ae30b3ba00f09ce063e3099453de9f55ac0e0a8aa6ad8009f5454ad574a000d",
+        ".project-checks.json": "41e1665fe4dadf447abbc2ebb284b3bafafb3ff931a8a3288e94fdd6f1772f40",
+        "runtime/project_docs.py": "792299a25cb17e8fee2bdb7514f3d76c2cbd4a6f9cd375b8e30a185962d42c15",
+        "runtime/project_check.py": "fac03cb56b60d78ee21669bbce312c69acecc5dc29c43e4491389ee2b9aa36c5",
+        "tests/test_project_docs.py": "db93d0bb42a5340eece7e5166ee5fe8a07718ee6a12946e231e82930be6e22d0"
+      }
+    },
+    {
+      "id": "public-agents-files",
+      "checkout": "public/public-agents-files",
+      "role": "mirror",
+      "purpose": "Allowlisted public skills and tool mirrors.",
+      "observation": "Exported tracked content has exact source revisions and digests; mirrors do not become standalone development sources.",
+      "files": {
+        "README.md": "43a1e89366e463b68467c05ffcd7d7667745b89828cf9178f71bbb2094c6d3f7",
+        "scripts/public_tool_rules.json": "81e72721f9decc54af19c5b59e21a8fe25998224cdc65ef32f88b5b245076e60"
+      }
+    },
+    {
+      "id": "system-health-nix",
+      "checkout": "public/system-health-nix",
+      "role": "tool",
+      "purpose": "Interval host metrics and private aggregate history.",
+      "observation": "Measurements identify workload pressure without retaining argv or identity; unavailable metrics remain unavailable.",
+      "files": {
+        "README.md": "6856c380d87cf9de3e62f626137996869309a3aecb0ccbdf962eb3f741a46018",
+        ".project-checks.json": "839654210c826bae3b2eb61373fd633a066f4c0e1516bbb8770871d9101fdf62",
+        "nix/package.nix": "db18060d9d58d1ce492df2db2f8d4d27712efc500c2d6ce660481a944eddbc63",
+        "tests/system-health.sh": "e9ec420678956f00100ae1ab93883f44531c33697b56954be3b307ba4b71930d"
+      }
+    },
+    {
+      "id": "visual-qa-mcp",
+      "checkout": "public/visual-qa-mcp",
+      "role": "tool",
+      "purpose": "Evidence-backed visual QA through CLI and MCP.",
+      "observation": "A shared service targets rechecks at recorded findings; browser skips and explicit baseline approval limit claims.",
+      "files": {
+        "README.md": "29d95aae123fd9dd46bfc04aba24b63d45531a5d4930a8d7323d8bb1c163aafa",
+        ".project-checks.json": "5b4d1db940c8f53b4fd5eb6f67d6b1e47a633571dc0b60fa8e20607a6eb1e0ab",
+        "src/service.ts": "aa4bfac314bef5d535a82575f32696969e524d92e662fde52a8c286f264fe711",
+        "tests/README.md": "ddfa7043e2e83781cf4c8dcdb26cd9d14f56d4338fa269cd16bc96c5132130e8"
+      }
+    },
+    {
+      "id": "agent-evidence-nix",
+      "checkout": "private/agent-evidence-nix",
+      "role": "tool",
+      "purpose": "Bounded source-bound reads, search and diff.",
+      "observation": "File and result-generation guards reject stale pages; search and tracked diff declare distinct corpora.",
+      "files": {
+        "README.md": "a20f7ac9ad6cf2d2a793e628b4864121deced897abe539ba50f337c7ef12f16f",
+        ".project-checks.json": "436f7b99e87848bf5ae01c688b83933bf5088a096db12e16760a73ee3fe2835f",
+        "src/agent_evidence/source.py": "63b5ccce32f912d5327cf96348b21946b4555c785e50902787d3c44a4d20156e",
+        "src/agent_evidence/selection.py": "548764171bba4a550e972a34e2ec2ac68f0fffe804bad003b1ea27cc9d639cb9",
+        "tests/test_evidence.py": "e8d2596701fd3bd52e92b1650096c12a53d44aa08dc3b3dcb6fe015e8c5b415b"
+      }
+    },
+    {
+      "id": "agent-runtime-nix",
+      "checkout": "private/agent-runtime-nix",
+      "role": "tool",
+      "purpose": "Separate-account runtime and offline builder.",
+      "observation": "Host-selected packages and explicit operator configuration keep runtime integration independent of package repositories.",
+      "files": {
+        "README.md": "7b1172d625fdd74eb52291e6ccb603fc83ecab706462c1f9e5b2bcf11e39074d",
+        ".project-checks.json": "19e163fb5d9cb9415418b2fcec35644047f359689d2a49c701ce12fdd00dea50",
+        "docs/modularity.md": "4842c7740e327689d5539f5524172eaf03ed7059b9252c4b03485e4c19040548"
+      }
+    },
+    {
+      "id": "agent-security-scan-nix",
+      "checkout": "private/agent-security-scan-nix",
+      "role": "tool",
+      "purpose": "Pinned source, privacy and dependency scanning.",
+      "observation": "Current-file privacy, history privacy and meaningful scanner coverage are distinct claims; diagnostics omit matched content.",
+      "files": {
+        "README.md": "57f6f1ada79148490f78e2967f53f4dfd6605ca1c44ec081d2ab783bb2593423",
+        ".project-checks.json": "7b8e1488b12a3d5dcee013754a4eb0228372e4a2d33c342e032eeb9222b7df63",
+        "tests/test_privacy.py": "10ce343b032f9404afa826322deff3a534d3fd276ea8c4efa01f382f022fbf0b"
+      }
+    },
+    {
+      "id": "agent-tool-meter-nix",
+      "checkout": "private/agent-tool-meter-nix",
+      "role": "tool",
+      "purpose": "Private command-volume and latency measurements.",
+      "observation": "Measurement logs omit argv/output contents; lock waits, slow output consumers and descendant cleanup are bounded.",
+      "files": {
+        "README.md": "cd07dd9b1e8d898a7af33fdf487422651a534f9f781d7474b3fc93996ca7b665",
+        ".project-checks.json": "16d8a7dfc501567d2f244ff2fab4e838a2bc60a98cd3cb09d2c19dd08c85ca79",
+        "src/agent_tool_meter/meter.py": "7f1ead8fc2930e356881b90b14df0882fb708cbf0b7d86a246434e9893cacd9d",
+        "tests/test_meter.py": "0d82320c0429d572ef1164a5bf2d35e84d908865505c2b0ecd5ec0bd6a93b7d1"
+      }
+    },
+    {
+      "id": "agent-toolbox-nix",
+      "checkout": "private/agent-toolbox-nix",
+      "role": "tool",
+      "purpose": "Pinned command environment with a stable argv wrapper.",
+      "observation": "Selected commands and descendants use the chosen tool PATH; this composition grants no sandbox or extra authority.",
+      "files": {
+        "README.md": "ef122856776add1342b4bd91801036db6cd6ac42d31709ac7cafafa49c322e96",
+        ".project-checks.json": "be832223fcad04b7e63fd327dffb0c63cdd0a5081ba80a5403816c122732b884",
+        "nix/toolbox.nix": "8f3d2c77a65865433c842a8d2ad3066dbdaf0bf7dac1fc3dc01d7a5bd846e601"
+      }
+    },
+    {
+      "id": "coding-agents-nix",
+      "checkout": "private/coding-agents-nix",
+      "role": "tool",
+      "purpose": "Pinned native harness packages and optional configuration.",
+      "observation": "Package pins own versions; instruction delivery and native usage counters do not establish paired coding-task quality.",
+      "files": {
+        "README.md": "d8168018086f3f6ab98d262de81ffadc84325236f1ffa9a8bf99baa581d30d34",
+        ".project-checks.json": "f2da262e5c2e02b4af7c2bd73fd01bd9b54c422b4487a81d5d80734e36375506",
+        "docs/harness-quality.md": "3826cdec6777331add6de82e3b37658b710878c762d8a9fb94be28e9bf4d9041",
+        "runtime/session-report.mjs": "2508cdbee1ba675427fb06d4302d894b936acf48582b63f5d3a9eb99bda38459"
+      }
+    },
+    {
+      "id": "desicion-testing-nix",
+      "checkout": "private/desicion-testing-nix",
+      "role": "empty",
+      "purpose": "Reserved empty directory.",
+      "observation": "No source or product evidence was present at review.",
+      "files": {}
+    },
+    {
+      "id": "harnesh-nix",
+      "checkout": "private/harnesh-nix",
+      "role": "tool",
+      "purpose": "Agent-agnostic tmux cockpit.",
+      "observation": "Adapters are command arrays; task excerpts and live process state do not prove readiness or completed work.",
+      "files": {
+        "README.md": "d1ab37662d9e80e707da4cc83b2144029e47a385ad03f5e4255522f114faf0dd",
+        ".project-checks.json": "c04aeb18092dfa1d9e618bdbbbfff893ae6838080ec8561070fca3a1e6733770",
+        "src/ops.rs": "03977e659c0a6353ff7e62dd58aaed228fc5f8ebf8a44f914505c81205dc5bd9"
+      }
+    },
+    {
+      "id": "library-pkgs-knowledge",
+      "checkout": "private/library-pkgs-knowledge",
+      "role": "empty",
+      "purpose": "Reserved empty directory.",
+      "observation": "No source or product evidence was present at review.",
+      "files": {}
+    },
+    {
+      "id": "lite-runtime-nix",
+      "checkout": "private/lite-runtime-nix",
+      "role": "tool",
+      "purpose": "Operator-owned namespace runtime.",
+      "observation": "The lighter runtime has a different identity/credential boundary; socket and daemon projection remain host-owned authority.",
+      "files": {
+        "README.md": "deaadc4da24b5ee905ea8e06b5bde5f981dfd65231c9267ec36821d5ad309260",
+        ".project-checks.json": "0b65ee014a65116952297faa12e24b5aeb3ad3f8ea5769b6eb7eb3fa5009746c",
+        "tests/default.nix": "c7e4979052714c3e1f53b0793345c162ed1a5519486b127f226293d5e8262c36"
+      }
+    },
+    {
+      "id": "nix-change-explain-nix",
+      "checkout": "private/nix-change-explain-nix",
+      "role": "tool",
+      "purpose": "Offline selected Nix option and derivation comparison.",
+      "observation": "Explicit options are evaluated per side without builds or activation, with default value redaction and bounded output.",
+      "files": {
+        "README.md": "abcde216f7aa46953e950911493e55382911c9957fd7a1f174369b7a58df9ee3",
+        ".project-checks.json": "16d8a7dfc501567d2f244ff2fab4e838a2bc60a98cd3cb09d2c19dd08c85ca79",
+        "tests/test_explain.py": "1c7c79c7ead8abc036c6620dbad1e9ca0298112d0c20d3e4d68cf4fd0f436a29"
+      }
+    },
+    {
+      "id": "repo-scaffold-nix",
+      "checkout": "private/repo-scaffold-nix",
+      "role": "tool",
+      "purpose": "Fail-closed repository declaring-file scaffolder.",
+      "observation": "Missing files can be added with rollback; existing custom environments require deliberate migration.",
+      "files": {
+        "README.md": "d57128454a7de895a01aab5c35c8864c6c409d8d7fcf81ce69b09f7ec29fb030",
+        ".project-checks.json": "8d91c8957f2924d71763a450cdf1c3ee32b1366f087079eec585edf7ab0b2b40",
+        "runtime/project_scaffold.py": "d9d009a8c3a4c6197226b172ab7f29feef90f9e3693235a677202e47035be38c",
+        "tests/test_project_scaffold.py": "e693fcfa2a24769e47e476540e68d3715848e5fa774d6b4e100beb03bb6d9930"
+      }
+    },
+    {
+      "id": "secure-research-tool",
+      "checkout": "private/secure-research-tool",
+      "role": "tool",
+      "purpose": "Independent bounded Research service and client.",
+      "observation": "The independently packaged socket client does not establish the service deployment boundary; acceptance remains open.",
+      "files": {
+        "README.md": "2662e919a074db8c4236183847bf01fddf9c94cfa36ebf9e5e9dd88f58c23836",
+        ".project-checks.json": "7dd2e1b766ad5760f26aabbc201db6a9132301a6401822e0b744b9a1363757d1",
+        "docs/api.md": "6b2dab48497f7e8dfc6e18fe01f4c1889b257d47735975c0b41b2115960b7da1"
+      }
+    },
+    {
+      "id": "skill-engine-nix",
+      "checkout": "private/skill-engine-nix",
+      "role": "tool",
+      "purpose": "Advisory skill selection and harness adapters.",
+      "observation": "The engine can abstain; cache isolation and hints do not prove a skill was read or applied.",
+      "files": {
+        "README.md": "8ca8169151908d389130e225591b4f330326254f6e3b2bec942c6d6754df1dc5",
+        ".project-checks.json": "ad8fa630517059468cf17866346be46e09fb421014e13a7b33d7e15b2f4ce9ad",
+        "src/skill_engine/policy.py": "12d20c394f977b4e8ee2ec364216bdf95a368a2a8512670dfd275df91dd506e3",
+        "src/skill_engine/cache.py": "928a1c0520cde1ee99601cbc598d9ee8b0ddd23efa40206a8a8ae37e5c55b398",
+        "tests/test_cache.py": "d1bb3869670b094f1156856a08570f477ae261d0406d0a897cc12719c66077cb"
+      }
+    },
+    {
+      "id": "skill-library",
+      "checkout": "private/skill-library",
+      "role": "tool",
+      "purpose": "Single-job validated skill catalog.",
+      "observation": "Short coherent guidance, progressive references and removal of redundant skills are maintained with source-bound integrity.",
+      "files": {
+        "README.md": "7d7f0a9c901b962ad2bd019068e35ba7987251d531f9b3da9ccd2d5e385b99a3",
+        ".project-checks.json": "e6ca9a89719de7c671492069f1efae70d59e72a06887fa814a8e8cc19619fb3e",
+        "STANDARD.md": "5afc11d9a07e66bc83b1c4a95e139860af6ff8e2c11c4d0dc92e7a1d7d0bce05"
+      }
+    },
+    {
+      "id": "tabula-repo-nix",
+      "checkout": "private/tabula-repo-nix",
+      "role": "tool",
+      "purpose": "Offline repository context cards and freshness receipts.",
+      "observation": "Human explanations and cited-byte freshness have separate owners; update never rewrites the explanation.",
+      "files": {
+        "README.md": "edd790c429ec50c37155ab1ee54de94731de6c207fe88889d91c7c8f41362a9f",
+        ".project-checks.json": "8297dc2dbd73194b85de3c45b7ac948ff3e951979350f7b87413358f73b3b05e",
+        "tabula.py": "be5764799d54302d0608660df8ebc81c48010c676fdfab6a06408d2e22b4837f",
+        "tests/test_tabula.py": "ac2fc419aecbfebc2eb5fe4b43867ef5b68b0f9e4c4a46b5157003c7ac3f540b"
+      }
+    },
+    {
+      "id": "virtual-swarm-nix",
+      "checkout": "private/virtual-swarm-nix",
+      "role": "tool",
+      "purpose": "Desktop/terminal task board and isolated workstation.",
+      "observation": "Task states are manually managed; worker Git identity is an explicit public profile rather than inferred publication authority.",
+      "files": {
+        "README.md": "567ad679fc430a7c179a2fad0f3fde0169d23533c59a95b5bd6b11840f6c6e37",
+        ".project-checks.json": "0e4f7ff55bc6bb9af95cfeee80916b349ab77bbe6230124e5f4b313657ffbc66",
+        "tests/test_fleet_identity.py": "d7d1370f5c6f1cd80517ca0e95ac5c04cdcaf70aa1a6d180cecc46c8d414b05d"
+      }
+    },
+    {
+      "id": "archived",
+      "checkout": "private/_archived",
+      "role": "archive",
+      "purpose": "Retired snapshots and restoration evidence.",
+      "observation": "Verified private snapshots are historical; restoration does not make them canonical development sources.",
+      "files": {
+        "README.md": "a461b25c1808275a7e302708b428dd87d2ff6b9994d60a5e33f8a856a4762e63"
+      }
+    },
+    {
+      "id": "public-release",
+      "checkout": "private/public-release",
+      "role": "preparation",
+      "purpose": "Publication preparation and historical audit guidance.",
+      "observation": "Rewritten candidates remain preparation until reviewed publication; old histories require separate privacy review.",
+      "files": {
+        "PUBLISH.md": "8c5d32c30a21647740477b1eb319a88eb9ba4dad7803495eee06996b81683536"
+      }
+    }
+  ],
+  "lessons": [
+    {
+      "id": "L01",
+      "claim": "Compose independent tool, harness, runtime and host owners.",
+      "sources": [
+        "agent-runtime-nix",
+        "lite-runtime-nix",
+        "coding-agents-nix",
+        "agent-toolbox-nix"
+      ],
+      "adopted_in": [
+        "research/HARNESS-REVIEW.md#L01",
+        "DEVTOOL-START.md#boundary"
+      ]
+    },
+    {
+      "id": "L02",
+      "claim": "Use reviewed declarations and a real vertical slice before adding layers.",
+      "sources": [
+        "repo-scaffold-nix",
+        "project-check-nix"
+      ],
+      "adopted_in": [
+        "research/HARNESS-REVIEW.md#L02",
+        "DEVTOOL-START.md"
+      ]
+    },
+    {
+      "id": "L03",
+      "claim": "Bound retrieval and bind continuation to source identity and a declared corpus.",
+      "sources": [
+        "agent-evidence-nix",
+        "ast-index-nix"
+      ],
+      "adopted_in": [
+        "research/HARNESS-REVIEW.md#L03",
+        "DEVTOOL-START.md#contract"
+      ]
+    },
+    {
+      "id": "L04",
+      "claim": "Keep human repository explanations separate from byte freshness receipts.",
+      "sources": [
+        "tabula-repo-nix"
+      ],
+      "adopted_in": [
+        "research/HARNESS-REVIEW.md#L04",
+        "LEARNING.md#review",
+        "DEVTOOL-START.md#learning"
+      ]
+    },
+    {
+      "id": "L05",
+      "claim": "Derive repeated dependency facts from source; installed tools can lag source changes.",
+      "sources": [
+        "project-check-nix",
+        "coding-agents-nix"
+      ],
+      "adopted_in": [
+        "research/HARNESS-REVIEW.md#L05",
+        "DEVTOOL-START.md#learning"
+      ]
+    },
+    {
+      "id": "L06",
+      "claim": "Measure command costs privately and distinguish diagnostics from budget enforcement.",
+      "sources": [
+        "agent-tool-meter-nix",
+        "system-health-nix",
+        "nix-change-explain-nix"
+      ],
+      "adopted_in": [
+        "research/HARNESS-REVIEW.md#L06",
+        "DEVTOOL-START.md#measurement"
+      ]
+    },
+    {
+      "id": "L07",
+      "claim": "Retain live handles and include bounded waiting and cleanup in the operation.",
+      "sources": [
+        "agent-tool-meter-nix",
+        "harnesh-nix",
+        "ascii-designer-mcp"
+      ],
+      "adopted_in": [
+        "research/HARNESS-REVIEW.md#L07",
+        "DEVTOOL-START.md#contract"
+      ]
+    },
+    {
+      "id": "L08",
+      "claim": "Keep task state, execution identity, current-source privacy and publication authority separate.",
+      "sources": [
+        "virtual-swarm-nix",
+        "agent-runtime-nix",
+        "agent-security-scan-nix",
+        "public-agents-files",
+        "archived",
+        "public-release"
+      ],
+      "adopted_in": [
+        "research/HARNESS-REVIEW.md#L08",
+        "LEARNING.md#evidence"
+      ]
+    },
+    {
+      "id": "L09",
+      "claim": "Independent Research client integration does not establish service deployment acceptance.",
+      "sources": [
+        "secure-research-tool",
+        "lite-runtime-nix",
+        "agent-runtime-nix"
+      ],
+      "adopted_in": [
+        "research/HARNESS-REVIEW.md#L09",
+        "DEVTOOL-START.md#boundary"
+      ]
+    },
+    {
+      "id": "L10",
+      "claim": "Remove redundant guidance and verify actual delivery and task behavior.",
+      "sources": [
+        "skill-library",
+        "skill-engine-nix",
+        "coding-agents-nix"
+      ],
+      "adopted_in": [
+        "research/HARNESS-REVIEW.md#L10",
+        "LEARNING.md#review",
+        "LEARNING.md#evidence"
+      ]
+    },
+    {
+      "id": "L11",
+      "claim": "Preserve missing coverage and pin freshness instead of promoting narrow or historical evidence.",
+      "sources": [
+        "project-check-nix",
+        "agent-security-scan-nix",
+        "nix-change-explain-nix"
+      ],
+      "adopted_in": [
+        "research/HARNESS-REVIEW.md#L11",
+        "LEARNING.md#evidence"
+      ]
+    },
+    {
+      "id": "L12",
+      "claim": "Use focused visual feedback and recheck affected evidence before costly work.",
+      "sources": [
+        "visual-qa-mcp",
+        "ascii-designer-mcp"
+      ],
+      "adopted_in": [
+        "research/HARNESS-REVIEW.md#L12",
+        "DEVTOOL-START.md#measurement"
+      ]
+    }
+  ]
+}

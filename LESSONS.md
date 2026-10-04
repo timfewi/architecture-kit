@@ -5,6 +5,13 @@ provenance was not supplied with the kit; they are not independent proof that
 this reference architecture is deployed. The research register identifies
 primary evidence for the mechanisms used here.
 
+The source-backed [harness tool review](research/HARNESS-REVIEW.md) adds the
+2026-10-04 observations from active development. It distinguishes source review
+from runtime acceptance. Use [DEVTOOL-START.md](DEVTOOL-START.md) to apply those
+lessons to a new tool and [LEARNING.md](LEARNING.md) to check freshness or revise
+them. The principles below remain design recommendations, not newly verified
+deployment claims.
+
 ## Progress must be host-observable
 
 A long-running model turn is not evidence of progress. Repeated reads, broad

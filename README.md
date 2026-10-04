@@ -6,6 +6,9 @@ not implement or deploy an agent runtime.
 
 ## Start here
 
+Starting a development tool? Use [DEVTOOL-START.md](DEVTOOL-START.md) for a CLI,
+checker, scaffolder, index or optional MCP adapter.
+
 Want a coding harness? Read [FAST-START.md](FAST-START.md).
 
 Want the complete single-agent contract? Read [STARTER.md](STARTER.md).
@@ -22,7 +25,8 @@ Those belong in a separate implementation repository.
 - portable agent, Linux host and workstation profiles;
 - synthetic examples and negative contract tests;
 - integrity, privacy and JSON Schema checks;
-- architecture, tooling and verification guidance.
+- architecture, tooling and verification guidance;
+- a source-bound tool review and an explicit [learning workflow](LEARNING.md).
 
 Synthetic fixtures prove contract consistency only. They do not prove a
 runtime, deployment, security boundary or performance result.
@@ -56,6 +60,8 @@ just check
 - [REBUILD-GUIDE.md](REBUILD-GUIDE.md) — complete implementation order
 - [VERIFICATION.md](VERIFICATION.md) — evidence and acceptance
 - [research/FINDINGS.md](research/FINDINGS.md) — sources and limits
+- [research/HARNESS-REVIEW.md](research/HARNESS-REVIEW.md) — current tool lessons
+- [LEARNING.md](LEARNING.md) — check source drift and incorporate new evidence
 
 Keep credentials, personal data, machine paths and environment-specific policy
 outside the kit. Reusable source and documentation are English.

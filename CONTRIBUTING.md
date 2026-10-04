@@ -17,6 +17,11 @@ organization-specific policy.
 
 ## Make and verify a change
 
+For source-backed lessons or new tool patterns, follow [LEARNING.md](LEARNING.md).
+Update the owning guide and learning register together. A standalone contributor
+does not need the original private sources; report that external freshness was
+not checked. Do not accept candidate hashes without reviewing changed evidence.
+
 Keep source changes separate from generated updates. When a contract changes,
 add or update an independent semantic check that would fail for the old or
 incorrect behavior. Do not weaken an expectation merely to make a check pass.

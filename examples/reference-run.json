@@ -24,7 +24,7 @@
       "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
       "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
       "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-      "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+      "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
       "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
     },
     "state": "QUEUED",
@@ -42,7 +42,7 @@
       "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
       "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
       "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-      "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+      "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
       "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
     },
     "binding_digest": "2357e801c8cc284c4c149cd6403c0a5e907cddb684d25c7aaf89c6431a82a10e",
@@ -110,7 +110,7 @@
       "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
       "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
       "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-      "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+      "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
       "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
     },
     "messages": [
@@ -172,7 +172,7 @@
       "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
       "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
       "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-      "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+      "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
       "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
     },
     "deadline": "2026-09-13T00:10:00Z",
@@ -230,7 +230,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "messages": [
@@ -289,7 +289,7 @@
           "payload": {
             "approval_id": "read-approval",
             "grant_id": "read-grant",
-            "grant_digest": "3ded0f7db9c603453eb398301805e07d2323c2c42ea5d91ea7682daff01d5ec5",
+            "grant_digest": "0e8f76fb3a639fbe1557396442508341b9d7b899966d62baaf75c999ee5f02f9",
             "decision": "granted",
             "decided_at": "2026-09-13T00:00:00Z",
             "expires_at": "2026-09-13T00:10:00Z"
@@ -327,7 +327,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "binding_digest": "2357e801c8cc284c4c149cd6403c0a5e907cddb684d25c7aaf89c6431a82a10e",
@@ -351,7 +351,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "input_digest": "675d78573c6dff90830c5323f5b06f1e77d54adc9252afa74bfd6c0ebbd1bdad",
@@ -461,7 +461,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "messages": [
@@ -520,7 +520,7 @@
           "payload": {
             "approval_id": "read-approval",
             "grant_id": "read-grant",
-            "grant_digest": "3ded0f7db9c603453eb398301805e07d2323c2c42ea5d91ea7682daff01d5ec5",
+            "grant_digest": "0e8f76fb3a639fbe1557396442508341b9d7b899966d62baaf75c999ee5f02f9",
             "decision": "denied",
             "decided_at": "2026-09-13T00:00:00Z",
             "expires_at": "2026-09-13T00:10:00Z"
@@ -594,7 +594,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "messages": [
@@ -698,7 +698,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "messages": [
@@ -807,7 +807,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "messages": [
@@ -939,7 +939,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "messages": [
@@ -1008,7 +1008,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "messages": [
@@ -1127,7 +1127,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "messages": [
@@ -1186,7 +1186,7 @@
           "payload": {
             "approval_id": "read-approval",
             "grant_id": "read-grant",
-            "grant_digest": "3ded0f7db9c603453eb398301805e07d2323c2c42ea5d91ea7682daff01d5ec5",
+            "grant_digest": "0e8f76fb3a639fbe1557396442508341b9d7b899966d62baaf75c999ee5f02f9",
             "decision": "granted",
             "decided_at": "2026-09-13T00:00:00Z",
             "expires_at": "2026-09-13T00:10:00Z"
@@ -1224,7 +1224,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "binding_digest": "2357e801c8cc284c4c149cd6403c0a5e907cddb684d25c7aaf89c6431a82a10e",
@@ -1246,7 +1246,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "last_sequence": 9,
@@ -1267,7 +1267,7 @@
           "at": "2026-09-13T00:00:11Z",
           "kind": "restart",
           "payload": {
-            "checkpoint_digest": "235d4d8a659d3ffcdd479ae143b869ba8aa0d9cfc5fb5ec9508b5b3d945562c7"
+            "checkpoint_digest": "9d06103e051220fd160156d599c21357190b74353db48c73ac4ac4b7ec642fb3"
           }
         },
         {
@@ -1285,7 +1285,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "input_digest": "675d78573c6dff90830c5323f5b06f1e77d54adc9252afa74bfd6c0ebbd1bdad",
@@ -1395,7 +1395,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "messages": [
@@ -1454,7 +1454,7 @@
           "payload": {
             "approval_id": "read-approval",
             "grant_id": "read-grant",
-            "grant_digest": "3ded0f7db9c603453eb398301805e07d2323c2c42ea5d91ea7682daff01d5ec5",
+            "grant_digest": "0e8f76fb3a639fbe1557396442508341b9d7b899966d62baaf75c999ee5f02f9",
             "decision": "granted",
             "decided_at": "2026-09-13T00:00:00Z",
             "expires_at": "2026-09-13T00:10:00Z"
@@ -1492,7 +1492,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "binding_digest": "2357e801c8cc284c4c149cd6403c0a5e907cddb684d25c7aaf89c6431a82a10e",
@@ -1569,7 +1569,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "messages": [
@@ -1628,7 +1628,7 @@
           "payload": {
             "approval_id": "read-approval",
             "grant_id": "read-grant",
-            "grant_digest": "3ded0f7db9c603453eb398301805e07d2323c2c42ea5d91ea7682daff01d5ec5",
+            "grant_digest": "0e8f76fb3a639fbe1557396442508341b9d7b899966d62baaf75c999ee5f02f9",
             "decision": "granted",
             "decided_at": "2026-09-13T00:00:00Z",
             "expires_at": "2026-09-13T00:10:00Z"
@@ -1666,7 +1666,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "binding_digest": "2357e801c8cc284c4c149cd6403c0a5e907cddb684d25c7aaf89c6431a82a10e",
@@ -1700,7 +1700,7 @@
               "toolchain_digest": "9ebea4a3c7fc6bce4bcb423dcfaf67a4fb8b7aeb22073807df734b2699e87972",
               "registry_digest": "04e28bcd5ab7d16f047d6b1456b2aaca483dca385f6d2a5c675ec88f109f20ce",
               "config_digest": "f65c7e7fba425cff1d9ba4b41a088900ce4dccc99698aa3d055656477c12ed73",
-              "schema_digest": "bcc8f3cf00a081c296e39ea39c997ab4dc4df2bcc143161878690d93d9aff735",
+              "schema_digest": "823538203e5715d5de1dfd4f038ece1b8b23a97dcc1129cea69b1fbf5751d241",
               "task_digest": "03fd57b9472b246357ec12787d30a6710007ce121156e268481a685c7345d2fb"
             },
             "input_digest": "675d78573c6dff90830c5323f5b06f1e77d54adc9252afa74bfd6c0ebbd1bdad",

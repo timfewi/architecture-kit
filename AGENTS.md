@@ -14,6 +14,14 @@ with the pinned validator dependencies; report unavailable coverage. Review
 intentional derived catalog/manifest updates and do not refresh behavioral
 expectations merely to restore passing checks.
 
+When tool work yields a reusable lesson, follow [LEARNING.md](LEARNING.md): check
+the canonical source map, review relevant source and evidence, update the owning
+guide and learning register together, then refresh derived hashes deliberately.
+Use [DEVTOOL-START.md](DEVTOOL-START.md) for standalone tools; do not require a
+platform implementation for a CLI. External source checks are explicit and
+optional for a standalone clone; internal register integrity is part of the fast
+gate. Never treat matching source hashes as runtime or semantic acceptance.
+
 <!-- bootstrap-start -->
 When asked to implement a platform from this clone, start with
 [the temporary build guide](.agents/README.md) and

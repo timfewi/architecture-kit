@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Added a standalone Devtool start route covering boundaries, scaffolding,
+  CLI/MCP slices, source context, documentation and proportionate verification.
+- Reviewed 21 active canonical tool repositories and classified mirrors,
+  empty directories, archives and publication preparation separately.
+- Added twelve source-backed lessons with adoption links, selected-file receipts,
+  an offline drift checker and negative regressions; internal integrity runs in
+  the fast gate without access to private sources.
+- Added an explicit learning maintenance workflow and linked it from existing
+  guidance. Source observations do not upgrade historical runtime evidence.
 - Licensed the kit under MIT after reviewing the self-contained source and
   pinned public Nixpkgs development dependency.
 - Replaced private-state release wording with the open-source policy and

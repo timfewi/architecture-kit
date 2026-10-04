@@ -6,10 +6,10 @@ default:
     @just --list
 
 # Full kit acceptance; missing validator dependencies are an error.
-check: lint format-check privacy-check test test-bootstrap verify
+check: lint format-check privacy-check check-learning test test-bootstrap verify
 
 # Narrow checks without the JSON Schema validator; not full acceptance.
-check-fast: lint format-check privacy-check test-semantics test-runtime-semantics test-skills test-bootstrap structural
+check-fast: lint format-check privacy-check check-learning test-semantics test-runtime-semantics test-skills test-learning test-bootstrap structural
 
 # Lint Python and the Direnv entry point without executing .envrc.
 lint:
@@ -63,6 +63,18 @@ structural:
 # Refresh derived hashes only after intentional, reviewed source changes.
 refresh-manifest:
     python3 -B scripts/check_kit.py --refresh-manifest
+
+# Validate learning/source relationships without requiring the original workspace.
+check-learning:
+    python3 -B scripts/review_tools.py
+
+# Exercise drift, inventory changes and unsafe evidence with temporary fixtures.
+test-learning:
+    python3 -B -m unittest discover -s tests -p 'test_learning.py'
+
+# Explicit offline check of an operator-selected collection; no writes or execution.
+check-tool-sources sources_root source_map="":
+    @python3 -B scripts/review_tools.py --sources-root {{ quote(sources_root) }} {{ if source_map == "" { "" } else { "--source-map " + quote(source_map) } }}
 
 # Print a fresh synthetic measurement; do not overwrite accepted evidence.
 benchmark:

@@ -17,6 +17,13 @@ not promote or close it.
 
 Evidence never automatically promotes to a higher level.
 
+The [learning register](research/harness-tools.json) binds observations to selected
+source bytes and adoption locations. Its internal checks prove register integrity;
+an optional external check proves freshness of those selected bytes and the local
+directory inventory. Neither proves semantic correctness, current runtime
+acceptance or an improvement in agent outcomes. See [LEARNING.md](LEARNING.md)
+for comparison and refresh rules.
+
 ## Required evidence identity
 
 Every accepted record binds requirement, source snapshot, policy, toolchain,

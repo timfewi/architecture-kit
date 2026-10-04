@@ -5,6 +5,9 @@ architecture kit. It contains no runtime, provider adapter, tool handler, model
 loop or deployment configuration. Use it to scope work in a separate
 implementation repository.
 
+For a standalone CLI, checker, index or MCP adapter, use
+[DEVTOOL-START.md](DEVTOOL-START.md). That route does not require a harness platform.
+
 The fast start changes implementation order, not the contracts or the meaning
 of conformance. A synthetic replay remains specification evidence. A harness is
 usable only after its real adapter, broker, worker, storage and controller have

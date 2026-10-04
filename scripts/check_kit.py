@@ -11,9 +11,10 @@ from pathlib import Path
 from urllib.parse import urldefrag, urljoin
 
 if __package__:
-    from . import check_skills, runtime_contracts
+    from . import check_skills, review_tools, runtime_contracts
 else:
     import check_skills
+    import review_tools
     import runtime_contracts
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -288,6 +289,7 @@ def contract_examples(root, tools, documents):
 
 def semantic_check(root):
     check_skills.check(root)
+    review_tools.validate(root)
     files = source_files(root)
     documents = schema_documents(root)
     json_files = {

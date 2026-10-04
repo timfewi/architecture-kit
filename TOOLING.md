@@ -4,6 +4,12 @@ The recommended starting point is a small typed capability surface over ordinary
 Linux tools. The selection unit is a question plus corpus, authority, output
 contract and correctness oracle. There is no universal fastest CLI.
 
+For observed CLI/MCP implementation patterns, corpus limits, source-bound paging,
+private command measurements and focused visual feedback, see the
+[tool review](research/HARNESS-REVIEW.md). [DEVTOOL-START.md](DEVTOOL-START.md)
+applies them without requiring a platform. These implementation examples do not
+add canonical operations or imply that a host has installed a particular tool.
+
 ## Choose by the question
 
 | Question | Default engine | Escalation and admission condition |

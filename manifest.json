@@ -1,7 +1,7 @@
 {
   "$schema": "https://architecture-kit.invalid/schemas/manifest.schema.json",
   "language": "en",
-  "generated_on": "2026-09-28",
+  "generated_on": "2026-10-04",
   "artifacts": [
     {
       "path": ".agents/README.md",
@@ -114,8 +114,8 @@
     {
       "path": "AGENTS.md",
       "kind": "markdown",
-      "sha256": "4cfe3218ff97bbcfcc7663359e9c1adc12bc0acb154d2efec4538ad3666eca46",
-      "size_bytes": 1171
+      "sha256": "0f63428e9f0225753de1db20f153179bddd77a9f640ac713bbdc9d080823e80f",
+      "size_bytes": 1727
     },
     {
       "path": "ARCHITECTURE.md",
@@ -132,8 +132,8 @@
     {
       "path": "CHANGELOG.md",
       "kind": "markdown",
-      "sha256": "9f123c4c8fff3bd7fc60814934b4e9eebeb589ed4a618d93d8c917f01324e962",
-      "size_bytes": 2859
+      "sha256": "d9649b92d18336f0d8e14b970d2f070c56c36800b0d55685658c61de0c159727",
+      "size_bytes": 3524
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -144,26 +144,38 @@
     {
       "path": "CONTRIBUTING.md",
       "kind": "markdown",
-      "sha256": "8e2f3e114c78e312bad65ce3e7ffa2433707b16397534a0689c2ca04e8ee621a",
-      "size_bytes": 1867
+      "sha256": "5575c8b65d226011d0de3f7736aca88bb26bae8bfbe4ec8c1a01ffa181c363fd",
+      "size_bytes": 2191
     },
     {
       "path": "DEVELOPMENT.md",
       "kind": "markdown",
-      "sha256": "1255e00e7f840827d2f57a7dd8827f62680adebf96e0f6b5dfc597f0983381a0",
-      "size_bytes": 7513
+      "sha256": "226f6dfca32b03e2c7fefd27e19398b32aed24c2e58cc6ebadae6fd9c53f7fb9",
+      "size_bytes": 8197
+    },
+    {
+      "path": "DEVTOOL-START.md",
+      "kind": "markdown",
+      "sha256": "55ec5b560c6a3cec4c308ab36d1306b433ed15939b24b67a4b1e736f9004bab9",
+      "size_bytes": 6766
     },
     {
       "path": "FAST-START.md",
       "kind": "markdown",
-      "sha256": "b6e0747940adca6aa048692fe02aee5dcaad70c4f0ee9f735a1f9da109bf3682",
-      "size_bytes": 6695
+      "sha256": "950d9fa828eb2460c7837677aae65f87c54b6b5d57b40a622bc5ff36a8348d5b",
+      "size_bytes": 6839
+    },
+    {
+      "path": "LEARNING.md",
+      "kind": "markdown",
+      "sha256": "2c94b110ad8f9a46daf2506b27ccf4cde688a22d42708a9720cffb602539cda8",
+      "size_bytes": 5463
     },
     {
       "path": "LESSONS.md",
       "kind": "markdown",
-      "sha256": "a9de852b37d7178728d010c3b2235a907d82b1dfe46f54c49cefe448b8d1100d",
-      "size_bytes": 6621
+      "sha256": "572c0167ba4fdf3ae04a620ce0e3b20e77932f62f49ca577414b8f18490741f5",
+      "size_bytes": 7038
     },
     {
       "path": "LICENSE",
@@ -180,8 +192,8 @@
     {
       "path": "README.md",
       "kind": "markdown",
-      "sha256": "656dc0446bf259d1085138f3a6f4977757cf0011e97007953744847daf31e3eb",
-      "size_bytes": 2651
+      "sha256": "920769ecc53349cde3c91a8508411490e3f562607d05cbc7858db69fb1e07932",
+      "size_bytes": 3029
     },
     {
       "path": "REBUILD-GUIDE.md",
@@ -204,14 +216,14 @@
     {
       "path": "TOOLING.md",
       "kind": "markdown",
-      "sha256": "ecc0fc794a0e715b60c1f477f6c8dfad29efab1c77feb8412dfeeac0794850fb",
-      "size_bytes": 11254
+      "sha256": "78d84718d2ca77d4606f3083e04d4caed61bb8e5307a4bb9b5e4915a45ffe2f7",
+      "size_bytes": 11642
     },
     {
       "path": "VERIFICATION.md",
       "kind": "markdown",
-      "sha256": "8b4f4a63c9819f650c4650eac296b5c37ea43216927c093a27c0af8c1d0cae4e",
-      "size_bytes": 8431
+      "sha256": "bb0aa1c5a25b87a650c375f1d5029f3b2703d7a5d1f8d4a779db050423f4f314",
+      "size_bytes": 8868
     },
     {
       "path": "examples/agent-config.json",
@@ -222,7 +234,7 @@
     {
       "path": "examples/reference-run.json",
       "kind": "json",
-      "sha256": "713a73ccc26aa503d169087d2ed977f1747b185b48f272c2a47a1e0c71d2be82",
+      "sha256": "815104038c0c6e247f161eada1775e4465e66fa731c32763901c34f7c03ba710",
       "size_bytes": 61178
     },
     {
@@ -312,8 +324,8 @@
     {
       "path": "justfile",
       "kind": "just",
-      "sha256": "2e9fa4165f50d82035e9b3374dc54e2c1e1b25d09d8c2a6c7289d4760bfa17af",
-      "size_bytes": 2801
+      "sha256": "64dcf4d8226f5bb6722a329e7b24cdeaceb160829683fae05fcb85d2fcebe037",
+      "size_bytes": 3440
     },
     {
       "path": "profiles/agent-platform.yaml",
@@ -356,6 +368,18 @@
       "kind": "markdown",
       "sha256": "a2917b7d4216716857d2059271fa919e5d0102ec35aa0fe405c58d4cb4cea840",
       "size_bytes": 13802
+    },
+    {
+      "path": "research/HARNESS-REVIEW.md",
+      "kind": "markdown",
+      "sha256": "a4be43c41a6a5e40e7bb455dade9f616ef23d437311891650bada64d9803cd85",
+      "size_bytes": 7755
+    },
+    {
+      "path": "research/harness-tools.json",
+      "kind": "json",
+      "sha256": "4aa93388d89af7d9d0f763868cbc83596ded9dc784fa4b66541c5752a18f0d5f",
+      "size_bytes": 21024
     },
     {
       "path": "research/retrieval-measurement.json",
@@ -424,6 +448,12 @@
       "size_bytes": 1353
     },
     {
+      "path": "schemas/harness-tools.schema.json",
+      "kind": "json-schema",
+      "sha256": "af6661a6d15ff05d5530c3f62768e6ea25c69df160b0303c8ebe554ca07d166c",
+      "size_bytes": 3533
+    },
+    {
       "path": "schemas/interfaces.schema.json",
       "kind": "json-schema",
       "sha256": "5bf6f33ccde51f37137bdd909c8d6ece642572320d9ced4e9f4d3775789a8b86",
@@ -486,8 +516,8 @@
     {
       "path": "scripts/check_kit.py",
       "kind": "python",
-      "sha256": "9567049260180bfe195e5c80672649043ccc7b12e65a500c6d923bfe407469b6",
-      "size_bytes": 23791
+      "sha256": "a5459f78f41257ee1d5c3f7eca35bed612cbdbb29bd90728183e2895281bd86a",
+      "size_bytes": 23861
     },
     {
       "path": "scripts/check_publication.py",
@@ -512,6 +542,12 @@
       "kind": "python",
       "sha256": "58cf059302cc621b9e61c3110d8902db2e5bfa640ed471bd2c846b3cbb2ce32b",
       "size_bytes": 12210
+    },
+    {
+      "path": "scripts/review_tools.py",
+      "kind": "python",
+      "sha256": "f2f2dc6905d80978aec5577a15a8ca3aa34c1c9c45e79cf0ba10f00d5d0a9a6d",
+      "size_bytes": 10963
     },
     {
       "path": "scripts/runtime_contracts.py",
@@ -566,6 +602,12 @@
       "kind": "markdown",
       "sha256": "adf19011e669ae08925d5cdc7f9661a6c0827295f5f605620d5f15e9500712bd",
       "size_bytes": 1581
+    },
+    {
+      "path": "tests/test_learning.py",
+      "kind": "python",
+      "sha256": "faa3db3ffd95cfe88a6d2cffd26702e1db70c534edfae18919885caf2386564a",
+      "size_bytes": 11534
     },
     {
       "path": "tests/test_publication.py",

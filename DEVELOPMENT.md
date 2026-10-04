@@ -97,12 +97,20 @@ Review and commit the complete intended changes according to your Git policy.
 | `just refresh-manifest` | Refresh derived hashes after reviewing intentional changes. |
 | `just benchmark` | Print a new synthetic measurement without replacing accepted research evidence. |
 | `just baseline` | Optional host-provided project-check security scan; not silently included or installed by this generic Flake. |
+| `just check-learning` | Validate local lesson/source relationships; does not access external checkouts. |
+| `just test-learning` | Temporary-fixture regressions for source drift, inventory changes and unsafe inputs. |
+| `just check-tool-sources ROOT [MAP]` | Explicit offline directory/selected-file freshness check; optional regular Markdown map for a symlinked README. |
 | `nix flake check --no-update-lock-file` | Build the validator import/version smoke check for the current system; not the full kit acceptance suite. |
 | `nix build --no-link .#validator` | Realize only the Python validator environment without creating a result symlink. |
 
 The shell has no shellHook and never runs checks on entry. Recipes do not load
 .env files. The formatter and checker commands operate on the current checkout,
 not on a copied or implicitly rewritten source snapshot.
+
+The learning checker uses Python's standard library and never executes reviewed
+projects. Internal integrity and its regressions are part of the fast gate. A
+public clone needs no adjacent tools. See [LEARNING.md](LEARNING.md) for scope,
+candidate receipts and the deliberate review-before-refresh workflow.
 
 ## Portable build assistance
 
