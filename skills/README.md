@@ -19,6 +19,14 @@ The catalog's capability names are descriptive routing hints, never grants:
 Validate actual availability and task authority before choosing either column.
 No model, host vendor or particular tool transport is required.
 
+## Choosing between the tool skills
+
+tool-call-discipline decides which calls to make, in what order, and how to
+recover when one fails or its outcome is unknown. context-budget decides how much
+output enters context and what survives compaction. A task that needs both loads
+both. Each loads its references only when the body points to them; they are
+covered by the skill's digest.
+
 ## Public and private packaging
 
 Use these portable sources as the common package after normal

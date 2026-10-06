@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Split the efficient-tool-use skill into tool-call-discipline and context-budget,
+  each loading short references on demand, and removed the old name. The pilot
+  now has eleven author-written cases; every skill must appear in it.
 - Added a standalone Devtool start route covering boundaries, scaffolding,
   CLI/MCP slices, source context, documentation and proportionate verification.
 - Reviewed 21 active canonical tool repositories and classified mirrors,

@@ -28,11 +28,52 @@
       "reason": "Verification of an implemented change."
     },
     {
-      "request": "A large tool response consumes the context before the task is done. Choose a bounded strategy preserving complete results.",
+      "request": "A large tool response consumes the context before the task is done. Keep the evidence I need without carrying the whole output.",
       "expected": [
-        "efficient-tool-use"
+        "context-budget"
       ],
-      "reason": "Tool selection and completeness."
+      "reason": "Output volume and evidence preservation; no call sequencing question."
+    },
+    {
+      "request": "List every use of a deprecated option across this repository. The search tool returns fifty hits per page.",
+      "expected": [
+        "tool-call-discipline"
+      ],
+      "reason": "Engine choice and complete paging for an exhaustive request."
+    },
+    {
+      "request": "The request that renames the release tag timed out and I cannot tell whether it was applied. Should I send it again?",
+      "expected": [
+        "tool-call-discipline"
+      ],
+      "reason": "Uncertain outcome of a mutation: observe state before any retry."
+    },
+    {
+      "request": "The same lint command has failed three times with the same error. What should I do before running it again?",
+      "expected": [
+        "tool-call-discipline"
+      ],
+      "reason": "Failure class and fingerprint; a repeated action needs a changed assumption."
+    },
+    {
+      "request": "This session is about to be compacted. Write down what the next session needs to continue.",
+      "expected": [
+        "context-budget"
+      ],
+      "reason": "Resume note and evidence preservation."
+    },
+    {
+      "request": "Survey forty log files for a timeout pattern: read independent files together, keep the output small, and leave a note so the work can resume after compaction.",
+      "expected": [
+        "tool-call-discipline",
+        "context-budget"
+      ],
+      "reason": "Both jobs: batched reads and complete coverage, plus bounded output and a resume note."
+    },
+    {
+      "request": "Open README.md and tell me what its first heading says.",
+      "expected": [],
+      "reason": "One known read; neither skill adds value."
     }
   ]
 }

@@ -11,7 +11,17 @@ from scripts import check_skills
 class SkillTests(unittest.TestCase):
     def test_actual_catalog_and_pilot_references(self):
         result = check_skills.check(check_skills.ROOT)
-        self.assertEqual(len(result["skills"]), 4)
+        self.assertEqual(len(result["skills"]), 5)
+
+    def test_every_skill_appears_in_routing_pilot(self):
+        names = {s["name"] for s in check_skills.catalog(check_skills.ROOT)["skills"]}
+        pilot = json.loads(
+            (check_skills.ROOT / "skills/routing-pilot.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        routed = {name for case in pilot["cases"] for name in case["expected"]}
+        self.assertEqual(names - routed, set())
 
     def test_metadata_invalid_and_duplicate(self):
         cases = [

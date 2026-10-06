@@ -1,7 +1,7 @@
 {
   "$schema": "https://architecture-kit.invalid/schemas/manifest.schema.json",
   "language": "en",
-  "generated_on": "2026-10-04",
+  "generated_on": "2026-10-06",
   "artifacts": [
     {
       "path": ".agents/README.md",
@@ -132,8 +132,8 @@
     {
       "path": "CHANGELOG.md",
       "kind": "markdown",
-      "sha256": "d9649b92d18336f0d8e14b970d2f070c56c36800b0d55685658c61de0c159727",
-      "size_bytes": 3524
+      "sha256": "50aa62b6913abf06454d0341ce864b9080bf1d99293de178851ed892d0e0ac4b",
+      "size_bytes": 3756
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -558,20 +558,32 @@
     {
       "path": "skills/README.md",
       "kind": "markdown",
-      "sha256": "10d4d24907612e4c7bf025b961c9eee8c20f62a44719a0eaecbaa581fa769d4f",
-      "size_bytes": 2526
+      "sha256": "3446a5d8d62886d1c54a60f1320971ac3a2aa34f22a0ae384ee054882160e228",
+      "size_bytes": 2910
     },
     {
       "path": "skills/catalog.json",
       "kind": "json",
-      "sha256": "602285f43f26b1ed127dac38c36679838c8d4356d1d87767838361e80ec1f554",
-      "size_bytes": 2769
+      "sha256": "d48d624d5696eb439aba342cf60b06786d9ba39f03de219fa70063abb8d5471a",
+      "size_bytes": 4131
     },
     {
-      "path": "skills/efficient-tool-use/SKILL.md",
+      "path": "skills/context-budget/SKILL.md",
       "kind": "markdown",
-      "sha256": "691483b7a17b3f38a774959770cab91ea471b0250567968e9a907becec23a2ad",
-      "size_bytes": 1752
+      "sha256": "dbdc319ed4543e8081e46888fcc109c1e4f65b992d4d73f7f09c25c12323ba27",
+      "size_bytes": 1998
+    },
+    {
+      "path": "skills/context-budget/references/measuring.md",
+      "kind": "markdown",
+      "sha256": "d8deaa89e726b7431c82dc157f7a06490837005975fccf3e61448cb42de9bda2",
+      "size_bytes": 853
+    },
+    {
+      "path": "skills/context-budget/references/resume-note.md",
+      "kind": "markdown",
+      "sha256": "cd067939dfbdf3d230c214eac57dbde2bf59ab3a3ae791f06025d21301617581",
+      "size_bytes": 1150
     },
     {
       "path": "skills/repository-orientation/SKILL.md",
@@ -582,20 +594,38 @@
     {
       "path": "skills/routing-pilot.json",
       "kind": "json",
-      "sha256": "66396453e6e7517c9cdcb352d0b0c078bfe0454eb4c6dcc38806af6e33b974c2",
-      "size_bytes": 1287
+      "sha256": "9298d215679b2fbc6aae9c7e130efa6f1976a1c33fc89f3631b95021485be633",
+      "size_bytes": 2983
     },
     {
       "path": "skills/routing-review.md",
       "kind": "markdown",
-      "sha256": "7bacf909626672eb11adf3b83eadf6038928c1c8c806deaebac6d6400bd7eb4c",
-      "size_bytes": 757
+      "sha256": "0dff0aa644f740186cfe6eaaec1f49253ed6b0cea764bdca94a3175533800c4f",
+      "size_bytes": 1550
     },
     {
       "path": "skills/test-contract-freshness/SKILL.md",
       "kind": "markdown",
       "sha256": "08b7d1680db7a9130519694f340fbc1b85f847fd5583c687461387f29deb68e2",
       "size_bytes": 1699
+    },
+    {
+      "path": "skills/tool-call-discipline/SKILL.md",
+      "kind": "markdown",
+      "sha256": "4f611799f35963b7ec11d64b275214a36a3a9e9f1e3bbdc9b8c38188cba22dd4",
+      "size_bytes": 2592
+    },
+    {
+      "path": "skills/tool-call-discipline/references/engine-choice.md",
+      "kind": "markdown",
+      "sha256": "d476f5cb84d249ea7dff3304eca4b87fe3621f6c07762184aa422f211f386622",
+      "size_bytes": 1906
+    },
+    {
+      "path": "skills/tool-call-discipline/references/failure-handling.md",
+      "kind": "markdown",
+      "sha256": "97ded4afd1936b1a3936716ffeab3fc5d7f5a7c7f383640cefe4a697ac40a7f6",
+      "size_bytes": 1935
     },
     {
       "path": "skills/verified-change/SKILL.md",
@@ -642,8 +672,8 @@
     {
       "path": "tests/test_skills.py",
       "kind": "python",
-      "sha256": "95f0ceab13d905cdeb65861cd8e171c780ce5019f94fe3a861b15891597d10c6",
-      "size_bytes": 4025
+      "sha256": "7454fb3b52ab4a593e0d3494000a2f0c7e2a2a4a8ec0c1ba2a3eea4c17c89842",
+      "size_bytes": 4456
     }
   ],
   "catalog": {

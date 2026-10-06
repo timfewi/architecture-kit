@@ -2,9 +2,9 @@
   "format": "portable-skill-catalog-v1",
   "skills": [
     {
-      "name": "efficient-tool-use",
-      "description": "Choose bounded retrieval and execution strategies for a task with many tools, large outputs or repeated investigation. Use when tool selection or context cost matters; not to impose overhead on trivial work.",
-      "path": "skills/efficient-tool-use/SKILL.md",
+      "name": "context-budget",
+      "description": "Keep model-visible context small and recoverable on long or output-heavy tasks through summaries before bodies, bounded reads, projection, artifact handles, evidence preservation, resume notes and concise answers. Use when output volume, rereads or compaction threaten the task; not for choosing or sequencing tool calls.",
+      "path": "skills/context-budget/SKILL.md",
       "provenance": "architecture-kit-authored",
       "capabilities": [
         "source.read",
@@ -12,9 +12,11 @@
         "execution.run"
       ],
       "files": {
-        "SKILL.md": "691483b7a17b3f38a774959770cab91ea471b0250567968e9a907becec23a2ad"
+        "SKILL.md": "dbdc319ed4543e8081e46888fcc109c1e4f65b992d4d73f7f09c25c12323ba27",
+        "references/measuring.md": "d8deaa89e726b7431c82dc157f7a06490837005975fccf3e61448cb42de9bda2",
+        "references/resume-note.md": "cd067939dfbdf3d230c214eac57dbde2bf59ab3a3ae791f06025d21301617581"
       },
-      "content_sha256": "c8b356ca1e331d9490cf41d86670dfb28a37e2fec9b1de21ead4437b8540234c"
+      "content_sha256": "80eb123616b50b4b1b28143abee8c00600b058d7836140d4ab0abed624856279"
     },
     {
       "name": "repository-orientation",
@@ -45,6 +47,23 @@
         "SKILL.md": "08b7d1680db7a9130519694f340fbc1b85f847fd5583c687461387f29deb68e2"
       },
       "content_sha256": "58c983df6ea590099584b5385f5ce38648864752c8e5d8b88d66d5abe26714e5"
+    },
+    {
+      "name": "tool-call-discipline",
+      "description": "Plan, sequence and recover multi-step tool calls by choosing an engine per question and corpus, batching independent reads, serializing mutations against expected state, paging completely and handling failures or uncertain outcomes. Use when several calls depend on each other or a call failed; not for one known read or for output size alone.",
+      "path": "skills/tool-call-discipline/SKILL.md",
+      "provenance": "architecture-kit-authored",
+      "capabilities": [
+        "source.read",
+        "source.search",
+        "execution.run"
+      ],
+      "files": {
+        "SKILL.md": "4f611799f35963b7ec11d64b275214a36a3a9e9f1e3bbdc9b8c38188cba22dd4",
+        "references/engine-choice.md": "d476f5cb84d249ea7dff3304eca4b87fe3621f6c07762184aa422f211f386622",
+        "references/failure-handling.md": "97ded4afd1936b1a3936716ffeab3fc5d7f5a7c7f383640cefe4a697ac40a7f6"
+      },
+      "content_sha256": "9f098bcae37743bdbbb8cedc3de39165cf8860b9108158dc579d3c17c2987c4d"
     },
     {
       "name": "verified-change",
