@@ -177,18 +177,6 @@
       "files": {}
     },
     {
-      "id": "harnesh-nix",
-      "checkout": "private/harnesh-nix",
-      "role": "tool",
-      "purpose": "Agent-agnostic tmux cockpit.",
-      "observation": "Adapters are command arrays; task excerpts and live process state do not prove readiness or completed work.",
-      "files": {
-        "README.md": "d1ab37662d9e80e707da4cc83b2144029e47a385ad03f5e4255522f114faf0dd",
-        ".project-checks.json": "c04aeb18092dfa1d9e618bdbbbfff893ae6838080ec8561070fca3a1e6733770",
-        "src/ops.rs": "03977e659c0a6353ff7e62dd58aaed228fc5f8ebf8a44f914505c81205dc5bd9"
-      }
-    },
-    {
       "id": "library-pkgs-knowledge",
       "checkout": "private/library-pkgs-knowledge",
       "role": "empty",
@@ -335,22 +323,13 @@
     {
       "id": "L02",
       "claim": "Use reviewed declarations and a real vertical slice before adding layers.",
-      "sources": [
-        "repo-scaffold-nix",
-        "project-check-nix"
-      ],
-      "adopted_in": [
-        "research/HARNESS-REVIEW.md#L02",
-        "DEVTOOL-START.md"
-      ]
+      "sources": ["repo-scaffold-nix", "project-check-nix"],
+      "adopted_in": ["research/HARNESS-REVIEW.md#L02", "DEVTOOL-START.md"]
     },
     {
       "id": "L03",
       "claim": "Bound retrieval and bind continuation to source identity and a declared corpus.",
-      "sources": [
-        "agent-evidence-nix",
-        "ast-index-nix"
-      ],
+      "sources": ["agent-evidence-nix", "ast-index-nix"],
       "adopted_in": [
         "research/HARNESS-REVIEW.md#L03",
         "DEVTOOL-START.md#contract"
@@ -359,9 +338,7 @@
     {
       "id": "L04",
       "claim": "Keep human repository explanations separate from byte freshness receipts.",
-      "sources": [
-        "tabula-repo-nix"
-      ],
+      "sources": ["tabula-repo-nix"],
       "adopted_in": [
         "research/HARNESS-REVIEW.md#L04",
         "LEARNING.md#review",
@@ -371,10 +348,7 @@
     {
       "id": "L05",
       "claim": "Derive repeated dependency facts from source; installed tools can lag source changes.",
-      "sources": [
-        "project-check-nix",
-        "coding-agents-nix"
-      ],
+      "sources": ["project-check-nix", "coding-agents-nix"],
       "adopted_in": [
         "research/HARNESS-REVIEW.md#L05",
         "DEVTOOL-START.md#learning"
@@ -396,11 +370,7 @@
     {
       "id": "L07",
       "claim": "Retain live handles and include bounded waiting and cleanup in the operation.",
-      "sources": [
-        "agent-tool-meter-nix",
-        "harnesh-nix",
-        "ascii-designer-mcp"
-      ],
+      "sources": ["agent-tool-meter-nix", "ascii-designer-mcp"],
       "adopted_in": [
         "research/HARNESS-REVIEW.md#L07",
         "DEVTOOL-START.md#contract"
@@ -417,10 +387,7 @@
         "archived",
         "public-release"
       ],
-      "adopted_in": [
-        "research/HARNESS-REVIEW.md#L08",
-        "LEARNING.md#evidence"
-      ]
+      "adopted_in": ["research/HARNESS-REVIEW.md#L08", "LEARNING.md#evidence"]
     },
     {
       "id": "L09",
@@ -438,11 +405,7 @@
     {
       "id": "L10",
       "claim": "Remove redundant guidance and verify actual delivery and task behavior.",
-      "sources": [
-        "skill-library",
-        "skill-engine-nix",
-        "coding-agents-nix"
-      ],
+      "sources": ["skill-library", "skill-engine-nix", "coding-agents-nix"],
       "adopted_in": [
         "research/HARNESS-REVIEW.md#L10",
         "LEARNING.md#review",
@@ -457,18 +420,12 @@
         "agent-security-scan-nix",
         "nix-change-explain-nix"
       ],
-      "adopted_in": [
-        "research/HARNESS-REVIEW.md#L11",
-        "LEARNING.md#evidence"
-      ]
+      "adopted_in": ["research/HARNESS-REVIEW.md#L11", "LEARNING.md#evidence"]
     },
     {
       "id": "L12",
       "claim": "Use focused visual feedback and recheck affected evidence before costly work.",
-      "sources": [
-        "visual-qa-mcp",
-        "ascii-designer-mcp"
-      ],
+      "sources": ["visual-qa-mcp", "ascii-designer-mcp"],
       "adopted_in": [
         "research/HARNESS-REVIEW.md#L12",
         "DEVTOOL-START.md#measurement"
