@@ -1,7 +1,7 @@
 {
   "$schema": "https://architecture-kit.invalid/schemas/manifest.schema.json",
   "language": "en",
-  "generated_on": "2026-10-06",
+  "generated_on": "2026-10-22",
   "artifacts": [
     {
       "path": ".agents/README.md",
@@ -134,6 +134,12 @@
       "kind": "markdown",
       "sha256": "50aa62b6913abf06454d0341ce864b9080bf1d99293de178851ed892d0e0ac4b",
       "size_bytes": 3756
+    },
+    {
+      "path": "CLAUDE.md",
+      "kind": "markdown",
+      "sha256": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+      "size_bytes": 11
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -378,8 +384,8 @@
     {
       "path": "research/harness-tools.json",
       "kind": "json",
-      "sha256": "4aa93388d89af7d9d0f763868cbc83596ded9dc784fa4b66541c5752a18f0d5f",
-      "size_bytes": 21024
+      "sha256": "262dbc40f81457291620ca3e9087c2cce41c13cc62184e2e0d1f07e8b932f5e0",
+      "size_bytes": 20174
     },
     {
       "path": "research/retrieval-measurement.json",
